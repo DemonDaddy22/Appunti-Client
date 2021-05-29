@@ -1,0 +1,42 @@
+@mixin border($border: none, $radius: 0) {
+    border: $border;
+
+    @if $radius != 0 {
+        border-radius: $radius;
+    }
+}
+
+@mixin flex($flexDirection: row, $alignItems: none, $justifyContent: none, $gap: 0) {
+    display: flex;
+    flex-direction: $flexDirection;
+
+    @if $alignItems != none {
+        align-items: $alignItems;
+    }
+
+    @if $gap != 0 {
+        gap: $gap;
+    }
+
+    @if $justifyContent != none {
+        justify-content: $justifyContent;
+    }
+}
+
+@mixin spacing($margin: 0, $padding: 0) {
+    margin: $margin;
+    padding: $padding;
+}
+
+@mixin square($size: 0, $borderRadius: 0) {
+    height: $size;
+    width: $size;
+
+    @if $borderRadius != 0 {
+        border-radius: $borderRadius;
+    }
+}
+
+@mixin circle($size) {
+    @include square($size, 50%);
+}
