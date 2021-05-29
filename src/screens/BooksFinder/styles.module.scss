@@ -1,0 +1,5 @@
+@import '../../globalStyles.scss';
+
+.booksFinderContainer {
+    @include spacing(0, 1rem);
+}

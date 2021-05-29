@@ -30,8 +30,7 @@ interface IThemeContextValue {
     /**
      * 
      * @interface IThemeContextValue
-     * @field `toggleTheme` - function to toggle app theme
-     * @function
+     * @function toggleTheme - function to toggle app theme
      * @returns `void`
      * 
      */
@@ -40,8 +39,7 @@ interface IThemeContextValue {
     /**
      * 
      * @interface IThemeContextValue
-     * @field `getThemedValue` - function which returns a value based on current theme
-     * @function
+     * @function getThemedValue - function which returns a value based on current theme
      * @param {string} lightValue - specifies value to be used for light theme
      * @param {string} darkValue - specifies value to be used for dark theme
      * @returns `string`
