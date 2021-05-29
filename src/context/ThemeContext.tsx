@@ -1,13 +1,15 @@
 import React, { useCallback, useState } from 'react';
 import { DARK_THEME, LIGHT_THEME } from '../resources/theme';
 
-export const ThemeContext = React.createContext({
+const ThemeContextValue: IThemeContextValue = {
     isLightTheme: false,
     theme: LIGHT_THEME,
     toggleTheme: () => {},
     // eslint-disable-next-line no-unused-vars
-    getThemedValue: (_lightValue: string, _darkValue: string) => {}
-});
+    getThemedValue: (_lightValue: string, _darkValue: string): string => _lightValue
+};
+
+export const ThemeContext = React.createContext(ThemeContextValue);
 
 const ThemeContextProvider: React.FC<IContext> = props => {
     const { children } = props;
