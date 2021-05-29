@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './App.scss';
-import { DARK_THEME } from './resources/theme';
+import ThemeContextProvider, { ThemeContext } from './context/ThemeContext';
 
 const App: React.FC<{}> = () => {
+    const { theme } = useContext(ThemeContext); 
+
     return (
-        <div className='App'>
-            <h1 style={{ color: DARK_THEME.themePrimary }}>Hello from Appunti</h1>
-        </div>
+        <ThemeContextProvider>
+            <div className='App'>
+                <h1 style={{ color: theme.themePrimary }}>Hello from Appunti</h1>
+            </div>
+        </ThemeContextProvider>
     );
 };
 
