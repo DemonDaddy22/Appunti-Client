@@ -42,3 +42,31 @@ interface IInput {
      */
     style?: React.CSSProperties;
 }
+
+interface IButton {
+
+    /**
+     * 
+     * @interface IButton
+     * @field `children` - specifies valid React node element(s)
+     * 
+     */
+    children: React.ReactNode;
+
+    /**
+     * 
+     * @interface IButton
+     * @function onClick - function to trigger when the button is clicked
+     * @returns `void`
+     * 
+     */
+    onClick: () => void;
+
+    /**
+     * 
+     * @interface IButton
+     * @field `style` - specifies styles to override the default styles
+     * 
+     */
+    style?: React.CSSProperties;
+}

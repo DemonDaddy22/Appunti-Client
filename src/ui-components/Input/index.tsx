@@ -6,14 +6,14 @@ const Input: React.FC<IInput> = props => {
 
     const handleChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value),
-        []
+        [onChange]
     );
     
     return <input
         type={type}
         value={value}
         name={name}
-        onChange={e => handleChange(e)}
+        onChange={handleChange}
         className={classes.input}
         style={style}
     >
