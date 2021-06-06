@@ -9,9 +9,11 @@ module.exports = {
         browser: true,
     },
     globals: {},
-    plugins: ['react', 'react-hooks'],
+    extends: ['prettier'],
+    plugins: ['react', 'react-hooks', 'prettier'],
     rules: {
-        'semi': 2,
+        'prettier/prettier': 2,
+        semi: 2,
         'comma-dangle': 0,
         'react/jsx-uses-vars': 1,
         'no-unused-vars': 1,
@@ -22,14 +24,11 @@ module.exports = {
         'no-console': 1,
         'no-await-in-loop': 1,
         'no-return-assign': ['error', 'except-parens'],
-        'no-unused-expressions': [
-            2,
-            { allowTaggedTemplates: true, },
-        ],
+        'no-unused-expressions': [2, { allowTaggedTemplates: true }],
         'import/prefer-default-export': 0,
-        'import': 0,
+        import: 0,
         'react/require-default-props': 0,
-        'quotes': [
+        quotes: [
             2,
             'single',
             {
@@ -37,34 +36,44 @@ module.exports = {
                 allowTemplateLiterals: true,
             },
         ],
-        'eqeqeq': 1,
+        eqeqeq: 1,
         'array-bracket-spacing': 1,
         'object-curly-spacing': [1, 'always'],
-        'object-curly-newline': [1, {
-            'ObjectExpression': {
-                'multiline': true, 'minProperties': 3, 'consistent': false 
-            }, 
-        }],
-        'camelcase': 1,
-        'indent': 2,
-        'max-len': [2, {
-            code: 120, tabWidth: 4, ignoreTemplateLiterals: true 
-        }],
+        'object-curly-newline': [
+            1,
+            {
+                ObjectExpression: {
+                    multiline: true,
+                    minProperties: 3,
+                    consistent: false,
+                },
+            },
+        ],
+        camelcase: 1,
+        indent: 2,
+        'max-len': [
+            2,
+            {
+                code: 120,
+                tabWidth: 4,
+                ignoreTemplateLiterals: true,
+            },
+        ],
     },
     settings: {
         'import/resolver': 'webpack',
-        'react': {
+        react: {
             createClass: 'createReactClass',
             pragma: 'React',
             fragment: 'Fragment',
             version: 'detect',
             flowVersion: '0.53',
         },
-        'propWrapperFunctions': [
+        propWrapperFunctions: [
             'forbidExtraProps',
             { property: 'freeze', object: 'Object' },
             { property: 'myFavoriteWrapper' },
         ],
-        'linkComponents': ['Hyperlink', { name: 'Link', linkAttribute: 'to' }],
+        linkComponents: ['Hyperlink', { name: 'Link', linkAttribute: 'to' }],
     },
 };

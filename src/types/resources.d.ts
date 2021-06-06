@@ -12,7 +12,7 @@ interface ITheme {
      * @field {string} text - specifies text accent color
      */
     text: string;
-    
+
     /**
      * @interface ITheme
      * @field {string} textIntense - specifies more intense text accent color

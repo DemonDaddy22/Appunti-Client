@@ -6,7 +6,7 @@ import BooksFinder from './screens/BooksFinder';
 const App: React.FC<{}> = () => {
     return (
         <ThemeContextProvider>
-            <div className='App'>
+            <div className="App">
                 <BooksFinder />
             </div>
         </ThemeContextProvider>
