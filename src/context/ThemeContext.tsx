@@ -1,8 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import useTheme from '../hooks/useTheme';
+import { THEME } from '../resources/constants';
 import { DARK_THEME, LIGHT_THEME } from '../resources/theme';
 
 const ThemeContextValue: IThemeContextValue = {
-    isLightTheme: false,
+    isLightTheme: true,
     theme: LIGHT_THEME,
     toggleTheme: () => {},
     // eslint-disable-next-line no-unused-vars
@@ -15,8 +17,13 @@ export const ThemeContext = React.createContext(ThemeContextValue);
 const ThemeContextProvider: React.FC<IContext> = (props) => {
     const { children } = props;
 
-    const [isLightTheme, setIsLightTheme] = useState<boolean>(true);
-    const [theme, setTheme] = useState<ITheme>(LIGHT_THEME);
+    const [getThemeFromBrowser, setThemeInBrowser] = useTheme();
+    const [isLightTheme, setIsLightTheme] = useState<boolean>(
+        getThemeFromBrowser() === THEME.LIGHT
+    );
+    const [theme, setTheme] = useState<ITheme>(
+        isLightTheme ? LIGHT_THEME : DARK_THEME
+    );
 
     const toggleTheme = useCallback(() => {
         setIsLightTheme((prevIsLightTheme) => !prevIsLightTheme);
@@ -28,6 +35,11 @@ const ThemeContextProvider: React.FC<IContext> = (props) => {
     const getThemedValue = useCallback(
         (lightValue: string, darkValue: string) =>
             isLightTheme ? lightValue : darkValue,
+        [isLightTheme]
+    );
+
+    useEffect(
+        () => setThemeInBrowser(isLightTheme ? THEME.LIGHT : THEME.DARK),
         [isLightTheme]
     );
 

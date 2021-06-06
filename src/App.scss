@@ -1,3 +1,10 @@
+@import './resources/globalStyles.scss';
+
 .App {
-  text-align: center;
+    text-align: center;
+}
+
+.header {
+    margin: 0;
+    @include theme(color, themeSecondary);
 }

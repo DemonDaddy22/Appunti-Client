@@ -7,7 +7,7 @@ import Input from '../../ui-components/Input';
 import classes from './styles.module.scss';
 
 const BooksFinder: React.FC<{}> = () => {
-    const { theme } = useContext(ThemeContext);
+    const { toggleTheme } = useContext(ThemeContext);
 
     const [query, setQuery] = useState<string>('');
     const [books, setBooks] = useState<any[]>([]);
@@ -45,6 +45,7 @@ const BooksFinder: React.FC<{}> = () => {
         <div className={classes.booksFinderContainer}>
             <Input name="search" value={query} onChange={handleInputChange} />
             <Button onClick={handleSearchButtonClick}>Search</Button>
+            <Button onClick={toggleTheme}>Toggle Theme</Button>
         </div>
     );
 };
