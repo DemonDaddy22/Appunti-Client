@@ -44,8 +44,10 @@ const BooksFinder: React.FC<{}> = () => {
     return (
         <div className={classes.booksFinderContainer}>
             <Input name="search" value={query} onChange={handleInputChange} />
-            <Button onClick={handleSearchButtonClick}>Search</Button>
-            <Button onClick={toggleTheme}>Toggle Theme</Button>
+            <div className={classes.buttonsWrapper}>
+                <Button onClick={handleSearchButtonClick}>Search</Button>
+                <Button onClick={toggleTheme}>Toggle Theme</Button>
+            </div>
         </div>
     );
 };

@@ -6,5 +6,5 @@
 
 .header {
     margin: 0;
-    @include theme(color, themeSecondary);
+    @include theme(color, themeSecondary, $transition: 0.25s);
 }
