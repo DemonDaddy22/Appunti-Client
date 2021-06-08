@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import useAsyncExec from '../../hooks/useAsyncExec';
 import { BOOKS_API_URI } from '../../resources/constants';
-import Button from '../../ui-components/Button';
+import Button, { ButtonOutlined } from '../../ui-components/Button';
 import Input from '../../ui-components/Input';
 import classes from './styles.module.scss';
 
@@ -45,7 +45,9 @@ const BooksFinder: React.FC<{}> = () => {
         <div className={classes.booksFinderContainer}>
             <Input name="search" value={query} onChange={handleInputChange} />
             <div className={classes.buttonsWrapper}>
-                <Button onClick={handleSearchButtonClick}>Search</Button>
+                <ButtonOutlined onClick={handleSearchButtonClick}>
+                    Search
+                </ButtonOutlined>
                 <Button onClick={toggleTheme}>Toggle Theme</Button>
             </div>
         </div>

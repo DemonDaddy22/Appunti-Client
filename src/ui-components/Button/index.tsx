@@ -1,32 +1,39 @@
-import React from 'react';
-import classes from './styles.module.scss';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+import { StyledButton, StyledButtonOutlined } from './styles';
 
-// TODO - create styled components to use colors from props for hovered and active states
 const Button: React.FC<IButton> = (props) => {
-    const { children, onClick, style } = props;
+    const { theme } = useContext(ThemeContext);
+    const {
+        children,
+        color = theme.textOpposite,
+        backgroundColor = theme.themePrimary,
+        borderColor = theme.themePrimary,
+        onClick,
+        style,
+    } = props;
 
     return (
-        <button onClick={onClick} className={classes.button} style={style}>
+        <StyledButton
+            color={color}
+            backgroundColor={backgroundColor}
+            borderColor={borderColor}
+            onClick={onClick}
+            style={style}
+        >
             {children}
-        </button>
+        </StyledButton>
     );
 };
 
 export const ButtonOutlined: React.FC<IButtonOutlined> = (props) => {
-    const { children, color, borderColor, onClick, style } = props;
+    const { theme } = useContext(ThemeContext);
+    const { children, color = theme.themePrimary, onClick, style } = props;
 
     return (
-        <button
-            onClick={onClick}
-            className={classes.buttonOutlined}
-            style={{
-                color: color,
-                borderColor: borderColor,
-                ...style,
-            }}
-        >
+        <StyledButtonOutlined color={color} onClick={onClick} style={style}>
             {children}
-        </button>
+        </StyledButtonOutlined>
     );
 };
 

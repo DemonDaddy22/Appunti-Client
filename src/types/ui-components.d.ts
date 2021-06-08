@@ -53,6 +53,27 @@ interface IInput {
 interface IButton {
     /**
      *
+     * @field `color` - specifies text color of the content
+     *
+     */
+    color?: string;
+
+    /**
+     *
+     * @field `borderColor` - specifies border color of the button
+     *
+     */
+    borderColor?: string;
+
+    /**
+     *
+     * @field `backgroundColor` - specifies background color of the button
+     *
+     */
+    backgroundColor?: string;
+
+    /**
+     *
      * @field `children` - specifies valid React node element(s)
      *
      */
@@ -74,18 +95,33 @@ interface IButton {
     style?: React.CSSProperties;
 }
 
-interface IButtonOutlined extends IButton {
+interface IButtonOutlined {
     /**
      *
-     * @field `color` - specifies text color of the content
+     * @field `color` - specifies text color of the content and border color of button
      *
      */
     color?: string;
 
     /**
      *
-     * @field `borderColor` - specifies border color of the button
+     * @field `children` - specifies valid React node element(s)
      *
      */
-    borderColor?: string;
+    children: React.ReactNode;
+
+    /**
+     *
+     * @function onClick - function to trigger when the button is clicked
+     * @returns `void`
+     *
+     */
+    onClick: () => void;
+
+    /**
+     *
+     * @field `style` - specifies styles to override the default styles
+     *
+     */
+    style?: React.CSSProperties;
 }
