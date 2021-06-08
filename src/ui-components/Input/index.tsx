@@ -1,8 +1,18 @@
-import React, { useCallback } from 'react';
-import classes from './styles.module.scss';
+import React, { useCallback, useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
+import { StyledInput } from './styles';
 
 const Input: React.FC<IInput> = (props) => {
-    const { value, name, type, onChange, style } = props;
+    const { theme } = useContext(ThemeContext);
+    const {
+        value,
+        name,
+        type,
+        color = theme.themeSecondary,
+        borderColor = theme.borderColor,
+        onChange,
+        style,
+    } = props;
 
     const handleChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value),
@@ -10,14 +20,15 @@ const Input: React.FC<IInput> = (props) => {
     );
 
     return (
-        <input
+        <StyledInput
+            color={color}
+            borderColor={borderColor}
             type={type}
             value={value}
             name={name}
             onChange={handleChange}
-            className={classes.input}
             style={style}
-        ></input>
+        ></StyledInput>
     );
 };
 

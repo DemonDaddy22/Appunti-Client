@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BLACK_30, WHITE_TRANSPARENT_90 } from '../../resources/colors';
 
 export const StyledButtonOutlined = styled.button`
-    border: 1px solid ${(props: IButtonOutlined) => props.color};
+    border: 1px solid ${(props: IColor) => props.color};
     border-radius: 4px;
     background-color: transparent;
     color: ${(props) => props.color};
@@ -16,7 +16,7 @@ export const StyledButtonOutlined = styled.button`
     transition: background-color 0.25s, border 0.25s, color 0.25s, filter 0.1s;
 
     &:hover {
-        background-color: ${(props: IButtonOutlined) => props.color};
+        background-color: ${(props: IColor) => props.color};
         color: ${WHITE_TRANSPARENT_90};
         outline: none;
     }
@@ -27,8 +27,8 @@ export const StyledButtonOutlined = styled.button`
 `;
 
 export const StyledButton = styled.button`
-    background-color: ${(props: IButton) => props.backgroundColor};
-    border: 1px solid ${(props: IButton) => props.borderColor};
+    background-color: ${(props: IColors) => props.backgroundColor};
+    border: 1px solid ${(props: IColors) => props.borderColor};
     border-radius: 4px;
     box-shadow: none;
     color: ${(props) => props.color};
