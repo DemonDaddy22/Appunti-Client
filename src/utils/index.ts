@@ -1,2 +1,158 @@
-export const isEmptyString = (value: any): boolean =>
+/**
+ *
+ * @function isEmptyString - Checks if passed value is an empty string or not
+ * @param {string} value
+ * @returns `boolean` indicating whether `value` is an empty string
+ *
+ */
+export const isEmptyString = (value: string): boolean =>
     !value || (typeof value === 'string' && value.trim().length === 0);
+
+/**
+ *
+ * @function isValidNumber - Checks if passed value is a valid number or not
+ * @param {number | string} value
+ * @returns `boolean` indicating whether `value` is a valid number
+ *
+ */
+export const isValidNumber = (value: number | string): boolean =>
+    !isNaN(Number(value));
+
+/**
+ *
+ * @function isEmptyList - Checks if passed object is an empty list or not
+ * @param {Array<any>} obj
+ * @returns `boolean` indicating whether `obj` is an empty list
+ *
+ */
+export const isEmptyList = (obj: Array<any>): boolean =>
+    !Array.isArray(obj) || (Array.isArray(obj) && obj.length === 0);
+
+/**
+ *
+ * @function isEmptyObject - Checks if passed object is an empty object or not
+ * @param {Object} obj
+ * @returns `boolean` indicating whether `obj` is an empty object
+ *
+ */
+export const isEmptyObject = (obj: Object): boolean =>
+    !obj ||
+    typeof obj !== 'object' ||
+    Array.isArray(obj) ||
+    Object.keys(obj).length === 0;
+
+/**
+ *
+ * @function isHexColor - Checks if passed color string is hex color or not
+ * @param {string} color
+ * @returns `boolean` indicating whether `color` is a hex color
+ *
+ */
+export const isHexColor = (color: string): boolean =>
+    /^#([0-9A-F]{3}){1,2}$/i.test(color);
+
+/**
+ *
+ * @function isValidColor - Checks if passed color string is valid color or not
+ * @param {string} color
+ * @returns `boolean` indicating whether `color` is a valid color
+ *
+ */
+export const isValidColor = (color: string): boolean => {
+    if (isEmptyString(color)) return false;
+    const style = new Option().style;
+    style.color = color;
+    if (isHexColor(color)) {
+        // convert hex to rgb as style.color gets converted to rgb
+        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+        if (!result) return false;
+        color = `rgb(${parseInt(result[1], 16)}, ${parseInt(
+            result[2],
+            16
+        )}, ${parseInt(result[3], 16)})`;
+    }
+    return style.color === color;
+};
+
+/**
+ *
+ * @function hexToRGB - Converts valid hex color string to rgb variant
+ * @param {string} color
+ * @returns `string | null`
+ *
+ */
+export const hexToRGB = (color: string): string | null => {
+    if (!isValidColor(color)) return null;
+
+    // checks for 3 digit hex value (#0f0) and converts them to 6 digit hex value
+    let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+    color = color.replace(
+        shorthandRegex,
+        (m, r, g, b) => r + r + g + g + b + b
+    );
+
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+    // eslint-disable-next-line prettier/prettier
+    return result ? `rgb(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)})` : null;
+};
+
+/**
+ *
+ * @function rgbToHex - Converts valid rgb color value to hex variant
+ * @param {string} color
+ * @returns `string | null`
+ *
+ */
+export const rgbToHex = (color: string): string | null => {
+    if (!isValidColor(color)) return null;
+
+    if (isHexColor(color)) return color;
+
+    // Turn color rgb(r, g, b) into rgb(r g b)
+    const sep = color.indexOf(', ') > -1 ? ', ' : ' ';
+
+    // Turn color rgb(r g b) into [r, g, b]
+    const colorArray = color.substr(4).split(')')[0].split(sep);
+
+    // + converts string to number
+    let r = (+colorArray[0]).toString(16),
+        g = (+colorArray[1]).toString(16),
+        b = (+colorArray[2]).toString(16);
+
+    if (r.length === 1) r = '0' + r;
+    if (g.length === 1) g = '0' + g;
+    if (b.length === 1) b = '0' + b;
+
+    return '#' + r + g + b;
+};
+
+/**
+ *
+ * @function isColorDark - Checks if passed color string is dark or not
+ * @param {string} color
+ * @returns `boolean` indicating whether `color` is a dark color
+ *
+ */
+export const isColorDark = (color: string): boolean => {
+    if (!isValidColor(color)) return false;
+
+    let colorCopy: string | null = null;
+    if (!isHexColor(color)) colorCopy = rgbToHex(color);
+
+    if (!colorCopy) return false;
+
+    const is3digitHex = /^#[0-9A-F]{3}$/i.test(colorCopy);
+    if (is3digitHex)
+        colorCopy = colorCopy.replace(
+            /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+            (m, r, g, b) => r + r + g + g + b + b
+        );
+
+    let rgb = parseInt(colorCopy.substring(1), 16);
+    let r = (rgb >> 16) & 0xff;
+    let g = (rgb >> 8) & 0xff;
+    let b = (rgb >> 0) & 0xff;
+
+    let luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+    return luma < 100;
+};
