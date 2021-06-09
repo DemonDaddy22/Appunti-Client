@@ -67,6 +67,13 @@ interface IInput extends IColor, IBorderColor {
 
     /**
      *
+     * @field `placeholder` - specifies placeholder for input field
+     *
+     */
+    placeholder: string;
+
+    /**
+     *
      * @function onChange - function to trigger when input is changed
      * @returns `void`
      */
@@ -89,10 +96,17 @@ interface IInput extends IColor, IBorderColor {
 
     /**
      *
-     * @field `style` - specifies styles to override the default styles
+     * @field `style` - specifies styles to override the default input styles
      *
      */
     style?: React.CSSProperties;
+
+    /**
+     *
+     * @field `containerStyle` - specifies styles to override the default input container styles
+     *
+     */
+    containerStyle?: React.CSSProperties;
 }
 
 interface IButton extends IColors {
