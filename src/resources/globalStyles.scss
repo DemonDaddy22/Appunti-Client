@@ -1,3 +1,5 @@
+@import './globalVariables.scss';
+
 @mixin border($border: none, $radius: 0) {
     border: $border;
 
@@ -39,4 +41,26 @@
 
 @mixin circle($size) {
     @include square($size, 50%);
+}
+
+@mixin theme($property, $key, $inlinePre: null, $inlinePost: null, $transition: 0) {
+    @each $theme in $themes {
+        $value: map-get($theme, $key);
+        
+        @if ($theme == $darkTheme) {
+            @at-root [theme-mode='dark'] #{&} {
+                #{$property}: #{$inlinePre} #{$value} #{$inlinePost};
+            }
+        }
+        
+        @else {
+            @at-root :root #{&} {
+                #{$property}: #{$inlinePre} #{$value} #{$inlinePost};
+            }
+        }
+
+        @if $transition != 0 {
+            transition: #{$property} $transition;
+        }
+    }
 }

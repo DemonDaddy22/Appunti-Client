@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './App.scss';
-import ThemeContextProvider, { ThemeContext } from './context/ThemeContext';
+import ThemeContextProvider from './context/ThemeContext';
+import BooksFinder from './screens/BooksFinder';
 
 const App: React.FC<{}> = () => {
-    const { theme } = useContext(ThemeContext); 
-
     return (
         <ThemeContextProvider>
-            <div className='App'>
-                <h1 style={{ color: theme.themePrimary }}>Hello from Appunti</h1>
+            <div className="App">
+                <h1 className="header">APPUNTI</h1>
+                <BooksFinder />
             </div>
         </ThemeContextProvider>
     );

@@ -1,3 +1,5 @@
+@import './resources/globalStyles.scss';
+
 *,
 *:before,
 *:after {
@@ -5,7 +7,11 @@
 }
 
 body {
+    @include theme(background-color, background, $transition: 0.25s);
     margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    width: 100vw;
     font-family: 'Fira Code', monospace;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -13,6 +19,13 @@ body {
 
 code {
     font-family: 'Fira Code', monospace;
+}
+
+#root {
+    @include theme(background-color, background, $transition: 0.25s);
+    min-height: inherit;
+    overflow-x: inherit;
+    width: inherit;
 }
 
 // font-family: 'Satisfy', cursive;

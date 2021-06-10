@@ -1,4 +1,9 @@
-export const LIGHT_THEME: ITheme = Object.freeze({
+$black: #000;
+$dark: #0F141F;
+$light: #F4F4F4;
+$white: #FFF;
+
+$lightTheme: (
     background: '#FAFAFA',
     borderColor: '#D0D0D0',
     text: '#101010',
@@ -8,9 +13,9 @@ export const LIGHT_THEME: ITheme = Object.freeze({
     textOpposite: '#D7D7D7',
     themePrimary: '#1C4374',
     themeSecondary: '#40A368',
-});
+);
 
-export const DARK_THEME: ITheme = Object.freeze({
+$darkTheme: (
     background: '#0F141F',
     borderColor: '#3A4460',
     text: '#F0F0F0',
@@ -20,4 +25,6 @@ export const DARK_THEME: ITheme = Object.freeze({
     textOpposite: '#202636',
     themePrimary: '#1992E3',
     themeSecondary: '#88DDAA',
-});
+);
+
+$themes: ($lightTheme, $darkTheme);

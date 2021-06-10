@@ -2,44 +2,65 @@
 
 interface ITheme {
     /**
-     * @interface ITheme
-     * @field {string} background - specifies background accent color
+     *
+     * @field {string} `background` - specifies background accent color
+     *
      */
     background: string;
 
     /**
-     * @interface ITheme
-     * @field {string} text - specifies text accent color
+     *
+     * @field {string} `borderColor` - specifies background accent color
+     *
+     */
+    borderColor: string;
+
+    /**
+     *
+     * @field {string} `text` - specifies text accent color
+     *
      */
     text: string;
-    
+
     /**
-     * @interface ITheme
-     * @field {string} textIntense - specifies more intense text accent color
+     *
+     * @field {string} `textGrey` - specifies text color in shade of grey
+     *
+     */
+    textGrey: string;
+
+    /**
+     *
+     * @field {string} `textIntense` - specifies more intense text accent color
+     *
      */
     textIntense: string;
 
     /**
-     * @interface ITheme
-     * @field {string} textObscure - specifies lighter text accent color
+     *
+     * @field {string} `textObscure` - specifies lighter text accent color
+     *
      */
     textObscure: string;
 
     /**
-     * @interface ITheme
-     * @field {string} textOpposite - specifies contrasting text accent color
+     *
+     * @field {string} `textOpposite` - specifies contrasting text accent color
+     *
      */
     textOpposite: string;
 
     /**
-     * @interface ITheme
-     * @field {string} themePrimary - specifies theme primary color
+     *
+     * @field {string} `themePrimary` - specifies theme primary color
+     *
      */
     themePrimary: string;
 
     /**
-     * @interface ITheme
-     * @field {string} themeSecondary - specifies theme secondary color
+     *
+     * @field {string} `themeSecondary` - specifies theme secondary color
+     *
      */
     themeSecondary: string;
 }

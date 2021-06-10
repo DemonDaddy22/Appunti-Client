@@ -1,0 +1,9 @@
+@import '../../resources/globalStyles.scss';
+
+.booksFinderContainer {
+    @include spacing(0, 1rem);
+}
+
+.buttonsWrapper {
+    @include flex($justifyContent: center, $gap: 1rem);
+}
