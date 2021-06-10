@@ -16,17 +16,27 @@ export const StyledInput = styled.input`
     }}9F;
     border-radius: 4px;
     color: ${(props: IColors) => props.color};
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     outline: none;
-    padding: 1rem 0.75rem;
+    padding: 0.8rem 0.6rem;
     width: 100%;
     transition: border 0.25s;
+
+    @media (min-width: 1024px) {
+        font-size: 1.1rem;
+        padding: 0.9rem 0.7rem;
+    }
+
+    @media (min-width: 1500px) {
+        font-size: 1.15rem;
+        padding: 1rem 0.8rem;
+    }
 
     &::placeholder {
         color: ${(props: IColors) => {
             const color = props.color || '';
             return isHexColor(color) ? color : rgbToHex(color);
-        }}5F;
+        }}AF;
     }
 
     &:hover {
@@ -42,7 +52,11 @@ export const StyledInput = styled.input`
         position: absolute;
         top: 0;
         width: 0;
-        transition: 0.5s;
+        transition: 0.3s;
+
+        @media (min-width: 1024px) {
+            transition: 0.5s;
+        }
     }
 
     & ~ .focus-border i:before,
@@ -54,7 +68,11 @@ export const StyledInput = styled.input`
         position: absolute;
         top: 0;
         width: 2px;
-        transition: 0.6s;
+        transition: 0.4s;
+
+        @media (min-width: 1024px) {
+            transition: 0.6s;
+        }
     }
 
     & ~ .focus-border:after,
@@ -68,13 +86,21 @@ export const StyledInput = styled.input`
     &:focus ~ .focus-border:before,
     &:focus ~ .focus-border:after {
         width: 100%;
-        transition: 0.5s;
+        transition: 0.3s;
+
+        @media (min-width: 1024px) {
+            transition: 0.5s;
+        }
     }
 
     &:focus ~ .focus-border i:before,
     &:focus ~ .focus-border i:after {
         height: 100%;
-        transition: 0.6s;
+        transition: 0.4s;
+
+        @media (min-width: 1024px) {
+            transition: 0.6s;
+        }
     }
 `;
 

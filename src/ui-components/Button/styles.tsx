@@ -8,10 +8,11 @@ export const StyledButtonOutlined = styled.button`
     color: ${(props) => props.color};
     cursor: pointer;
     filter: brightness(1);
+    font-size: 0.85rem;
     font-weight: 500;
     letter-spacing: 0.25px;
     outline: none;
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 0.85rem;
     text-transform: uppercase;
     transition: background-color 0.25s, border 0.25s, color 0.25s, filter 0.1s;
 
@@ -24,6 +25,16 @@ export const StyledButtonOutlined = styled.button`
     &:active {
         filter: brightness(0.75);
     }
+
+    @media (min-width: 1024px) {
+        font-size: 0.9rem;
+        padding: 0.7rem 0.95rem;
+    }
+
+    @media (min-width: 1500px) {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
 `;
 
 export const StyledButton = styled.button`
@@ -34,10 +45,11 @@ export const StyledButton = styled.button`
     color: ${(props) => props.color};
     cursor: pointer;
     filter: brightness(1);
+    font-size: 0.85rem;
     font-weight: 500;
     letter-spacing: 0.25px;
     outline: none;
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 0.85rem;
     text-transform: uppercase;
     transition: background-color 0.25s, border 0.25s, box-shadow 0.25s,
         color 0.25s, filter 0.25s;
@@ -50,5 +62,15 @@ export const StyledButton = styled.button`
 
     &:active {
         filter: brightness(0.85);
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 0.9rem;
+        padding: 0.7rem 0.95rem;
+    }
+
+    @media (min-width: 1500px) {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
     }
 `;
