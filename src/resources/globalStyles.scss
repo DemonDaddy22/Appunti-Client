@@ -8,7 +8,7 @@
     }
 }
 
-@mixin flex($flexDirection: row, $alignItems: none, $justifyContent: none, $gap: 0) {
+@mixin flex($flexDirection: row, $alignItems: none, $justifyContent: none, $gap: 0, $flexWrap: none) {
     display: flex;
     flex-direction: $flexDirection;
 
@@ -22,6 +22,10 @@
 
     @if $justifyContent != none {
         justify-content: $justifyContent;
+    }
+
+    @if $flexWrap != none {
+        flex-wrap: $flexWrap;
     }
 }
 

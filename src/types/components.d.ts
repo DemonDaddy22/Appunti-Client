@@ -1,12 +1,9 @@
 /* eslint-disable no-unused-vars */
 
-interface IBookSearchData {
-    items?: Array<any>;
-    kind: string;
-    totalItems: number;
+interface ISearchResultsContainer extends IStyle {
+    data: any[] | undefined;
 }
 
-interface IBookSearchResponse {
-    data: IBookSearchData;
-    status: number;
+interface ISearchResultsBookCard extends IStyle {
+    data: any;
 }

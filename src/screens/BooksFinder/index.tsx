@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import SearchResultsContainer from '../../components/SearchResultsContainer';
 import { ThemeContext } from '../../context/ThemeContext';
 import useAsyncExec from '../../hooks/useAsyncExec';
 import { BOOKS_API_URI } from '../../resources/constants';
@@ -10,31 +11,32 @@ const BooksFinder: React.FC<{}> = () => {
     const { toggleTheme } = useContext(ThemeContext);
 
     const [query, setQuery] = useState<string>('');
-    const [books, setBooks] = useState<any[]>([]);
-    const [loading, setIsLoading] = useState<boolean>(false);
-    const [fetching, setIsFetching] = useState<boolean>(false);
+    const [books, setBooks] = useState<IBookSearchData | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    const [fetching, setFetching] = useState<boolean>(false);
 
     // TODO - style button and search bar
     const fetchBooks = useCallback(async () => {
-        setIsLoading(true);
+        setLoading(true);
         try {
             const res = await fetch(`${BOOKS_API_URI}/search?q=${query}`);
             const data: IBookSearchResponse = await res.json();
-            let fetchedBooks: any[] = data.data?.items || [];
+            let fetchedBooks: IBookSearchData = data.data || {};
             setBooks(fetchedBooks);
             useAsyncExec(() => setQuery(''));
         } catch (err) {
-            setBooks(books);
+            setError(err);
         } finally {
-            setIsLoading(false);
+            setLoading(false);
         }
     }, [query]);
 
     const handleInputChange = useCallback((q: string) => setQuery(q), []);
 
     const handleSearchButtonClick = useCallback(() => {
-        setIsFetching(true);
-        useAsyncExec(() => setIsFetching(false));
+        setFetching(true);
+        useAsyncExec(() => setFetching(false));
     }, []);
 
     useEffect(() => {
@@ -55,6 +57,7 @@ const BooksFinder: React.FC<{}> = () => {
                 </ButtonOutlined>
                 <Button onClick={toggleTheme}>Toggle Theme</Button>
             </div>
+            <SearchResultsContainer data={books?.items} />
         </div>
     );
 };

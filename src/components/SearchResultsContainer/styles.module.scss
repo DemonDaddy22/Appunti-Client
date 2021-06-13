@@ -1,0 +1,14 @@
+@import '../../resources/globalStyles.scss';
+
+.searchResultsContainer {
+    @include spacing(1rem 0);
+    @include flex($gap: 0.5rem, $flexWrap: wrap);
+
+    @media (min-width: 1024px) {
+        gap: 0.75rem;
+    }
+    
+    @media (min-width: 1500px) {
+        gap: 1rem;
+    }
+}

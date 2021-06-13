@@ -50,7 +50,7 @@ interface IColors {
     backgroundColor?: string;
 }
 
-interface IInput extends IColor, IBorderColor {
+interface IInput extends IColor, IBorderColor, IStyle {
     /**
      *
      * @field `value` - specifies value for input field
@@ -96,20 +96,13 @@ interface IInput extends IColor, IBorderColor {
 
     /**
      *
-     * @field `style` - specifies styles to override the default input styles
-     *
-     */
-    style?: React.CSSProperties;
-
-    /**
-     *
      * @field `containerStyle` - specifies styles to override the default input container styles
      *
      */
     containerStyle?: React.CSSProperties;
 }
 
-interface IButton extends IColors {
+interface IButton extends IColors, IStyle {
     /**
      *
      * @field `children` - specifies valid React node element(s)
@@ -124,16 +117,9 @@ interface IButton extends IColors {
      *
      */
     onClick: () => void;
-
-    /**
-     *
-     * @field `style` - specifies styles to override the default styles
-     *
-     */
-    style?: React.CSSProperties;
 }
 
-interface IButtonOutlined extends IColor {
+interface IButtonOutlined extends IColor, IStyle {
     /**
      *
      * @field `children` - specifies valid React node element(s)
@@ -148,11 +134,4 @@ interface IButtonOutlined extends IColor {
      *
      */
     onClick: () => void;
-
-    /**
-     *
-     * @field `style` - specifies styles to override the default styles
-     *
-     */
-    style?: React.CSSProperties;
 }

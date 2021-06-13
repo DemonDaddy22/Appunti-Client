@@ -16,7 +16,7 @@ export const DARK_THEME: ITheme = Object.freeze({
     text: '#F0F0F0',
     textGrey: '#8F8F8F',
     textIntense: '#FFFFFF',
-    textObscure: '#999999',
+    textObscure: '#A7A7A7',
     textOpposite: '#202636',
     themePrimary: '#1992E3',
     themeSecondary: '#88DDAA',
