@@ -29,6 +29,19 @@
     }
 }
 
+@mixin grid($gap: 0.5rem, $gridTemplateColumns: none, $gridTemplateRows: none) {
+    display: grid;
+    gap: $gap;
+
+    @if $gridTemplateColumns != none {
+        grid-template-columns: $gridTemplateColumns;
+    }
+    
+    @if $gridTemplateRows != none {
+        grid-template-rows: $gridTemplateRows;
+    }
+}
+
 @mixin spacing($margin: 0, $padding: 0) {
     margin: $margin;
     padding: $padding;
