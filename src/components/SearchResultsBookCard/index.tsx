@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 import { isEmptyObject, truncateStringToLength } from '../../utils';
 import classes from './styles.module.scss';
 
-// TODO - show 1 card per row for smaller screens
-// TODO - for mobile screens, show content in single column, for tabs, show in 2 columns
-// TODO - for small laptops and above, show multiple cards in single row, with card resembling mobile cards
 const SearchResultsBookCard: React.FC<ISearchResultsBookCard> = (props) => {
+    const { getThemedValue } = useContext(ThemeContext);
     const { data, style } = props;
 
     return !isEmptyObject(data) ? (
-        <div className={classes.searchResultsBookCardContainer} style={style}>
+        <div
+            className={classes.searchResultsBookCardContainer}
+            style={{
+                backgroundColor: getThemedValue('#FFFFFF', '#121929'),
+                ...style,
+            }}
+        >
             <div className={classes.column}>
                 <img
                     className={classes.image}
@@ -28,7 +33,7 @@ const SearchResultsBookCard: React.FC<ISearchResultsBookCard> = (props) => {
                     {data.volumeInfo?.publishedDate}
                 </div>
                 <div className={classes.description}>
-                    {truncateStringToLength(data.volumeInfo?.description, 100)}
+                    {truncateStringToLength(data.volumeInfo?.description, 200)}
                 </div>
             </div>
         </div>

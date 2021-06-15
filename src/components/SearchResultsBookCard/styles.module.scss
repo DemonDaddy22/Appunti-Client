@@ -1,12 +1,20 @@
 @import '../../resources/globalStyles.scss';
+@import '../../resources/globalVariables.scss';
 
 .searchResultsBookCardContainer {
-    @include border(1px solid teal, 4px);
+    @include border(2px solid transparent, 4px);
     @include spacing(0 auto, 4px);
     @include flex($gap: 0.5rem);
-    color: whitesmoke;
+    box-shadow: none;
     flex: 1;
-    min-width: 350px;
+    overflow: hidden;
+    transition: background-color $transitionDuration, border 0.15s, box-shadow 0.25s;
+
+    &:hover {
+        @include theme(border-color, themePrimary);
+        box-shadow: 0 6px 10px rgba($color: $dark, $alpha: 0.1);
+        cursor: pointer;
+    }
 
     & .column {
         @include flex($flexDirection: column, $gap: 0.25rem);

@@ -2,13 +2,17 @@
 
 .searchResultsContainer {
     @include spacing(1rem 0);
-    @include flex($gap: 0.5rem, $flexWrap: wrap);
+    @include grid($gridTemplateColumns: 1fr);
 
-    @media (min-width: 1024px) {
-        gap: 0.75rem;
+    @media (min-width: 900px) {
+        @include grid($gap: 0.75rem, $gridTemplateColumns: 1fr 1fr);
     }
     
     @media (min-width: 1500px) {
-        gap: 1rem;
+        @include grid($gap: 1rem, $gridTemplateColumns: 1fr 1fr 1fr);
+    }
+    
+    @media (min-width: 2000px) {
+        @include grid($gap: 1rem, $gridTemplateColumns: 1fr 1fr 1fr 1fr);
     }
 }
