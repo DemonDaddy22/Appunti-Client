@@ -129,14 +129,15 @@ export const rgbToHex = (color: string): string | null => {
 /**
  *
  * @function isColorDark - Checks if passed color string is dark or not
- * @param {string} color
+ * @param {string | undefined} color: ;
  * @returns `boolean` indicating whether `color` is a dark color
  *
  */
-export const isColorDark = (color: string): boolean => {
+export const isColorDark = (color: string | undefined): boolean => {
+    if (!color) return false;
     if (!isValidColor(color)) return false;
 
-    let colorCopy: string | null = null;
+    let colorCopy: string | null = color;
     if (!isHexColor(color)) colorCopy = rgbToHex(color);
 
     if (!colorCopy) return false;

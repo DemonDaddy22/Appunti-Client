@@ -1,11 +1,33 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+    useCallback,
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
+} from 'react';
+import { ButtonOutlined } from '../Button';
 import { createListOfSize, isValidNumber } from '../../utils';
+import { ThemeContext } from '../../context/ThemeContext';
+import {
+    THEME_PRIMARY_ACCENT2,
+    WHITE_TRANSPARENT_90,
+} from '../../resources/colors';
+import { StyledPageButton, StyledPageButtonContainer } from './styles';
 import classes from './styles.module.scss';
 
-const Pagination = (props: any) => {
-    const { pageRange, pageIndex, countPerPage, totalCount, handlePageChange } =
-        props;
+const Pagination: React.FC<IPagination> = (props) => {
+    const {
+        pageRange,
+        pageIndex,
+        countPerPage,
+        totalCount,
+        handlePageChange,
+        style,
+        buttonContainerStyle,
+        buttonStyle,
+    } = props;
 
+    const { getThemedValue } = useContext(ThemeContext);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [currPages, setCurrPages] = useState<number[]>(() =>
         createListOfSize(pageRange)
@@ -75,35 +97,57 @@ const Pagination = (props: any) => {
 
     const renderPages = useMemo(
         () => (
-            <div style={{ display: 'flex', gap: 4 }}>
+            <StyledPageButtonContainer
+                color={getThemedValue(
+                    THEME_PRIMARY_ACCENT2,
+                    WHITE_TRANSPARENT_90
+                )}
+                style={buttonContainerStyle}
+            >
                 {currPages.map((page) => (
-                    <div
-                        onClick={() => handlePageChange(page)}
-                        className={`${classes.btn} ${
-                            page === pageIndex && classes.active
-                        }`}
+                    <StyledPageButton
                         key={`page-${page}-of-${totalPages}`}
+                        onClick={() => handlePageChange(page)}
+                        style={buttonStyle}
+                        color={getThemedValue(
+                            THEME_PRIMARY_ACCENT2,
+                            WHITE_TRANSPARENT_90
+                        )}
+                        active={page === pageIndex}
                     >
                         {page}
-                    </div>
+                    </StyledPageButton>
                 ))}
-            </div>
+            </StyledPageButtonContainer>
         ),
         [currPages, pageIndex, countPerPage, totalCount]
     );
 
     return totalCount > 0 ? (
-        <div style={{ display: 'flex', gap: 8 }}>
-            <button disabled={pageIndex === 1} onClick={handlePrevButtonClick}>
-                Prev
-            </button>
+        <div className={classes.paginationContainer} style={style}>
+            <ButtonOutlined
+                color={getThemedValue(
+                    THEME_PRIMARY_ACCENT2,
+                    WHITE_TRANSPARENT_90
+                )}
+                style={{ fontWeight: 'bold' }}
+                disabled={pageIndex === 1}
+                onClick={handlePrevButtonClick}
+            >
+                &lt;
+            </ButtonOutlined>
             {renderPages}
-            <button
+            <ButtonOutlined
+                color={getThemedValue(
+                    THEME_PRIMARY_ACCENT2,
+                    WHITE_TRANSPARENT_90
+                )}
+                style={{ fontWeight: 'bold' }}
                 disabled={pageIndex === totalPages}
                 onClick={handleNextButtonClick}
             >
-                Next
-            </button>
+                &gt;
+            </ButtonOutlined>
         </div>
     ) : null;
 };

@@ -105,6 +105,13 @@ interface IInput extends IColor, IBorderColor, IStyle {
 interface IButton extends IColors, IStyle {
     /**
      *
+     * @field `disabled` - specifies whether button should be disabled
+     *
+     */
+    disabled?: boolean | undefined;
+
+    /**
+     *
      * @field `children` - specifies valid React node element(s)
      *
      */
@@ -122,6 +129,13 @@ interface IButton extends IColors, IStyle {
 interface IButtonOutlined extends IColor, IStyle {
     /**
      *
+     * @field `disabled` - specifies whether button should be disabled
+     *
+     */
+    disabled?: boolean | undefined;
+
+    /**
+     *
      * @field `children` - specifies valid React node element(s)
      *
      */
@@ -134,4 +148,73 @@ interface IButtonOutlined extends IColor, IStyle {
      *
      */
     onClick: () => void;
+}
+
+interface IPagination {
+    /**
+     *
+     * @field `pageRange` - specifies size of pagination bar
+     *
+     */
+    pageRange: number;
+
+    /**
+     *
+     * @field `pageIndex` - specifies current page index
+     *
+     */
+    pageIndex: number;
+
+    /**
+     *
+     * @field `countPerPage` - specifies number of entries per page
+     *
+     */
+    countPerPage: number;
+
+    /**
+     *
+     * @field `totalCount` - specifies total number of entries
+     *
+     */
+    totalCount: number;
+
+    /**
+     *
+     * @function handlePageChange - function to trigger on page change
+     * @param {number} page - specifies updated page number
+     * @returns `void`
+     *
+     */
+    handlePageChange: (page: number) => void;
+
+    /**
+     *
+     * @field `style` - specifies styles to override default container styles
+     *
+     */
+    style?: React.CSSProperties;
+
+    /**
+     *
+     * @field `buttonContainerStyle` - specifies styles to override default button container styles
+     *
+     */
+    buttonContainerStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `buttonStyle` - specifies styles to override default button styles
+     *
+     */
+    buttonStyle?: React.CSSProperties;
+}
+
+interface IPageButton {
+    /**
+     *
+     * @field `active` - specifies whether button is active or not
+     *
+     */
+    active: boolean;
 }

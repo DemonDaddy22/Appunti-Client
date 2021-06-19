@@ -72,7 +72,7 @@ const BooksFinder: React.FC<{}> = () => {
                 pageRange={7}
                 pageIndex={pageIndex}
                 countPerPage={maxResults}
-                totalCount={books?.totalItems}
+                totalCount={books?.totalItems || 0}
                 handlePageChange={handlePageChange}
             />
         </div>

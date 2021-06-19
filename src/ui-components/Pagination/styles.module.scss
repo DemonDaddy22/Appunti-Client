@@ -1,16 +1,5 @@
-.btn {
-    color: #cfcfcf;
-    cursor: pointer;
+@import '../../resources/globalStyles.scss';
 
-    &:hover {
-        color: #fff;
-    }
-}
-
-.active {
-    color: #4282C6;
-
-    &:hover {
-        color: #4282C6;
-    }
+.paginationContainer {
+    @include flex($gap: 0.5rem, $justifyContent: center);
 }
