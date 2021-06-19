@@ -12,6 +12,7 @@ const BooksFinder: React.FC<{}> = () => {
     const { toggleTheme } = useContext(ThemeContext);
 
     const [query, setQuery] = useState<string>('');
+    const [pageIndex, setPageIndex] = useState<number>(0);
     const [maxResults, setMaxResults] = useState<number>(10);
     const [books, setBooks] = useState<IBookSearchData | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -28,7 +29,10 @@ const BooksFinder: React.FC<{}> = () => {
             const data: IBookSearchResponse = await res.json();
             let fetchedBooks: IBookSearchData = data.data || {};
             setBooks(fetchedBooks);
-            useAsyncExec(() => setQuery(''));
+            useAsyncExec(() => {
+                setPageIndex(1);
+                setQuery('');
+            });
         } catch (err) {
             setError(err);
         } finally {
@@ -42,6 +46,8 @@ const BooksFinder: React.FC<{}> = () => {
         setFetching(true);
         useAsyncExec(() => setFetching(false));
     }, []);
+
+    const handlePageChange = useCallback((page) => setPageIndex(page), []);
 
     useEffect(() => {
         if (fetching) fetchBooks();
@@ -63,9 +69,11 @@ const BooksFinder: React.FC<{}> = () => {
             </div>
             <SearchResultsContainer data={books?.items} />
             <Pagination
-                pageIndex={1}
+                pageRange={7}
+                pageIndex={pageIndex}
                 countPerPage={maxResults}
                 totalCount={books?.totalItems}
+                handlePageChange={handlePageChange}
             />
         </div>
     );

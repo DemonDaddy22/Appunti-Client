@@ -1,39 +1,109 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { createListOfSize, isValidNumber } from '../../utils';
+import classes from './styles.module.scss';
 
 const Pagination = (props: any) => {
-    const { pageIndex, countPerPage, totalCount } = props;
+    const { pageRange, pageIndex, countPerPage, totalCount, handlePageChange } =
+        props;
 
-    // 1 2 3 4 5
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [currPages, setCurrPages] = useState<number[]>(() =>
+        createListOfSize(pageRange)
+    );
 
-    // 1 2 3 ... 6
-    // 1 ... 4 5 6
+    useEffect(() => {
+        if (isValidNumber(pageRange)) {
+            const newPages = createListOfSize(
+                pageRange,
+                pageIndex > 0 ? pageIndex : 1
+            );
+            setCurrPages(newPages);
+        }
+    }, [pageRange]);
 
-    // 1 2 3 ... 7
-    // 1 ... 3 4 5 ...7
-    // 1 ... 5 6 7
-
-    // 1 2 3 ... 50
-    // 1 ... 26 27 28 ... 50
-    // 1 ... 48 49 50
-    const renderPages = useMemo(() => {
-        const totalPages = Math.ceil(totalCount / countPerPage);
-        // Extremes remain constant
-        // Middle part changes
-        // If index is already present on view and not active, then use it
-        // Else recalculate middle part
-        return (
-            <div style={{ display: 'flex', gap: 4 }}>
-                <div>1</div>
-                <div>{totalPages}</div>
-            </div>
+    useEffect(() => {
+        setTotalPages(
+            countPerPage <= 0 ? 0 : Math.ceil(totalCount / countPerPage)
         );
-    }, [pageIndex, countPerPage, totalCount]);
+    }, [countPerPage, totalCount]);
+
+    const doesPageExistInRange = useCallback(
+        (page: number) =>
+            page >= currPages[0] && page <= currPages[pageRange - 1],
+        [pageRange, currPages]
+    );
+
+    const handlePrevButtonClick = useCallback(() => {
+        const newPageIndex = pageIndex - 1;
+        if (newPageIndex < 1) return;
+        if (!doesPageExistInRange(newPageIndex)) {
+            if (newPageIndex >= pageRange) {
+                const newPages = createListOfSize(
+                    pageRange,
+                    newPageIndex - pageRange + 1
+                );
+                setCurrPages(newPages);
+            } else {
+                const newPages = createListOfSize(pageRange, 1);
+                setCurrPages(newPages);
+            }
+        }
+        handlePageChange(newPageIndex);
+    }, [pageIndex, pageRange]);
+
+    const handleNextButtonClick = useCallback(() => {
+        const newPageIndex = pageIndex + 1;
+        if (newPageIndex > totalPages) return;
+        if (!doesPageExistInRange(newPageIndex)) {
+            if (newPageIndex <= totalPages - pageRange + 1) {
+                const newPages = createListOfSize(pageRange, newPageIndex);
+                setCurrPages(newPages);
+            } else {
+                const range = totalPages - newPageIndex + 1;
+                const newPages = [
+                    ...createListOfSize(
+                        pageRange - range,
+                        newPageIndex - pageRange + range
+                    ),
+                    ...createListOfSize(range, newPageIndex),
+                ];
+                setCurrPages(newPages);
+            }
+        }
+        handlePageChange(newPageIndex);
+    }, [totalPages, pageIndex, pageRange]);
+
+    const renderPages = useMemo(
+        () => (
+            <div style={{ display: 'flex', gap: 4 }}>
+                {currPages.map((page) => (
+                    <div
+                        onClick={() => handlePageChange(page)}
+                        className={`${classes.btn} ${
+                            page === pageIndex && classes.active
+                        }`}
+                        key={`page-${page}-of-${totalPages}`}
+                    >
+                        {page}
+                    </div>
+                ))}
+            </div>
+        ),
+        [currPages, pageIndex, countPerPage, totalCount]
+    );
 
     return totalCount > 0 ? (
         <div style={{ display: 'flex', gap: 8 }}>
-            <button>Prev</button>
+            <button disabled={pageIndex === 1} onClick={handlePrevButtonClick}>
+                Prev
+            </button>
             {renderPages}
-            <button>Next</button>
+            <button
+                disabled={pageIndex === totalPages}
+                onClick={handleNextButtonClick}
+            >
+                Next
+            </button>
         </div>
     ) : null;
 };

@@ -1,0 +1,16 @@
+.btn {
+    color: #cfcfcf;
+    cursor: pointer;
+
+    &:hover {
+        color: #fff;
+    }
+}
+
+.active {
+    color: #4282C6;
+
+    &:hover {
+        color: #4282C6;
+    }
+}
