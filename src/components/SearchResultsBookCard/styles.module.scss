@@ -8,6 +8,7 @@
     box-shadow: none;
     flex: 1;
     overflow: hidden;
+    width: 100%;
     transition: background-color $transitionDuration, border 0.15s, box-shadow 0.25s;
 
     &:hover {
@@ -23,6 +24,17 @@
 
         &:first-child {
             width: 25%;
+        }
+    }
+
+    & .imagePlaceholder {
+        height: 100%;
+        overflow: hidden;
+        width: 100%;
+
+        & img {
+            height: inherit;
+            width: inherit;
         }
     }
 

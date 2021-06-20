@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { isEmptyObject, truncateStringToLength } from '../../utils';
@@ -16,11 +17,20 @@ const SearchResultsBookCard: React.FC<ISearchResultsBookCard> = (props) => {
             }}
         >
             <div className={classes.column}>
-                <img
-                    className={classes.image}
-                    src={data.volumeInfo?.imageLinks?.thumbnail}
-                    alt={data.volumeInfo?.title}
-                />
+                {data.volumeInfo?.imageLinks?.thumbnail ? (
+                    <img
+                        className={classes.image}
+                        src={data.volumeInfo.imageLinks.thumbnail}
+                        alt={data.volumeInfo?.title}
+                    />
+                ) : (
+                    <div className={classes.imagePlaceholder}>
+                        <img
+                            src="https://res.cloudinary.com/yelp-camp/image/upload/v1624193684/BookPlaceholder.jpg"
+                            alt="no-cover"
+                        />
+                    </div>
+                )}
             </div>
             <div className={classes.column}>
                 <div className={classes.title}>
@@ -33,7 +43,14 @@ const SearchResultsBookCard: React.FC<ISearchResultsBookCard> = (props) => {
                     {data.volumeInfo?.publishedDate}
                 </div>
                 <div className={classes.description}>
-                    {truncateStringToLength(data.volumeInfo?.description, 200)}
+                    {data.volumeInfo?.description
+                        ? truncateStringToLength(
+                            data.volumeInfo?.description,
+                            200
+                        )
+                        : data.volumeInfo?.subtitle
+                            ? truncateStringToLength(data.volumeInfo?.subtitle, 200)
+                            : 'No Preview Available'}
                 </div>
             </div>
         </div>

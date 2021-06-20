@@ -12,42 +12,60 @@ const BooksFinder: React.FC<{}> = () => {
     const { toggleTheme } = useContext(ThemeContext);
 
     const [query, setQuery] = useState<string>('');
-    const [pageIndex, setPageIndex] = useState<number>(0);
+    const [pageIndex, setPageIndex] = useState<number>(1);
     const [maxResults, setMaxResults] = useState<number>(10);
     const [books, setBooks] = useState<IBookSearchData | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
     const [fetching, setFetching] = useState<boolean>(false);
+    const [queryParams, setQueryParams] = useState<IBooksAPIParams>({
+        q: query,
+        page: pageIndex,
+        maxResults,
+    });
 
-    // TODO - style button and search bar
+    // TODO - cover all cases for api call - q, pageIndex, maxResults
     const fetchBooks = useCallback(async () => {
         setLoading(true);
+        const { q, page, maxResults } = queryParams;
         try {
             const res = await fetch(
-                `${BOOKS_API_URI}/search?q=${query}&maxResults=${maxResults}`
+                `${BOOKS_API_URI}/search?q=${q}&maxResults=${maxResults}&page=${
+                    page - 1
+                }`
             );
             const data: IBookSearchResponse = await res.json();
             let fetchedBooks: IBookSearchData = data.data || {};
             setBooks(fetchedBooks);
-            useAsyncExec(() => {
-                setPageIndex(1);
-                setQuery('');
-            });
         } catch (err) {
             setError(err);
         } finally {
             setLoading(false);
         }
-    }, [query]);
+    }, [query, maxResults, pageIndex]);
 
-    const handleInputChange = useCallback((q: string) => setQuery(q), []);
-
-    const handleSearchButtonClick = useCallback(() => {
-        setFetching(true);
-        useAsyncExec(() => setFetching(false));
+    const handleInputChange = useCallback((q: string) => {
+        setQuery(q);
+        setQueryParams((prevQueryParams) => ({ ...prevQueryParams, q }));
     }, []);
 
-    const handlePageChange = useCallback((page) => setPageIndex(page), []);
+    const handleSearchButtonClick = useCallback(() => {
+        setQueryParams((prevQueryParams) => ({ ...prevQueryParams, page: 1 }));
+        setFetching(true);
+        useAsyncExec(() => {
+            setFetching(false);
+            setQuery('');
+        });
+    }, []);
+
+    const handlePageChange = useCallback((page) => {
+        setPageIndex(page);
+        setQueryParams((prevQueryParams) => ({ ...prevQueryParams, page }));
+        setFetching(true);
+        useAsyncExec(() => {
+            setFetching(false);
+        });
+    }, []);
 
     useEffect(() => {
         if (fetching) fetchBooks();

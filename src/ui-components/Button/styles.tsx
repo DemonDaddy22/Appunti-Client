@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
-import { BLACK_30, THEME_PRIMARY_ACCENT3, WHITE_TRANSPARENT_90 } from '../../resources/colors';
+import { BLACK_30, GREY_50, THEME_PRIMARY_ACCENT3, WHITE_TRANSPARENT_90 } from '../../resources/colors';
 import { isColorDark } from '../../utils';
 
 export const StyledButtonOutlined = styled.button`
@@ -26,6 +26,13 @@ export const StyledButtonOutlined = styled.button`
 
     &:active {
         filter: brightness(0.75);
+    }
+
+    &:disabled {
+        background-color: transparent !important;
+        border-color: ${GREY_50} !important;
+        color: ${GREY_50} !important;
+        cursor: auto !important;
     }
 
     @media (min-width: 1024px) {

@@ -8,10 +8,7 @@ import React, {
 import { ButtonOutlined } from '../Button';
 import { createListOfSize, isValidNumber } from '../../utils';
 import { ThemeContext } from '../../context/ThemeContext';
-import {
-    THEME_PRIMARY_ACCENT2,
-    WHITE_TRANSPARENT_90,
-} from '../../resources/colors';
+import { THEME_PRIMARY_ACCENT2, GREY_80 } from '../../resources/colors';
 import { StyledPageButton, StyledPageButtonContainer } from './styles';
 import classes from './styles.module.scss';
 
@@ -27,7 +24,7 @@ const Pagination: React.FC<IPagination> = (props) => {
         buttonStyle,
     } = props;
 
-    const { getThemedValue } = useContext(ThemeContext);
+    const { isLightTheme, getThemedValue } = useContext(ThemeContext);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [currPages, setCurrPages] = useState<number[]>(() =>
         createListOfSize(pageRange)
@@ -98,10 +95,7 @@ const Pagination: React.FC<IPagination> = (props) => {
     const renderPages = useMemo(
         () => (
             <StyledPageButtonContainer
-                color={getThemedValue(
-                    THEME_PRIMARY_ACCENT2,
-                    WHITE_TRANSPARENT_90
-                )}
+                color={getThemedValue(THEME_PRIMARY_ACCENT2, GREY_80)}
                 style={buttonContainerStyle}
             >
                 {currPages.map((page) => (
@@ -109,10 +103,7 @@ const Pagination: React.FC<IPagination> = (props) => {
                         key={`page-${page}-of-${totalPages}`}
                         onClick={() => handlePageChange(page)}
                         style={buttonStyle}
-                        color={getThemedValue(
-                            THEME_PRIMARY_ACCENT2,
-                            WHITE_TRANSPARENT_90
-                        )}
+                        color={getThemedValue(THEME_PRIMARY_ACCENT2, GREY_80)}
                         active={page === pageIndex}
                     >
                         {page}
@@ -120,16 +111,13 @@ const Pagination: React.FC<IPagination> = (props) => {
                 ))}
             </StyledPageButtonContainer>
         ),
-        [currPages, pageIndex, countPerPage, totalCount]
+        [isLightTheme, currPages, pageIndex, countPerPage, totalCount]
     );
 
     return totalCount > 0 ? (
         <div className={classes.paginationContainer} style={style}>
             <ButtonOutlined
-                color={getThemedValue(
-                    THEME_PRIMARY_ACCENT2,
-                    WHITE_TRANSPARENT_90
-                )}
+                color={getThemedValue(THEME_PRIMARY_ACCENT2, GREY_80)}
                 style={{ fontWeight: 'bold' }}
                 disabled={pageIndex === 1}
                 onClick={handlePrevButtonClick}
@@ -138,10 +126,7 @@ const Pagination: React.FC<IPagination> = (props) => {
             </ButtonOutlined>
             {renderPages}
             <ButtonOutlined
-                color={getThemedValue(
-                    THEME_PRIMARY_ACCENT2,
-                    WHITE_TRANSPARENT_90
-                )}
+                color={getThemedValue(THEME_PRIMARY_ACCENT2, GREY_80)}
                 style={{ fontWeight: 'bold' }}
                 disabled={pageIndex === totalPages}
                 onClick={handleNextButtonClick}

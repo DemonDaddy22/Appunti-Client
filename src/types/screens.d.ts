@@ -10,3 +10,9 @@ interface IBookSearchResponse {
     data: IBookSearchData;
     status: number;
 }
+
+interface IBooksAPIParams {
+    q: string;
+    page: number;
+    maxResults: number;
+}
