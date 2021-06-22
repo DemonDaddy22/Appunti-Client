@@ -218,3 +218,49 @@ interface IPageButton {
      */
     active: boolean;
 }
+
+interface ISelectOption {
+    /**
+     *
+     * @field `label` - specifies select option label
+     *
+     */
+    label: string;
+
+    /**
+     *
+     * @field `value` - specifies select option value
+     *
+     */
+    value: any;
+}
+
+interface ISelect {
+    /**
+     *
+     * @field `name` - specifies name for select component
+     *
+     */
+    name: string;
+
+    /**
+     *
+     * @field `label` - specifies label for select component
+     *
+     */
+    label: string | undefined;
+
+    /**
+     *
+     * @field `labelId` - specifies label ID for select component
+     *
+     */
+    labelId: string | undefined;
+
+    /**
+     *
+     * @field `options` - specifies options for select component
+     *
+     */
+    options: Array<ISelectOption>;
+}

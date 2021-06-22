@@ -6,6 +6,7 @@ import { BOOKS_API_URI } from '../../resources/constants';
 import Button, { ButtonOutlined } from '../../ui-components/Button';
 import Input from '../../ui-components/Input';
 import Pagination from '../../ui-components/Pagination';
+import Select from '../../ui-components/Select';
 import classes from './styles.module.scss';
 
 const BooksFinder: React.FC<{}> = () => {
@@ -85,6 +86,16 @@ const BooksFinder: React.FC<{}> = () => {
                 </ButtonOutlined>
                 <Button onClick={toggleTheme}>Toggle Theme</Button>
             </div>
+            <Select
+                name="select"
+                label="Books per page"
+                labelId="booksPerPage"
+                options={[
+                    { label: '10', value: 10 },
+                    { label: '20', value: 20 },
+                    { label: '30', value: 30 },
+                ]}
+            />
             <SearchResultsContainer data={books?.items} />
             <Pagination
                 pageRange={7}
