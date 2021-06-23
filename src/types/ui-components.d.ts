@@ -263,4 +263,32 @@ interface ISelect {
      *
      */
     options: Array<ISelectOption>;
+
+    /**
+     *
+     * @field `containerStyle` - specifies styles to override default container styles
+     *
+     */
+    containerStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `labelStyle` - specifies styles to override default label styles
+     *
+     */
+    labelStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `selectStyle` - specifies styles to override default select styles
+     *
+     */
+    selectStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `optionStyle` - specifies styles to override default option styles
+     *
+     */
+    optionStyle?: React.CSSProperties;
 }
