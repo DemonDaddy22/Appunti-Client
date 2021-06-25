@@ -7,6 +7,7 @@ import Button, { ButtonOutlined } from '../../ui-components/Button';
 import Input from '../../ui-components/Input';
 import Pagination from '../../ui-components/Pagination';
 import Select from '../../ui-components/Select';
+import Label from '../../ui-components/Label';
 import classes from './styles.module.scss';
 
 const BooksFinder: React.FC<{}> = () => {
@@ -74,9 +75,10 @@ const BooksFinder: React.FC<{}> = () => {
 
     return (
         <div className={classes.booksFinderContainer}>
+            <Label label="Search for a book" />
             <Input
                 name="search"
-                placeholder="Search for a book"
+                placeholder="Enter book name..."
                 value={query}
                 onChange={handleInputChange}
             />

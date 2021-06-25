@@ -292,3 +292,19 @@ interface ISelect {
      */
     optionStyle?: React.CSSProperties;
 }
+
+interface ILabel extends IColor {
+    /**
+     *
+     * @field `label` - specifies the label content
+     *
+     */
+    label: string;
+
+    /**
+     *
+     * @field `style` - specifies styles to override default label styles
+     *
+     */
+    style?: React.CSSProperties;
+}
