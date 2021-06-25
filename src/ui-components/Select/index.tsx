@@ -4,6 +4,8 @@ import { ThemeContext } from '../../context/ThemeContext';
 import { GREY_80, THEME_PRIMARY_ACCENT2 } from '../../resources/colors';
 import { isEmptyList, isEmptyString } from '../../utils';
 
+// TODO - create custom Select with *DOWNSHIFT*
+
 const StyledSelectContainer = styled.div`
     align-items: flex-start;
     display: flex;
