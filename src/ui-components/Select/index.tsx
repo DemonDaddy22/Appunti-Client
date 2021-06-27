@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+/* eslint-disable prettier/prettier */
+import React from 'react';
 import styled from 'styled-components';
-import { ThemeContext } from '../../context/ThemeContext';
 import { GREY_80, THEME_PRIMARY_ACCENT2 } from '../../resources/colors';
 import { isEmptyList, isEmptyString } from '../../utils';
+import Downshift from 'downshift';
 
 // TODO - create custom Select with *DOWNSHIFT*
 
@@ -43,49 +44,80 @@ const StyledSelect = styled.select`
     }
 `;
 
+// TODO - style the elements
+// TODO - when no matching element is found, show the text 'Search for something else'
 const Select: React.FC<ISelect> = (props) => {
     const {
         name,
-        label,
-        labelId,
-        options,
+        options: items,
         containerStyle,
-        labelStyle,
         selectStyle,
         optionStyle,
+        onOptionChange,
+        onInputChange,
     } = props;
 
-    const { getThemedValue } = useContext(ThemeContext);
-
-    return !isEmptyList(options) ? (
-        <StyledSelectContainer style={containerStyle}>
-            {!isEmptyString(label) && !isEmptyString(labelId) && (
-                <StyledLabel
-                    color={getThemedValue(THEME_PRIMARY_ACCENT2, GREY_80)}
-                    htmlFor={labelId}
-                    style={labelStyle}
-                >
-                    {label}
-                </StyledLabel>
-            )}
-            <StyledSelect
-                borderColor={getThemedValue(THEME_PRIMARY_ACCENT2, GREY_80)}
-                color={getThemedValue(THEME_PRIMARY_ACCENT2, GREY_80)}
-                name={name}
-                id={labelId || ''}
-                style={selectStyle}
-            >
-                {options.map((option: ISelectOption, i: number) => (
-                    <option
-                        key={`${name}-option-${i}`}
-                        value={option?.value}
-                        style={optionStyle}
-                    >
-                        {option?.label}
-                    </option>
-                ))}
-            </StyledSelect>
-        </StyledSelectContainer>
+    return !isEmptyList(items) ? (
+        <Downshift
+            onChange={(selection) => onOptionChange(selection)}
+            itemToString={(item) => (item ? item.value : '')}
+        >
+            {({
+                getInputProps,
+                getItemProps,
+                getMenuProps,
+                getToggleButtonProps,
+                isOpen,
+                inputValue,
+                highlightedIndex,
+                selectedItem,
+                getRootProps,
+            }) => {
+                return (
+                    <div>
+                        <div
+                            style={{ display: 'inline-block', border: '1px solid red' }}
+                            {...getRootProps({ refKey: 'ref' }, { suppressRefError: true })}
+                        >
+                            <input {...getInputProps({ onChange: (e) => onInputChange(e.target.value) })} />
+                            <button {...getToggleButtonProps()}>
+                            &#8964;
+                            </button>
+                        </div>
+                        <ul style={{ position: 'absolute' }} {...getMenuProps()}>
+                            {isOpen
+                                ? items
+                                    .filter(
+                                        (item) =>
+                                            !inputValue ||
+                                          item.value.includes(inputValue)
+                                    )
+                                    .map((item, index) => (
+                                        <li
+                                            {...getItemProps({
+                                                key: item.value,
+                                                index,
+                                                item,
+                                                style: {
+                                                    backgroundColor:
+                                                      highlightedIndex === index
+                                                          ? 'lightgray'
+                                                          : 'white',
+                                                    fontWeight:
+                                                      selectedItem === item
+                                                          ? 'bold'
+                                                          : 'normal',
+                                                },
+                                            })}
+                                        >
+                                            {item.value}
+                                        </li>
+                                    ))
+                                : null}
+                        </ul>
+                    </div>
+                );}}
+        </Downshift>
     ) : null;
 };
 

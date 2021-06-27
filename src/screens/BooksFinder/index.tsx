@@ -9,6 +9,15 @@ import Pagination from '../../ui-components/Pagination';
 import Select from '../../ui-components/Select';
 import Label from '../../ui-components/Label';
 import classes from './styles.module.scss';
+import { isEmptyString } from '../../utils';
+
+const items = [
+    { value: 'apple' },
+    { value: 'pear' },
+    { value: 'orange' },
+    { value: 'grape' },
+    { value: 'banana' },
+];
 
 const BooksFinder: React.FC<{}> = () => {
     const { toggleTheme } = useContext(ThemeContext);
@@ -16,6 +25,12 @@ const BooksFinder: React.FC<{}> = () => {
     const [query, setQuery] = useState<string>('');
     const [pageIndex, setPageIndex] = useState<number>(1);
     const [maxResults, setMaxResults] = useState<number>(10);
+    const [maxResultsOption, setMaxResultsOption] = useState<ISelectOption>(
+        items[0]
+    );
+    const [maxResultsInput, setMaxResultsInput] = useState<string>(
+        items[0].value
+    );
     const [books, setBooks] = useState<IBookSearchData | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
@@ -69,6 +84,18 @@ const BooksFinder: React.FC<{}> = () => {
         });
     }, []);
 
+    const handleSelectInputChange = useCallback((value) => {
+        if (!isEmptyString(value)) setMaxResultsInput(value);
+    }, []);
+
+    const handleOptionSelect = useCallback(
+        (option) => {
+            setMaxResultsOption(option);
+            handleSelectInputChange(option?.value);
+        },
+        [handleSelectInputChange]
+    );
+
     useEffect(() => {
         if (fetching) fetchBooks();
     }, [fetching, fetchBooks]);
@@ -90,13 +117,9 @@ const BooksFinder: React.FC<{}> = () => {
             </div>
             <Select
                 name="select"
-                label="Books per page"
-                labelId="booksPerPage"
-                options={[
-                    { label: '10', value: 10 },
-                    { label: '20', value: 20 },
-                    { label: '30', value: 30 },
-                ]}
+                options={items}
+                onOptionChange={handleOptionSelect}
+                onInputChange={handleSelectInputChange}
             />
             <SearchResultsContainer data={books?.items} />
             <Pagination

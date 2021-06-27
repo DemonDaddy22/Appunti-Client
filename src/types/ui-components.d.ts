@@ -222,13 +222,6 @@ interface IPageButton {
 interface ISelectOption {
     /**
      *
-     * @field `label` - specifies select option label
-     *
-     */
-    label: string;
-
-    /**
-     *
      * @field `value` - specifies select option value
      *
      */
@@ -242,20 +235,6 @@ interface ISelect {
      *
      */
     name: string;
-
-    /**
-     *
-     * @field `label` - specifies label for select component
-     *
-     */
-    label: string | undefined;
-
-    /**
-     *
-     * @field `labelId` - specifies label ID for select component
-     *
-     */
-    labelId: string | undefined;
 
     /**
      *
@@ -273,13 +252,6 @@ interface ISelect {
 
     /**
      *
-     * @field `labelStyle` - specifies styles to override default label styles
-     *
-     */
-    labelStyle?: React.CSSProperties;
-
-    /**
-     *
      * @field `selectStyle` - specifies styles to override default select styles
      *
      */
@@ -291,6 +263,24 @@ interface ISelect {
      *
      */
     optionStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @function onOptionChange - function to trigger on option change
+     * @param {ISelectOption} option - specifies selected option
+     * @returns `void`
+     *
+     */
+    onOptionChange: (option: ISelectOption) => void;
+
+    /**
+     *
+     * @function onInputChange - function to trigger on input change
+     * @param {string} value - specifies input value
+     * @returns `void`
+     *
+     */
+    onInputChange: (value: string) => void;
 }
 
 interface ILabel extends IColor {
