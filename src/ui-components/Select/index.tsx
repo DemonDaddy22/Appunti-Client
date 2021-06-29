@@ -7,6 +7,27 @@ import Downshift from 'downshift';
 
 // TODO - create custom Select with *DOWNSHIFT*
 
+const StyledInputContainer = styled.div`
+    border: 1px solid violet;
+    display: inline-flex;
+    padding: 0;
+
+    & input {
+        border: none;
+        outline: none;
+        background-color: teal;
+    }
+
+    & button {
+        align-items: center;
+        background-color: transparent;
+        border: none;
+        display: inline-flex;
+        justify-content: center;
+        outline: none;
+    }
+`;
+
 const StyledSelectContainer = styled.div`
     align-items: flex-start;
     display: flex;
@@ -75,15 +96,14 @@ const Select: React.FC<ISelect> = (props) => {
             }) => {
                 return (
                     <div>
-                        <div
-                            style={{ display: 'inline-block', border: '1px solid red' }}
+                        <StyledInputContainer
                             {...getRootProps({ refKey: 'ref' }, { suppressRefError: true })}
                         >
                             <input {...getInputProps({ onChange: (e) => onInputChange(e.target.value) })} />
                             <button {...getToggleButtonProps()}>
                             &#8964;
                             </button>
-                        </div>
+                        </StyledInputContainer>
                         <ul style={{ position: 'absolute' }} {...getMenuProps()}>
                             {isOpen
                                 ? items
