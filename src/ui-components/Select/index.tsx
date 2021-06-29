@@ -6,33 +6,85 @@ import { isEmptyList, isEmptyString } from '../../utils';
 import Downshift from 'downshift';
 
 // TODO - create custom Select with *DOWNSHIFT*
+// TODO - use chevron icon in button
+// TODO - try initial open
 
 const StyledInputContainer = styled.div`
-    border: 1px solid violet;
+    border: 1px solid teal;
+    border-radius: 4px;
     display: inline-flex;
+    margin-top: 4px;
     padding: 0;
 
     & input {
         border: none;
+        border-top-left-radius: inherit;
+        border-bottom-left-radius: inherit;
+        font-size: 1.05rem;
         outline: none;
-        background-color: teal;
+        padding: 0.8rem 0.6rem;
+
+        @media (min-width: 1024px) {
+            font-size: 1.1rem;
+            padding: 0.9rem 0.7rem;
+        }
+
+        @media (min-width: 1500px) {
+            font-size: 1.15rem;
+            padding: 1rem 0.8rem;
+        }
     }
 
     & button {
         align-items: center;
         background-color: transparent;
         border: none;
+        cursor: pointer;
         display: inline-flex;
         justify-content: center;
+        font-size: 1.05rem;
+        font-weight: 900;
         outline: none;
+        padding: 0.8rem 0.6rem;
+
+        @media (min-width: 1024px) {
+            font-size: 1.1rem;
+            padding: 0.9rem 0.7rem;
+        }
+
+        @media (min-width: 1500px) {
+            font-size: 1.15rem;
+            padding: 1rem 0.8rem;
+        }
     }
 `;
 
-const StyledSelectContainer = styled.div`
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+// TODO - remove translations and border when isOpen -> false
+const StyledMenu = styled.ul`
+    border: 1px solid teal;
+    border-radius: 4px;
+    left: 50%;
+    list-style: none;
+    margin: 0.25rem auto 0;
+    min-width: 20%;
+    padding: 0;
+    position: absolute;
+    transform: translateX(-50%);
+`;
+
+const StyledMenuItem = styled.li`
+    padding: 0.5rem 0.75rem;
+    text-align: start;
+
+    &:first-of-type {
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+    }
+    
+    &:last-of-type {
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+    }
 `;
 
 const StyledLabel = styled.label`
@@ -101,10 +153,10 @@ const Select: React.FC<ISelect> = (props) => {
                         >
                             <input {...getInputProps({ onChange: (e) => onInputChange(e.target.value) })} />
                             <button {...getToggleButtonProps()}>
-                            &#8964;
+                                {'>'}
                             </button>
                         </StyledInputContainer>
-                        <ul style={{ position: 'absolute' }} {...getMenuProps()}>
+                        <StyledMenu {...getMenuProps()}>
                             {isOpen
                                 ? items
                                     .filter(
@@ -113,7 +165,7 @@ const Select: React.FC<ISelect> = (props) => {
                                           item.value.includes(inputValue)
                                     )
                                     .map((item, index) => (
-                                        <li
+                                        <StyledMenuItem
                                             {...getItemProps({
                                                 key: item.value,
                                                 index,
@@ -131,10 +183,10 @@ const Select: React.FC<ISelect> = (props) => {
                                             })}
                                         >
                                             {item.value}
-                                        </li>
+                                        </StyledMenuItem>
                                     ))
                                 : null}
-                        </ul>
+                        </StyledMenu>
                     </div>
                 );}}
         </Downshift>
