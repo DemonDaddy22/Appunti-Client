@@ -1,25 +1,38 @@
+/* eslint-disable indent */
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { GREY_80, THEME_PRIMARY_ACCENT2 } from '../../resources/colors';
-import { isEmptyList, isEmptyString } from '../../utils';
+import { isEmptyList, isHexColor, rgbToHex } from '../../utils';
 import Downshift from 'downshift';
+import ChevronDown from '../../assets/icons/ChevronDown';
+import { ThemeContext } from '../../context/ThemeContext';
 
 // TODO - create custom Select with *DOWNSHIFT*
 // TODO - use chevron icon in button
 // TODO - try initial open
 
 const StyledInputContainer = styled.div`
-    border: 1px solid teal;
+    border: 1px solid;
+    border-color: ${(props: IColors) => {
+        const borderColor = props.borderColor || '';
+        return isHexColor(borderColor) ? borderColor : rgbToHex(borderColor);
+    }}9F;
     border-radius: 4px;
     display: inline-flex;
     margin-top: 4px;
     padding: 0;
+    transition: border 0.25s;
+
+    &:hover {
+        border-color: ${(props: IColors) => props.borderColor};
+    }
 
     & input {
+        background-color: transparent;
         border: none;
         border-top-left-radius: inherit;
         border-bottom-left-radius: inherit;
+        color: ${(props: IColors) => props.color};
         font-size: 1.05rem;
         outline: none;
         padding: 0.8rem 0.6rem;
@@ -32,30 +45,45 @@ const StyledInputContainer = styled.div`
         @media (min-width: 1500px) {
             font-size: 1.15rem;
             padding: 1rem 0.8rem;
+        }
+
+        &::placeholder {
+            color: ${(props: IColors) => {
+                const color = props.color || '';
+                return isHexColor(color) ? color : rgbToHex(color);
+            }}AF;
         }
     }
+`;
 
-    & button {
-        align-items: center;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        display: inline-flex;
-        justify-content: center;
-        font-size: 1.05rem;
-        font-weight: 900;
-        outline: none;
-        padding: 0.8rem 0.6rem;
+const StyledInputButton = styled.button`
+    align-items: center;
+    background-color: ${(props: IBackgroundColor) => props.backgroundColor};
+    border: none;
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    filter: brightness(1);
+    font-size: 1.05rem;
+    font-weight: 900;
+    justify-content: center;
+    outline: none;
+    padding: 0.8rem 0.6rem;
+    transition: background-color 0.25s, filter 0.1s;
 
-        @media (min-width: 1024px) {
-            font-size: 1.1rem;
-            padding: 0.9rem 0.7rem;
-        }
+    &:hover {
+        filter: brightness(0.85);
+    }
 
-        @media (min-width: 1500px) {
-            font-size: 1.15rem;
-            padding: 1rem 0.8rem;
-        }
+    @media (min-width: 1024px) {
+        font-size: 1.1rem;
+        padding: 0.9rem 0.7rem;
+    }
+
+    @media (min-width: 1500px) {
+        font-size: 1.15rem;
+        padding: 1rem 0.8rem;
     }
 `;
 
@@ -130,6 +158,8 @@ const Select: React.FC<ISelect> = (props) => {
         onInputChange,
     } = props;
 
+    const { theme } = useContext(ThemeContext);
+
     return !isEmptyList(items) ? (
         <Downshift
             onChange={(selection) => onOptionChange(selection)}
@@ -148,13 +178,13 @@ const Select: React.FC<ISelect> = (props) => {
             }) => {
                 return (
                     <div>
-                        <StyledInputContainer
+                        <StyledInputContainer color={theme.themeSecondary} borderColor={theme.textObscure}
                             {...getRootProps({ refKey: 'ref' }, { suppressRefError: true })}
                         >
                             <input {...getInputProps({ onChange: (e) => onInputChange(e.target.value) })} />
-                            <button {...getToggleButtonProps()}>
-                                {'>'}
-                            </button>
+                            <StyledInputButton backgroundColor={theme.textOpposite} {...getToggleButtonProps()}>
+                                <ChevronDown color={theme.text} />
+                            </StyledInputButton>
                         </StyledInputContainer>
                         <StyledMenu {...getMenuProps()}>
                             {isOpen
