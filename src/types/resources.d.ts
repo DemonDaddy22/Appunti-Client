@@ -38,7 +38,14 @@ interface ITheme {
 
     /**
      *
-     * @field {string} `textObscure` - specifies lighter text accent color
+     * @field {string} `textLight` - specifies lighter text accent color
+     *
+     */
+    textLight: string;
+
+    /**
+     *
+     * @field {string} `textObscure` - specifies obscure text accent color
      *
      */
     textObscure: string;

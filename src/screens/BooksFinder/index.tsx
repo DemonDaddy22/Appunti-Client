@@ -116,7 +116,6 @@ const BooksFinder: React.FC<{}> = () => {
                 <Button onClick={toggleTheme}>Toggle Theme</Button>
             </div>
             <Select
-                name="select"
                 options={items}
                 onOptionChange={handleOptionSelect}
                 onInputChange={handleSelectInputChange}

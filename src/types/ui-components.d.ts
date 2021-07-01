@@ -231,10 +231,10 @@ interface ISelectOption {
 interface ISelect extends IColors {
     /**
      *
-     * @field `name` - specifies name for select component
+     * @field `placeholder` - specifies placeholder for input field
      *
      */
-    name: string;
+    placeholder?: string;
 
     /**
      *
@@ -245,24 +245,31 @@ interface ISelect extends IColors {
 
     /**
      *
-     * @field `containerStyle` - specifies styles to override default container styles
+     * @field `containerStyle` - specifies container styles
      *
      */
     containerStyle?: React.CSSProperties;
 
     /**
      *
-     * @field `selectStyle` - specifies styles to override default select styles
+     * @field `inputContainerStyle` - specifies styles to override default input container styles
      *
      */
-    selectStyle?: React.CSSProperties;
+    inputContainerStyle?: React.CSSProperties;
 
     /**
      *
-     * @field `optionStyle` - specifies styles to override default option styles
+     * @field `selectMenuStyle` - specifies styles to override default select menu styles
      *
      */
-    optionStyle?: React.CSSProperties;
+    selectMenuStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `selectItemStyle` - specifies styles to override default select item styles
+     *
+     */
+    selectItemStyle?: React.CSSProperties;
 
     /**
      *
