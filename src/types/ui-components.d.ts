@@ -283,6 +283,38 @@ interface ISelect extends IColors {
     onInputChange: (value: string) => void;
 }
 
+interface ISelectMenu extends IBorderColor {
+    /**
+     *
+     * @field `isOpen` - specifies whether the menu is open
+     *
+     */
+    isOpen: boolean;
+}
+
+interface ISelectItem extends IColors {
+    /**
+     *
+     * @field `isHighlighted` - specifies whether the item is hovered
+     *
+     */
+    isHighlighted: boolean;
+
+    /**
+     *
+     * @field `isSelected` - specifies whether the item is selected
+     *
+     */
+    isSelected: boolean;
+
+    /**
+     *
+     * @field `selectedColor` - specifies text color for selected item
+     *
+     */
+    selectedColor: string;
+}
+
 interface ILabel extends IColor {
     /**
      *
