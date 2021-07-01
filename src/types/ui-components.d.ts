@@ -228,7 +228,7 @@ interface ISelectOption {
     value: any;
 }
 
-interface ISelect {
+interface ISelect extends IColors {
     /**
      *
      * @field `name` - specifies name for select component

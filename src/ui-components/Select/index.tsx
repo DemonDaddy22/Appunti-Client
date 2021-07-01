@@ -148,17 +148,19 @@ const StyledSelect = styled.select`
 // TODO - style the elements
 // TODO - when no matching element is found, show the text 'Search for something else'
 const Select: React.FC<ISelect> = (props) => {
+    const { theme } = useContext(ThemeContext);
+    
     const {
         name,
         options: items,
         containerStyle,
         selectStyle,
         optionStyle,
+        color = theme.themeSecondary,
+        borderColor = theme.borderColor,
         onOptionChange,
         onInputChange,
     } = props;
-
-    const { theme } = useContext(ThemeContext);
 
     return !isEmptyList(items) ? (
         <Downshift
@@ -178,7 +180,7 @@ const Select: React.FC<ISelect> = (props) => {
             }) => {
                 return (
                     <div>
-                        <StyledInputContainer color={theme.themeSecondary} borderColor={theme.textObscure}
+                        <StyledInputContainer color={color} borderColor={borderColor}
                             {...getRootProps({ refKey: 'ref' }, { suppressRefError: true })}
                         >
                             <input {...getInputProps({ onChange: (e) => onInputChange(e.target.value) })} />
