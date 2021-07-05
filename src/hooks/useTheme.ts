@@ -13,7 +13,7 @@ import { THEME } from '../resources/constants';
 const useTheme = (): [() => string, (theme: 'light' | 'dark') => void] => {
     const getThemeFromStorageIfPresent = () => {
         const swooshTheme =
-            localStorage.getItem('swooshTheme') || JSON.stringify(THEME.LIGHT);
+            localStorage.getItem('swooshTheme') || JSON.stringify(THEME.DARK);
         return JSON.parse(swooshTheme);
     };
 
