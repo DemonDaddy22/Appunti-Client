@@ -24,6 +24,13 @@ interface ITheme {
 
     /**
      *
+     * @field {string} `textContrastLight` - specifies text color with mild contrast
+     *
+     */
+    textContrastLight: string;
+
+    /**
+     *
      * @field {string} `textGrey` - specifies text color in shade of grey
      *
      */

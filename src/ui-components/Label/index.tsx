@@ -5,7 +5,7 @@ import { StyledLabel } from './styles';
 const Label: React.FC<ILabel> = (props) => {
     const { theme } = useContext(ThemeContext);
 
-    const { label, style, color = theme.textLight } = props;
+    const { label, style, color = theme.textContrastLight } = props;
 
     return (
         <StyledLabel color={color} style={style}>

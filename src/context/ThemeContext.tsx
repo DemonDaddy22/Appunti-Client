@@ -4,8 +4,8 @@ import { THEME } from '../resources/constants';
 import { DARK_THEME, LIGHT_THEME } from '../resources/theme';
 
 const ThemeContextValue: IThemeContextValue = {
-    isLightTheme: true,
-    theme: LIGHT_THEME,
+    isLightTheme: false,
+    theme: DARK_THEME,
     toggleTheme: () => {},
     // eslint-disable-next-line no-unused-vars
     getThemedValue: (_lightValue: string, _darkValue: string): string =>

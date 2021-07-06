@@ -6,7 +6,7 @@ import Downshift from 'downshift';
 import ChevronDown from '../../assets/icons/ChevronDown';
 import { ThemeContext } from '../../context/ThemeContext';
 import { THEME_PRIMARY_ACCENT3, WHITE } from '../../resources/colors';
-import { StyledInputContainer, StyledInputButton, StyledMenu, StyledMenuItem } from './styles';
+import { StyledInputContainer, StyledInputButton, StyledMenu, StyledMenuItem, StyledInputWrapper } from './styles';
 
 // TODO - add border effects similar to input component
 const Select: React.FC<ISelect> = (props) => {
@@ -47,29 +47,34 @@ const Select: React.FC<ISelect> = (props) => {
             }) => {
                 return (
                     <div style={containerStyle}>
-                        <StyledInputContainer
-                            color={color}
-                            borderColor={borderColor}
-                            {...getRootProps(
-                                { refKey: 'ref' },
-                                { suppressRefError: true }
-                            )}
-                        >
-                            <input
-                                {...getInputProps({
-                                    placeholder,
-                                    style: inputContainerStyle,
-                                    onChange: (e) =>
-                                        onInputChange(e.target.value),
-                                })}
-                            />
-                            <StyledInputButton
-                                backgroundColor={theme.textOpposite}
-                                {...getToggleButtonProps()}
+                        <StyledInputWrapper>
+                            <StyledInputContainer
+                                color={color}
+                                borderColor={borderColor}
+                                {...getRootProps(
+                                    { refKey: 'ref' },
+                                    { suppressRefError: true }
+                                )}
                             >
-                                <ChevronDown color={theme.text} />
-                            </StyledInputButton>
-                        </StyledInputContainer>
+                                <input
+                                    {...getInputProps({
+                                        placeholder,
+                                        style: inputContainerStyle,
+                                        onChange: (e) =>
+                                            onInputChange(e.target.value),
+                                    })}
+                                />
+                                <StyledInputButton
+                                    backgroundColor={theme.textOpposite}
+                                    {...getToggleButtonProps()}
+                                >
+                                    <ChevronDown color={theme.text} />
+                                </StyledInputButton>
+                            </StyledInputContainer>
+                            <span className="focus-border">
+                                <i></i>
+                            </span>
+                        </StyledInputWrapper>
                         <StyledMenu
                             isOpen={isOpen}
                             borderColor={theme.borderColor}
