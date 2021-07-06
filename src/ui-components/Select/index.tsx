@@ -13,6 +13,7 @@ const Select: React.FC<ISelect> = (props) => {
 
     const {
         placeholder = '',
+        value,
         options: items,
         containerStyle,
         inputContainerStyle,
@@ -57,6 +58,7 @@ const Select: React.FC<ISelect> = (props) => {
                             <input
                                 {...getInputProps({
                                     placeholder,
+                                    value,
                                     style: inputContainerStyle,
                                     onChange: (e) =>
                                         onInputChange(e.target.value),

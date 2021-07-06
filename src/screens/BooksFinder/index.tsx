@@ -85,13 +85,18 @@ const BooksFinder: React.FC<{}> = () => {
     }, []);
 
     const handleSelectInputChange = useCallback((value) => {
-        if (!isEmptyString(value)) setMaxResultsInput(value);
+        setMaxResultsInput(!isEmptyString(value) ? value : '');
     }, []);
 
     const handleOptionSelect = useCallback(
         (option) => {
-            setMaxResultsOption(option);
-            handleSelectInputChange(option?.value);
+            if (option) {
+                // TODO - set query params
+                // TODO - update option object to include label and value
+                // TODO - call API when entries per page changes
+                setMaxResultsOption(option);
+                handleSelectInputChange(option?.value);
+            }
         },
         [handleSelectInputChange]
     );
@@ -116,6 +121,7 @@ const BooksFinder: React.FC<{}> = () => {
                 <Button onClick={toggleTheme}>Toggle Theme</Button>
             </div>
             <Select
+                value={maxResultsInput}
                 options={items}
                 onOptionChange={handleOptionSelect}
                 onInputChange={handleSelectInputChange}

@@ -238,6 +238,13 @@ interface ISelect extends IColors {
 
     /**
      *
+     * @field `value` - specifies value for input field
+     *
+     */
+    value: string;
+
+    /**
+     *
      * @field `options` - specifies options for select component
      *
      */
