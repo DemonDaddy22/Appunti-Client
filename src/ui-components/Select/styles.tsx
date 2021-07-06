@@ -3,51 +3,6 @@
 import styled from 'styled-components';
 import { isHexColor, rgbToHex } from '../../utils';
 
-export const StyledInputWrapper = styled.div`
-    margin: 4px 0;
-    position: relative;
-
-    & .focus-border:before,
-    & .focus-border:after {
-        background-color: ${(props: IColors) => props.color};
-        content: '';
-        height: 2px;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 0;
-        transition: 0.3s;
-
-        @media (min-width: 1024px) {
-            transition: 0.5s;
-        }
-    }
-
-    & .focus-border i:before,
-    & .focus-border i:after {
-        background-color: ${(props: IColors) => props.color};
-        content: '';
-        height: 0;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 2px;
-        transition: 0.4s;
-
-        @media (min-width: 1024px) {
-            transition: 0.6s;
-        }
-    }
-
-    & .focus-border:after,
-    & .focus-border i:after {
-        bottom: 0;
-        left: auto;
-        right: 0;
-        top: auto;
-    }
-`;
-
 export const StyledInputContainer = styled.div`
     border: 1px solid;
     border-color: ${(props: IColors) => {
@@ -57,6 +12,7 @@ export const StyledInputContainer = styled.div`
     border-radius: 4px;
     display: inline-flex;
     font-family: inherit;
+    margin: 4px 0;
     padding: 0;
     transition: border 0.25s;
 
@@ -91,26 +47,6 @@ export const StyledInputContainer = styled.div`
                 const color = props.color || '';
                 return isHexColor(color) ? color : rgbToHex(color);
             }}AF;
-        }
-
-        &:focus ~ .focus-border:before,
-        &:focus ~ .focus-border:after {
-            width: 100%;
-            transition: 0.3s;
-
-            @media (min-width: 1024px) {
-                transition: 0.5s;
-            }
-        }
-
-        &:focus ~ .focus-border i:before,
-        &:focus ~ .focus-border i:after {
-            height: 100%;
-            transition: 0.4s;
-
-            @media (min-width: 1024px) {
-                transition: 0.6s;
-            }
         }
     }
 `;
