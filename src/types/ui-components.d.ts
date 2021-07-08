@@ -222,10 +222,17 @@ interface IPageButton {
 interface ISelectOption {
     /**
      *
-     * @field `value` - specifies select option value
+     * @field `label` - specifies the label string to be displayed as option
      *
      */
-    value: any;
+    label: string;
+
+    /**
+     *
+     * @field `value` - specifies the actual value to be used for further processing
+     *
+     */
+    value: number;
 }
 
 interface ISelect extends IColors {

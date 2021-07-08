@@ -26,13 +26,13 @@ const Select: React.FC<ISelect> = (props) => {
     } = props;
 
     const isItemPresent = useCallback((inputValue: string | null) => (
-        items?.length && items.some((item) => item.value.includes(inputValue))
+        items?.length && items.some((item) => item.label.includes(inputValue || ''))
     ), [items]);
 
     return !isEmptyList(items) ? (
         <Downshift
             onChange={(selection) => onOptionChange(selection)}
-            itemToString={(item) => (item ? item.value : '')}
+            itemToString={(item) => (item ? item.label : '')}
         >
             {({
                 getInputProps,
@@ -81,7 +81,7 @@ const Select: React.FC<ISelect> = (props) => {
                                     ? items.filter(
                                         (item) =>
                                             !inputValue ||
-                                              item.value.includes(inputValue)
+                                              item.label.includes(inputValue)
                                     )
                                         .map((item, index: number) => (
                                             <StyledMenuItem
@@ -91,10 +91,10 @@ const Select: React.FC<ISelect> = (props) => {
                                                 color={theme.text}
                                                 selectedColor={theme.themeSecondary}
                                                 {...getItemProps({
-                                                    key: item.value, index, item, style: selectItemStyle
+                                                    key: item.label, index, item, style: selectItemStyle
                                                 })}
                                             >
-                                                {item.value}
+                                                {item.label}
                                             </StyledMenuItem>
                                         ))
                                     : <StyledMenuItem

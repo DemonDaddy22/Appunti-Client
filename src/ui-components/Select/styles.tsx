@@ -103,16 +103,17 @@ export const StyledMenu = styled.ul`
 `;
 
 export const StyledMenuItem = styled.li`
-    background-color: ${({ backgroundColor, isHighlighted }: ISelectItem) =>
-        `${backgroundColor}${isHighlighted ? 'AF' : ''}`};
+    background-color: ${({ backgroundColor }: ISelectItem) => backgroundColor};
     color: ${({ color, selectedColor, isSelected }: ISelectItem) =>
         isSelected ? selectedColor : color};
     cursor: pointer;
     font-weight: ${({ isSelected }: ISelectItem) =>
         isSelected ? 'bold' : 'inherit'};
+    filter: ${({ isHighlighted }: ISelectItem) =>
+        isHighlighted ? 'brightness(0.85)' : 'brightness(1)'};
     padding: 0.5rem 0.75rem;
     text-align: start;
-    transition: background-color 0.25s, color 0.25s;
+    transition: background-color 0.25s, color 0.25s, filter 0.25s;
 
     &:first-of-type {
         border-top-left-radius: inherit;

@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import SearchResultsContainer from '../../components/SearchResultsContainer';
 import { ThemeContext } from '../../context/ThemeContext';
 import useAsyncExec from '../../hooks/useAsyncExec';
-import { BOOKS_API_URI } from '../../resources/constants';
+import { BOOKS_API_URI, MAX_RESULTS_OPTIONS } from '../../resources/constants';
 import Button, { ButtonOutlined } from '../../ui-components/Button';
 import Input from '../../ui-components/Input';
 import Pagination from '../../ui-components/Pagination';
@@ -11,25 +11,16 @@ import Label from '../../ui-components/Label';
 import classes from './styles.module.scss';
 import { isEmptyString } from '../../utils';
 
-const items = [
-    { value: 'apple' },
-    { value: 'pear' },
-    { value: 'orange' },
-    { value: 'grape' },
-    { value: 'banana' },
-];
-
 const BooksFinder: React.FC<{}> = () => {
     const { toggleTheme } = useContext(ThemeContext);
 
     const [query, setQuery] = useState<string>('');
     const [pageIndex, setPageIndex] = useState<number>(1);
-    const [maxResults, setMaxResults] = useState<number>(10);
     const [maxResultsOption, setMaxResultsOption] = useState<ISelectOption>(
-        items[0]
+        MAX_RESULTS_OPTIONS[0]
     );
     const [maxResultsInput, setMaxResultsInput] = useState<string>(
-        items[0].value
+        MAX_RESULTS_OPTIONS[0].label
     );
     const [books, setBooks] = useState<IBookSearchData | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -37,19 +28,16 @@ const BooksFinder: React.FC<{}> = () => {
     const [fetching, setFetching] = useState<boolean>(false);
     const [queryParams, setQueryParams] = useState<IBooksAPIParams>({
         q: query,
-        page: pageIndex,
-        maxResults,
+        startIndex: pageIndex - 1,
+        maxResults: maxResultsOption.value,
     });
 
-    // TODO - cover all cases for api call - q, pageIndex, maxResults
     const fetchBooks = useCallback(async () => {
         setLoading(true);
-        const { q, page, maxResults } = queryParams;
+        const { q, startIndex, maxResults } = queryParams;
         try {
             const res = await fetch(
-                `${BOOKS_API_URI}/search?q=${q}&maxResults=${maxResults}&page=${
-                    page - 1
-                }`
+                `${BOOKS_API_URI}/search?q=${q}&maxResults=${maxResults}&start=${startIndex}`
             );
             const data: IBookSearchResponse = await res.json();
             let fetchedBooks: IBookSearchData = data.data || {};
@@ -59,7 +47,7 @@ const BooksFinder: React.FC<{}> = () => {
         } finally {
             setLoading(false);
         }
-    }, [query, maxResults, pageIndex]);
+    }, [query, maxResultsOption, pageIndex]);
 
     const handleInputChange = useCallback((q: string) => {
         setQuery(q);
@@ -67,7 +55,10 @@ const BooksFinder: React.FC<{}> = () => {
     }, []);
 
     const handleSearchButtonClick = useCallback(() => {
-        setQueryParams((prevQueryParams) => ({ ...prevQueryParams, page: 1 }));
+        setQueryParams((prevQueryParams) => ({
+            ...prevQueryParams,
+            startIndex: 0,
+        }));
         setFetching(true);
         useAsyncExec(() => {
             setFetching(false);
@@ -75,14 +66,20 @@ const BooksFinder: React.FC<{}> = () => {
         });
     }, []);
 
-    const handlePageChange = useCallback((page) => {
-        setPageIndex(page);
-        setQueryParams((prevQueryParams) => ({ ...prevQueryParams, page }));
-        setFetching(true);
-        useAsyncExec(() => {
-            setFetching(false);
-        });
-    }, []);
+    const handlePageChange = useCallback(
+        (page) => {
+            setPageIndex(page);
+            setQueryParams((prevQueryParams) => ({
+                ...prevQueryParams,
+                startIndex: (page - 1) * maxResultsOption.value,
+            }));
+            setFetching(true);
+            useAsyncExec(() => {
+                setFetching(false);
+            });
+        },
+        [maxResultsOption]
+    );
 
     const handleSelectInputChange = useCallback((value) => {
         setMaxResultsInput(!isEmptyString(value) ? value : '');
@@ -90,15 +87,20 @@ const BooksFinder: React.FC<{}> = () => {
 
     const handleOptionSelect = useCallback(
         (option) => {
-            if (option) {
-                // TODO - set query params
-                // TODO - update option object to include label and value
-                // TODO - call API when entries per page changes
+            if (option !== maxResultsOption) {
+                setQueryParams((prevQueryParams) => ({
+                    ...prevQueryParams,
+                    maxResults: option.value,
+                }));
                 setMaxResultsOption(option);
                 handleSelectInputChange(option?.value);
+                setFetching(true);
+                useAsyncExec(() => {
+                    setFetching(false);
+                });
             }
         },
-        [handleSelectInputChange]
+        [handleSelectInputChange, maxResultsOption]
     );
 
     useEffect(() => {
@@ -122,7 +124,7 @@ const BooksFinder: React.FC<{}> = () => {
             </div>
             <Select
                 value={maxResultsInput}
-                options={items}
+                options={MAX_RESULTS_OPTIONS}
                 onOptionChange={handleOptionSelect}
                 onInputChange={handleSelectInputChange}
             />
@@ -130,7 +132,7 @@ const BooksFinder: React.FC<{}> = () => {
             <Pagination
                 pageRange={7}
                 pageIndex={pageIndex}
-                countPerPage={maxResults}
+                countPerPage={maxResultsOption.value}
                 totalCount={books?.totalItems || 0}
                 handlePageChange={handlePageChange}
             />

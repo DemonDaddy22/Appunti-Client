@@ -13,6 +13,6 @@ interface IBookSearchResponse {
 
 interface IBooksAPIParams {
     q: string;
-    page: number;
+    startIndex: number;
     maxResults: number;
 }
