@@ -17,7 +17,7 @@
 
     .inputCol {
         @include flex($flexDirection: column, $gap: 0.5rem);
-    
+
         &:first-of-type {
             flex: 1;
         }

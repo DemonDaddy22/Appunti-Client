@@ -7,11 +7,11 @@
     @media (min-width: 900px) {
         @include grid($gap: 0.75rem, $gridTemplateColumns: 1fr 1fr);
     }
-    
+
     @media (min-width: 1500px) {
         @include grid($gap: 1rem, $gridTemplateColumns: 1fr 1fr 1fr);
     }
-    
+
     @media (min-width: 2000px) {
         @include grid($gap: 1rem, $gridTemplateColumns: 1fr 1fr 1fr 1fr);
     }

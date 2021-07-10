@@ -36,7 +36,7 @@
     @if $gridTemplateColumns != none {
         grid-template-columns: $gridTemplateColumns;
     }
-    
+
     @if $gridTemplateRows != none {
         grid-template-rows: $gridTemplateRows;
     }
@@ -63,13 +63,13 @@
 @mixin theme($property, $key, $inlinePre: null, $inlinePost: null, $transition: 0) {
     @each $theme in $themes {
         $value: map-get($theme, $key);
-        
+
         @if ($theme == $darkTheme) {
             @at-root [theme-mode='dark'] #{&} {
                 #{$property}: #{$inlinePre} #{$value} #{$inlinePost};
             }
         }
-        
+
         @else {
             @at-root :root #{&} {
                 #{$property}: #{$inlinePre} #{$value} #{$inlinePost};
