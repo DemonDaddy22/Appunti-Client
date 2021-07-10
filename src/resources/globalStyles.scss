@@ -8,7 +8,7 @@
     }
 }
 
-@mixin flex($flexDirection: row, $alignItems: none, $justifyContent: none, $gap: 0) {
+@mixin flex($flexDirection: row, $alignItems: none, $justifyContent: none, $gap: 0, $flexWrap: none) {
     display: flex;
     flex-direction: $flexDirection;
 
@@ -22,6 +22,23 @@
 
     @if $justifyContent != none {
         justify-content: $justifyContent;
+    }
+
+    @if $flexWrap != none {
+        flex-wrap: $flexWrap;
+    }
+}
+
+@mixin grid($gap: 0.5rem, $gridTemplateColumns: none, $gridTemplateRows: none) {
+    display: grid;
+    gap: $gap;
+
+    @if $gridTemplateColumns != none {
+        grid-template-columns: $gridTemplateColumns;
+    }
+
+    @if $gridTemplateRows != none {
+        grid-template-rows: $gridTemplateRows;
     }
 }
 
@@ -46,13 +63,13 @@
 @mixin theme($property, $key, $inlinePre: null, $inlinePost: null, $transition: 0) {
     @each $theme in $themes {
         $value: map-get($theme, $key);
-        
+
         @if ($theme == $darkTheme) {
             @at-root [theme-mode='dark'] #{&} {
                 #{$property}: #{$inlinePre} #{$value} #{$inlinePost};
             }
         }
-        
+
         @else {
             @at-root :root #{&} {
                 #{$property}: #{$inlinePre} #{$value} #{$inlinePost};

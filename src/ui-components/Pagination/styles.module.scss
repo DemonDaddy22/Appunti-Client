@@ -1,0 +1,5 @@
+@import '../../resources/globalStyles.scss';
+
+.paginationContainer {
+    @include flex($gap: 0.5rem, $justifyContent: center);
+}

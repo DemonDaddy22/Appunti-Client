@@ -11,6 +11,7 @@ const Button: React.FC<IButton> = (props) => {
         borderColor = theme.themePrimary,
         onClick,
         style,
+        disabled,
     } = props;
 
     return (
@@ -20,6 +21,7 @@ const Button: React.FC<IButton> = (props) => {
             borderColor={borderColor}
             onClick={onClick}
             style={style}
+            disabled={disabled}
         >
             {children}
         </StyledButton>
@@ -28,10 +30,21 @@ const Button: React.FC<IButton> = (props) => {
 
 export const ButtonOutlined: React.FC<IButtonOutlined> = (props) => {
     const { theme } = useContext(ThemeContext);
-    const { children, color = theme.themePrimary, onClick, style } = props;
+    const {
+        children,
+        color = theme.themePrimary,
+        onClick,
+        style,
+        disabled,
+    } = props;
 
     return (
-        <StyledButtonOutlined color={color} onClick={onClick} style={style}>
+        <StyledButtonOutlined
+            color={color}
+            onClick={onClick}
+            style={style}
+            disabled={disabled}
+        >
             {children}
         </StyledButtonOutlined>
     );
@@ -39,5 +52,5 @@ export const ButtonOutlined: React.FC<IButtonOutlined> = (props) => {
 
 export default Button;
 
-Button.defaultProps = { style: {} };
-ButtonOutlined.defaultProps = { style: {} };
+Button.defaultProps = { style: {}, disabled: false };
+ButtonOutlined.defaultProps = { style: {}, disabled: false };

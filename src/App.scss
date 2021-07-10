@@ -1,4 +1,5 @@
 @import './resources/globalStyles.scss';
+@import './resources/globalVariables.scss';
 
 .App {
     text-align: center;
@@ -6,5 +7,5 @@
 
 .header {
     margin: 0;
-    @include theme(color, themeSecondary, $transition: 0.25s);
+    @include theme(color, themeSecondary, $transition: $transitionDuration);
 }

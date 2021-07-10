@@ -139,3 +139,9 @@ export const GREY_70: string = '#B3B3B3';
 export const GREY_80: string = '#CCCCCC';
 export const GREY_90: string = '#E6E6E6';
 export const GREY_100: string = '#f7f4f4';
+
+export const THEME_PRIMARY_ACCENT1: string = '#1992E3';
+export const THEME_PRIMARY_ACCENT2: string = '#1C4374';
+export const THEME_PRIMARY_ACCENT3: string = '#202636';
+export const THEME_SECONDARY_ACCENT1: string = '#40A368';
+export const THEME_SECONDARY_ACCENT2: string = '#88DDAA';

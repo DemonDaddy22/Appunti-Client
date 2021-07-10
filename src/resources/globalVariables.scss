@@ -2,13 +2,16 @@ $black: #000;
 $dark: #0F141F;
 $light: #F4F4F4;
 $white: #FFF;
+$transitionDuration: 0.25s;
 
 $lightTheme: (
-    background: '#FAFAFA',
+    background: '#F7F7F7',
     borderColor: '#D0D0D0',
     text: '#101010',
+    textContrastLight: '#606060',
     textGrey: '#5F5F5F',
     textIntense: '#000000',
+    textLight: '#A0A0A0',
     textObscure: '#333333',
     textOpposite: '#D7D7D7',
     themePrimary: '#1C4374',
@@ -19,9 +22,11 @@ $darkTheme: (
     background: '#0F141F',
     borderColor: '#3A4460',
     text: '#F0F0F0',
+    textContrastLight: '#65739C',
     textGrey: '#8F8F8F',
     textIntense: '#FFFFFF',
-    textObscure: '#999999',
+    textLight: '#3C445C',
+    textObscure: '#A7A7A7',
     textOpposite: '#202636',
     themePrimary: '#1992E3',
     themeSecondary: '#88DDAA',

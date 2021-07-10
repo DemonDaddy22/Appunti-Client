@@ -10,3 +10,18 @@ export const THEME: IThemeVariants = Object.freeze({
     LIGHT: 'light',
     DARK: 'dark',
 });
+
+export const MAX_RESULTS_OPTIONS: Array<ISelectOption> = [
+    {
+        label: '10',
+        value: 10,
+    },
+    {
+        label: '20',
+        value: 20,
+    },
+    {
+        label: '40',
+        value: 40,
+    },
+];

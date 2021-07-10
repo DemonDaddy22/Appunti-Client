@@ -1,5 +1,7 @@
+/* eslint-disable prettier/prettier */
 import styled from 'styled-components';
-import { BLACK_30, WHITE_TRANSPARENT_90 } from '../../resources/colors';
+import { BLACK_30, GREY_50, THEME_PRIMARY_ACCENT3, WHITE_TRANSPARENT_90 } from '../../resources/colors';
+import { isColorDark } from '../../utils';
 
 export const StyledButtonOutlined = styled.button`
     border: 1px solid ${(props: IColor) => props.color};
@@ -18,12 +20,19 @@ export const StyledButtonOutlined = styled.button`
 
     &:hover {
         background-color: ${(props: IColor) => props.color};
-        color: ${WHITE_TRANSPARENT_90};
+        color: ${(props: IColor) => isColorDark(props.color) ? WHITE_TRANSPARENT_90 : THEME_PRIMARY_ACCENT3};
         outline: none;
     }
 
     &:active {
         filter: brightness(0.75);
+    }
+
+    &:disabled {
+        background-color: transparent !important;
+        border-color: ${GREY_50} !important;
+        color: ${GREY_50} !important;
+        cursor: auto !important;
     }
 
     @media (min-width: 1024px) {
@@ -62,6 +71,14 @@ export const StyledButton = styled.button`
 
     &:active {
         filter: brightness(0.85);
+    }
+
+    &:disabled {
+        background-color: ${GREY_50} !important;
+        border-color: ${GREY_50} !important;
+        color: ${WHITE_TRANSPARENT_90} !important;
+        cursor: auto !important;
+        filter: initial !important;
     }
 
     @media (min-width: 1024px) {
