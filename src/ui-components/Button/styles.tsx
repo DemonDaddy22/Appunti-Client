@@ -73,6 +73,14 @@ export const StyledButton = styled.button`
         filter: brightness(0.85);
     }
 
+    &:disabled {
+        background-color: ${GREY_50} !important;
+        border-color: ${GREY_50} !important;
+        color: ${WHITE_TRANSPARENT_90} !important;
+        cursor: auto !important;
+        filter: initial !important;
+    }
+
     @media (min-width: 1024px) {
         font-size: 0.9rem;
         padding: 0.7rem 0.95rem;

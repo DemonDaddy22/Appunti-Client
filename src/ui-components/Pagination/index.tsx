@@ -18,6 +18,7 @@ const Pagination: React.FC<IPagination> = (props) => {
         pageIndex,
         countPerPage,
         totalCount,
+        disabled,
         handlePageChange,
         style,
         buttonContainerStyle,
@@ -92,14 +93,16 @@ const Pagination: React.FC<IPagination> = (props) => {
         handlePageChange(newPageIndex);
     }, [totalPages, pageIndex, pageRange]);
 
-    const renderPages = useMemo(
+    const renderPageButtons = useMemo(
         () => (
             <StyledPageButtonContainer
+                disabled={disabled}
                 color={getThemedValue(THEME_PRIMARY_ACCENT2, GREY_80)}
                 style={buttonContainerStyle}
             >
                 {currPages.map((page) => (
                     <StyledPageButton
+                        disabled={disabled}
                         key={`page-${page}-of-${totalPages}`}
                         onClick={() => handlePageChange(page)}
                         style={buttonStyle}
@@ -111,7 +114,16 @@ const Pagination: React.FC<IPagination> = (props) => {
                 ))}
             </StyledPageButtonContainer>
         ),
-        [isLightTheme, currPages, pageIndex, countPerPage, totalCount]
+        [
+            isLightTheme,
+            currPages,
+            pageIndex,
+            countPerPage,
+            totalPages,
+            disabled,
+            buttonStyle,
+            buttonContainerStyle,
+        ]
     );
 
     return totalCount > 0 ? (
@@ -119,16 +131,16 @@ const Pagination: React.FC<IPagination> = (props) => {
             <ButtonOutlined
                 color={getThemedValue(THEME_PRIMARY_ACCENT2, GREY_80)}
                 style={{ fontWeight: 'bold' }}
-                disabled={pageIndex === 1}
+                disabled={pageIndex === 1 || disabled}
                 onClick={handlePrevButtonClick}
             >
                 &lt;
             </ButtonOutlined>
-            {renderPages}
+            {renderPageButtons}
             <ButtonOutlined
                 color={getThemedValue(THEME_PRIMARY_ACCENT2, GREY_80)}
                 style={{ fontWeight: 'bold' }}
-                disabled={pageIndex === totalPages}
+                disabled={pageIndex === totalPages || disabled}
                 onClick={handleNextButtonClick}
             >
                 &gt;

@@ -181,6 +181,13 @@ interface IPagination {
 
     /**
      *
+     * @field `disabled` - specifies whether pagination buttons should be disabled
+     *
+     */
+    disabled?: boolean;
+
+    /**
+     *
      * @function handlePageChange - function to trigger on page change
      * @param {number} page - specifies updated page number
      * @returns `void`
@@ -216,7 +223,14 @@ interface IPageButton {
      * @field `active` - specifies whether button is active or not
      *
      */
-    active: boolean;
+    active?: boolean;
+
+    /**
+     *
+     * @field `disabled` - specifies whether button is disabled or not
+     *
+     */
+    disabled?: boolean;
 }
 
 interface ISelectOption {

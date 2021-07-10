@@ -1,21 +1,22 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
-import { WHITE_TRANSPARENT_90, THEME_PRIMARY_ACCENT3 } from '../../resources/colors';
+import { WHITE_TRANSPARENT_90, THEME_PRIMARY_ACCENT3, GREY_50 } from '../../resources/colors';
 import { isColorDark } from '../../utils';
 
 interface IProps extends IPageButton, IColors {};
 
 export const StyledPageButtonContainer = styled.div`
-    border: 1px solid ${(props: IColor) => props.color};
+    border: 1px solid ${({ color, disabled }: IProps) => disabled ? GREY_50 : color};
     border-radius: 4px;
     display: flex;
+    transition: border 0.25s;
 `;
 
 export const StyledPageButton = styled.button`
-    background-color: ${(props: IProps) => props.active ? props.color : 'transparent'};
+    background-color: ${({ active, color }: IProps) => active ? color : 'transparent'};
     border: none;
-    border-right: 1px solid ${(props: IProps) => props.color};
-    color: ${(props: IProps) => props.active ? (isColorDark(props.color) ? WHITE_TRANSPARENT_90 : THEME_PRIMARY_ACCENT3) : props.color};
+    border-right: 1px solid ${({ color, disabled }: IProps) => disabled ? GREY_50 : color};
+    color: ${({ active, color }: IProps) => active ? (isColorDark(color) ? WHITE_TRANSPARENT_90 : THEME_PRIMARY_ACCENT3) : color};
     cursor: pointer;
     font-size: 0.85rem;
     font-weight: 500;
@@ -28,9 +29,15 @@ export const StyledPageButton = styled.button`
     }
 
     &:hover {
-        background-color: ${(props: IProps) => props.color};
-        color: ${(props: IProps) => isColorDark(props.color) ? WHITE_TRANSPARENT_90 : THEME_PRIMARY_ACCENT3};
+        background-color: ${({ color }: IProps) => color};
+        color: ${({ color }: IProps) => isColorDark(color) ? WHITE_TRANSPARENT_90 : THEME_PRIMARY_ACCENT3};
         outline: none;
+    }
+
+    &:disabled {
+        background-color: transparent !important;
+        color: ${GREY_50} !important;
+        cursor: auto !important;
     }
 
     @media (min-width: 1024px) {

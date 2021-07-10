@@ -7,3 +7,19 @@
 .buttonsWrapper {
     @include flex($justifyContent: center, $gap: 1rem);
 }
+
+.inputWrapper {
+    @include flex($flexDirection: column, $gap: 1rem);
+
+    @media (min-width: 1024px) {
+        flex-direction: row;
+    }
+
+    .inputCol {
+        @include flex($flexDirection: column, $gap: 0.5rem);
+    
+        &:first-of-type {
+            flex: 1;
+        }
+    }
+}

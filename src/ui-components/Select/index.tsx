@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import React, { useCallback, useContext } from 'react';
-import { isEmptyList } from '../../utils';
+import { isEmptyList, isEmptyObject, isEmptyString } from '../../utils';
 import Downshift from 'downshift';
 import ChevronDown from '../../assets/icons/ChevronDown';
 import { ThemeContext } from '../../context/ThemeContext';
@@ -26,8 +26,14 @@ const Select: React.FC<ISelect> = (props) => {
     } = props;
 
     const isItemPresent = useCallback((inputValue: string | null) => (
-        items?.length && items.some((item) => item.label.includes(inputValue || ''))
+        !isEmptyList(items) && items.some((item) => item.label.includes(inputValue || ''))
     ), [items]);
+
+    const handleInputBlur = useCallback((selectedItem: ISelectOption, inputValue: string | null) => {
+        if (isEmptyString(inputValue || '') && !isEmptyObject(selectedItem)) {
+            onInputChange(selectedItem.label);
+        }
+    }, [onInputChange]);
 
     return !isEmptyList(items) ? (
         <Downshift
@@ -62,6 +68,8 @@ const Select: React.FC<ISelect> = (props) => {
                                     style: inputContainerStyle,
                                     onChange: (e) =>
                                         onInputChange(e.target.value),
+                                    onBlur: (e) =>
+                                        handleInputBlur(selectedItem, e.target.value),
                                 })}
                             />
                             <StyledInputButton

@@ -109,27 +109,36 @@ const BooksFinder: React.FC<{}> = () => {
 
     return (
         <div className={classes.booksFinderContainer}>
-            <Label label="Search for a book" />
-            <Input
-                name="search"
-                placeholder="Enter book name..."
-                value={query}
-                onChange={handleInputChange}
-            />
+            <div className={classes.inputWrapper}>
+                <div className={classes.inputCol}>
+                    <Label label="Search for a book" />
+                    <Input
+                        name="search"
+                        placeholder="Enter book name..."
+                        value={query}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <div className={classes.inputCol}>
+                    <Label label="Max results per page" />
+                    <Select
+                        containerStyle={{ textAlign: 'initial' }}
+                        value={maxResultsInput}
+                        options={MAX_RESULTS_OPTIONS}
+                        onOptionChange={handleOptionSelect}
+                        onInputChange={handleSelectInputChange}
+                    />
+                </div>
+            </div>
             <div className={classes.buttonsWrapper}>
                 <ButtonOutlined onClick={handleSearchButtonClick}>
                     Search
                 </ButtonOutlined>
                 <Button onClick={toggleTheme}>Toggle Theme</Button>
             </div>
-            <Select
-                value={maxResultsInput}
-                options={MAX_RESULTS_OPTIONS}
-                onOptionChange={handleOptionSelect}
-                onInputChange={handleSelectInputChange}
-            />
             <SearchResultsContainer data={books?.items} />
             <Pagination
+                disabled={loading}
                 pageRange={7}
                 pageIndex={pageIndex}
                 countPerPage={maxResultsOption.value}
