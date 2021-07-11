@@ -6,7 +6,7 @@ import Downshift from 'downshift';
 import ChevronDown from '../../assets/icons/ChevronDown';
 import { ThemeContext } from '../../context/ThemeContext';
 import { THEME_PRIMARY_ACCENT3, WHITE } from '../../resources/colors';
-import { StyledInputContainer, StyledInputButton, StyledMenu, StyledMenuItem } from './styles';
+import { StyledInputContainer, StyledInputButton, StyledMenu, StyledMenuItem, StyledSelectContainer } from './styles';
 
 const Select: React.FC<ISelect> = (props) => {
     const { theme, getThemedValue } = useContext(ThemeContext);
@@ -52,7 +52,7 @@ const Select: React.FC<ISelect> = (props) => {
                 getRootProps,
             }) => {
                 return (
-                    <div style={containerStyle}>
+                    <StyledSelectContainer style={containerStyle}>
                         <StyledInputContainer
                             color={color}
                             borderColor={borderColor}
@@ -116,7 +116,7 @@ const Select: React.FC<ISelect> = (props) => {
                                     </StyledMenuItem>
                                 : null}
                         </StyledMenu>
-                    </div>
+                    </StyledSelectContainer>
                 );
             }}
         </Downshift>

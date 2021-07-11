@@ -3,6 +3,11 @@
 import styled from 'styled-components';
 import { isHexColor, rgbToHex } from '../../utils';
 
+export const StyledSelectContainer = styled.div`
+    position: relative;
+    z-index: 100;
+`;
+
 export const StyledInputContainer = styled.div`
     border: 1px solid;
     border-color: ${(props: IColors) => {
@@ -94,10 +99,10 @@ export const StyledMenu = styled.ul`
     padding: 0;
     position: absolute;
     transform: translateX(-50%);
-    width: 60%;
+    width: 100%;
     transition: border 0.25s;
 
-    @media (min-width: 1500px) {
+    @media (min-width: 1200px) {
         max-width: 18rem;
     }
 `;

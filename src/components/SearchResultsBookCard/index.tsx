@@ -34,7 +34,7 @@ const SearchResultsBookCard: React.FC<ISearchResultsBookCard> = (props) => {
             </div>
             <div className={classes.column}>
                 <div className={classes.title}>
-                    {truncateStringToLength(data.volumeInfo?.title, 25)}
+                    {data.volumeInfo?.title}
                 </div>
                 <div className={classes.authors}>
                     {data.volumeInfo?.authors?.join(',')}

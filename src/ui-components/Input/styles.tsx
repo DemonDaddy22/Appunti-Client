@@ -5,6 +5,7 @@ import { isHexColor, rgbToHex } from '../../utils';
 export const StyledInputContainer = styled.div`
     margin: 0.25rem 0;
     position: relative;
+    width: 100%;
 `;
 
 export const StyledInput = styled.input`
