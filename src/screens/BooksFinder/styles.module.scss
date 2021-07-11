@@ -16,10 +16,11 @@
     }
 
     .inputCol {
-        @include flex($flexDirection: column, $gap: 0.5rem);
+        @include flex($flexDirection: column, $gap: 0.5rem, $alignItems: flex-start);
 
         &:first-of-type {
             flex: 1;
+            align-self: stretch;
         }
     }
 }

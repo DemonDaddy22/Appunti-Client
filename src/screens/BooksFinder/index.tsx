@@ -122,7 +122,6 @@ const BooksFinder: React.FC<{}> = () => {
                 <div className={classes.inputCol}>
                     <Label label="Max results per page" />
                     <Select
-                        containerStyle={{ textAlign: 'initial' }}
                         value={maxResultsInput}
                         options={MAX_RESULTS_OPTIONS}
                         onOptionChange={handleOptionSelect}
