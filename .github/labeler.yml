@@ -14,12 +14,14 @@ documentation:
 package:
     - package.json
     - package-lock.json
-    - tsconfig.json
 
 config:
     - .eslintrc.js
     - .eslintignore
+    - .gitignore
+    - prettier.config.js
     - .vscode/*
+    - tsconfig.json
 
 workflow:
     - '.github/*'
