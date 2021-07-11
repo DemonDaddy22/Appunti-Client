@@ -5,6 +5,8 @@ on:
             - master
 jobs:
     build:
+        env:
+          CI: false
         runs-on: ubuntu-latest
         strategy:
             matrix:
