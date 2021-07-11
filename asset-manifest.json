@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Appunti-Client/static/css/main.480bbf49.chunk.css",
+    "main.js": "/Appunti-Client/static/js/main.3501dce0.chunk.js",
+    "main.js.map": "/Appunti-Client/static/js/main.3501dce0.chunk.js.map",
+    "runtime-main.js": "/Appunti-Client/static/js/runtime-main.7a3ed063.js",
+    "runtime-main.js.map": "/Appunti-Client/static/js/runtime-main.7a3ed063.js.map",
+    "static/js/2.35ef3dd1.chunk.js": "/Appunti-Client/static/js/2.35ef3dd1.chunk.js",
+    "static/js/2.35ef3dd1.chunk.js.map": "/Appunti-Client/static/js/2.35ef3dd1.chunk.js.map",
+    "static/js/3.cdec346c.chunk.js": "/Appunti-Client/static/js/3.cdec346c.chunk.js",
+    "static/js/3.cdec346c.chunk.js.map": "/Appunti-Client/static/js/3.cdec346c.chunk.js.map",
+    "index.html": "/Appunti-Client/index.html",
+    "static/css/main.480bbf49.chunk.css.map": "/Appunti-Client/static/css/main.480bbf49.chunk.css.map",
+    "static/js/2.35ef3dd1.chunk.js.LICENSE.txt": "/Appunti-Client/static/js/2.35ef3dd1.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7a3ed063.js",
+    "static/js/2.35ef3dd1.chunk.js",
+    "static/css/main.480bbf49.chunk.css",
+    "static/js/main.3501dce0.chunk.js"
+  ]
+}
