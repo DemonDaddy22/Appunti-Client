@@ -10,6 +10,7 @@ import Select from '../../ui-components/Select';
 import Label from '../../ui-components/Label';
 import classes from './styles.module.scss';
 import { isEmptyString } from '../../utils';
+import Loader from '../../ui-components/Loader';
 
 const BooksFinder: React.FC<{}> = () => {
     const { toggleTheme } = useContext(ThemeContext);
@@ -107,7 +108,7 @@ const BooksFinder: React.FC<{}> = () => {
         if (fetching) fetchBooks();
     }, [fetching, fetchBooks]);
 
-    return (
+    return !loading ? (
         <div className={classes.booksFinderContainer}>
             <div className={classes.inputWrapper}>
                 <div className={classes.inputCol}>
@@ -145,6 +146,8 @@ const BooksFinder: React.FC<{}> = () => {
                 handlePageChange={handlePageChange}
             />
         </div>
+    ) : (
+        <Loader />
     );
 };
 
