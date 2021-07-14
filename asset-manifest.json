@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Appunti-Client/static/css/main.890733eb.chunk.css",
-    "main.js": "/Appunti-Client/static/js/main.687e34ac.chunk.js",
-    "main.js.map": "/Appunti-Client/static/js/main.687e34ac.chunk.js.map",
+    "main.css": "/Appunti-Client/static/css/main.842538b4.chunk.css",
+    "main.js": "/Appunti-Client/static/js/main.48e8c4d2.chunk.js",
+    "main.js.map": "/Appunti-Client/static/js/main.48e8c4d2.chunk.js.map",
     "runtime-main.js": "/Appunti-Client/static/js/runtime-main.7a3ed063.js",
     "runtime-main.js.map": "/Appunti-Client/static/js/runtime-main.7a3ed063.js.map",
-    "static/js/2.a9ff51a0.chunk.js": "/Appunti-Client/static/js/2.a9ff51a0.chunk.js",
-    "static/js/2.a9ff51a0.chunk.js.map": "/Appunti-Client/static/js/2.a9ff51a0.chunk.js.map",
+    "static/js/2.c9969aa2.chunk.js": "/Appunti-Client/static/js/2.c9969aa2.chunk.js",
+    "static/js/2.c9969aa2.chunk.js.map": "/Appunti-Client/static/js/2.c9969aa2.chunk.js.map",
     "static/js/3.cdec346c.chunk.js": "/Appunti-Client/static/js/3.cdec346c.chunk.js",
     "static/js/3.cdec346c.chunk.js.map": "/Appunti-Client/static/js/3.cdec346c.chunk.js.map",
     "index.html": "/Appunti-Client/index.html",
-    "static/css/main.890733eb.chunk.css.map": "/Appunti-Client/static/css/main.890733eb.chunk.css.map",
-    "static/js/2.a9ff51a0.chunk.js.LICENSE.txt": "/Appunti-Client/static/js/2.a9ff51a0.chunk.js.LICENSE.txt"
+    "static/css/main.842538b4.chunk.css.map": "/Appunti-Client/static/css/main.842538b4.chunk.css.map",
+    "static/js/2.c9969aa2.chunk.js.LICENSE.txt": "/Appunti-Client/static/js/2.c9969aa2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.7a3ed063.js",
-    "static/js/2.a9ff51a0.chunk.js",
-    "static/css/main.890733eb.chunk.css",
-    "static/js/main.687e34ac.chunk.js"
+    "static/js/2.c9969aa2.chunk.js",
+    "static/css/main.842538b4.chunk.css",
+    "static/js/main.48e8c4d2.chunk.js"
   ]
 }
