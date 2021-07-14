@@ -37,6 +37,7 @@ const StyledLoader = styled.div`
         typeof size === 'number' ? `${size - 12}px` : size};
     width: ${({ size }: ILoader) =>
         typeof size === 'number' ? `${size - 12}px` : size};
+    transition: backgroundColor 0.25s;
     animation: ${LoaderAnimation} 2s ease-in-out infinite;
 
     @media (min-width: 1024) {

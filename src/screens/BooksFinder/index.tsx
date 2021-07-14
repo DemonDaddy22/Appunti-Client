@@ -24,7 +24,7 @@ const BooksFinder: React.FC<{}> = () => {
         MAX_RESULTS_OPTIONS[0].label
     );
     const [books, setBooks] = useState<IBookSearchData | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
     const [fetching, setFetching] = useState<boolean>(false);
     const [queryParams, setQueryParams] = useState<IBooksAPIParams>({
@@ -108,46 +108,51 @@ const BooksFinder: React.FC<{}> = () => {
         if (fetching) fetchBooks();
     }, [fetching, fetchBooks]);
 
-    return !loading ? (
-        <div className={classes.booksFinderContainer}>
-            <div className={classes.inputWrapper}>
-                <div className={classes.inputCol}>
-                    <Label label="Search for a book" />
-                    <Input
-                        name="search"
-                        placeholder="Enter book name..."
-                        value={query}
-                        onChange={handleInputChange}
-                    />
+    return (
+        <>
+            {loading && (
+                <div className={classes.loaderWrapper}>
+                    <Loader />
                 </div>
-                <div className={classes.inputCol}>
-                    <Label label="Max results per page" />
-                    <Select
-                        value={maxResultsInput}
-                        options={MAX_RESULTS_OPTIONS}
-                        onOptionChange={handleOptionSelect}
-                        onInputChange={handleSelectInputChange}
-                    />
+            )}
+            <div className={classes.booksFinderContainer}>
+                <div className={classes.inputWrapper}>
+                    <div className={classes.inputCol}>
+                        <Label label="Search for a book" />
+                        <Input
+                            name="search"
+                            placeholder="Enter book name..."
+                            value={query}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                    <div className={classes.inputCol}>
+                        <Label label="Max results per page" />
+                        <Select
+                            value={maxResultsInput}
+                            options={MAX_RESULTS_OPTIONS}
+                            onOptionChange={handleOptionSelect}
+                            onInputChange={handleSelectInputChange}
+                        />
+                    </div>
                 </div>
+                <div className={classes.buttonsWrapper}>
+                    <ButtonOutlined onClick={handleSearchButtonClick}>
+                        Search
+                    </ButtonOutlined>
+                    <Button onClick={toggleTheme}>Toggle Theme</Button>
+                </div>
+                <SearchResultsContainer data={books?.items} />
+                <Pagination
+                    disabled={loading}
+                    pageRange={7}
+                    pageIndex={pageIndex}
+                    countPerPage={maxResultsOption.value}
+                    totalCount={books?.totalItems || 0}
+                    handlePageChange={handlePageChange}
+                />
             </div>
-            <div className={classes.buttonsWrapper}>
-                <ButtonOutlined onClick={handleSearchButtonClick}>
-                    Search
-                </ButtonOutlined>
-                <Button onClick={toggleTheme}>Toggle Theme</Button>
-            </div>
-            <SearchResultsContainer data={books?.items} />
-            <Pagination
-                disabled={loading}
-                pageRange={7}
-                pageIndex={pageIndex}
-                countPerPage={maxResultsOption.value}
-                totalCount={books?.totalItems || 0}
-                handlePageChange={handlePageChange}
-            />
-        </div>
-    ) : (
-        <Loader />
+        </>
     );
 };
 
