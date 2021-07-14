@@ -365,3 +365,19 @@ interface ILabel extends IColor {
      */
     style?: React.CSSProperties;
 }
+
+interface ILoader extends IColor {
+    /**
+     *
+     * @field `size` - specifies size of the loader
+     *
+     */
+    size?: number | string;
+
+    /**
+     *
+     * @field `style` - specifies styles to override default loader styles
+     *
+     */
+    style?: React.CSSProperties;
+}

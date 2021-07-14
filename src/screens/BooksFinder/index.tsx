@@ -10,6 +10,7 @@ import Select from '../../ui-components/Select';
 import Label from '../../ui-components/Label';
 import classes from './styles.module.scss';
 import { isEmptyString } from '../../utils';
+import Loader from '../../ui-components/Loader';
 
 const BooksFinder: React.FC<{}> = () => {
     const { toggleTheme } = useContext(ThemeContext);
@@ -108,43 +109,50 @@ const BooksFinder: React.FC<{}> = () => {
     }, [fetching, fetchBooks]);
 
     return (
-        <div className={classes.booksFinderContainer}>
-            <div className={classes.inputWrapper}>
-                <div className={classes.inputCol}>
-                    <Label label="Search for a book" />
-                    <Input
-                        name="search"
-                        placeholder="Enter book name..."
-                        value={query}
-                        onChange={handleInputChange}
-                    />
+        <>
+            {loading && (
+                <div className={classes.loaderWrapper}>
+                    <Loader />
                 </div>
-                <div className={classes.inputCol}>
-                    <Label label="Max results per page" />
-                    <Select
-                        value={maxResultsInput}
-                        options={MAX_RESULTS_OPTIONS}
-                        onOptionChange={handleOptionSelect}
-                        onInputChange={handleSelectInputChange}
-                    />
+            )}
+            <div className={classes.booksFinderContainer}>
+                <div className={classes.inputWrapper}>
+                    <div className={classes.inputCol}>
+                        <Label label="Search for a book" />
+                        <Input
+                            name="search"
+                            placeholder="Enter book name..."
+                            value={query}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                    <div className={classes.inputCol}>
+                        <Label label="Max results per page" />
+                        <Select
+                            value={maxResultsInput}
+                            options={MAX_RESULTS_OPTIONS}
+                            onOptionChange={handleOptionSelect}
+                            onInputChange={handleSelectInputChange}
+                        />
+                    </div>
                 </div>
+                <div className={classes.buttonsWrapper}>
+                    <ButtonOutlined onClick={handleSearchButtonClick}>
+                        Search
+                    </ButtonOutlined>
+                    <Button onClick={toggleTheme}>Toggle Theme</Button>
+                </div>
+                <SearchResultsContainer data={books?.items} />
+                <Pagination
+                    disabled={loading}
+                    pageRange={7}
+                    pageIndex={pageIndex}
+                    countPerPage={maxResultsOption.value}
+                    totalCount={books?.totalItems || 0}
+                    handlePageChange={handlePageChange}
+                />
             </div>
-            <div className={classes.buttonsWrapper}>
-                <ButtonOutlined onClick={handleSearchButtonClick}>
-                    Search
-                </ButtonOutlined>
-                <Button onClick={toggleTheme}>Toggle Theme</Button>
-            </div>
-            <SearchResultsContainer data={books?.items} />
-            <Pagination
-                disabled={loading}
-                pageRange={7}
-                pageIndex={pageIndex}
-                countPerPage={maxResultsOption.value}
-                totalCount={books?.totalItems || 0}
-                handlePageChange={handlePageChange}
-            />
-        </div>
+        </>
     );
 };
 
