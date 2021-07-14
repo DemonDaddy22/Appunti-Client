@@ -24,7 +24,7 @@ const BooksFinder: React.FC<{}> = () => {
         MAX_RESULTS_OPTIONS[0].label
     );
     const [books, setBooks] = useState<IBookSearchData | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
     const [fetching, setFetching] = useState<boolean>(false);
     const [queryParams, setQueryParams] = useState<IBooksAPIParams>({
