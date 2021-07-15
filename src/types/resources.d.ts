@@ -66,6 +66,13 @@ interface ITheme {
 
     /**
      *
+     * @field {string} `textPrimary` - specifies primary text color
+     *
+     */
+    textPrimary: string;
+
+    /**
+     *
      * @field {string} `themePrimary` - specifies theme primary color
      *
      */

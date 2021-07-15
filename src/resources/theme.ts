@@ -8,6 +8,7 @@ export const LIGHT_THEME: ITheme = Object.freeze({
     textLight: '#A0A0A0',
     textObscure: '#333333',
     textOpposite: '#D7D7D7',
+    textPrimary: '#202636',
     themePrimary: '#1C4374',
     themeSecondary: '#40A368',
 });
@@ -22,6 +23,7 @@ export const DARK_THEME: ITheme = Object.freeze({
     textLight: '#3C445C',
     textObscure: '#A7A7A7',
     textOpposite: '#202636',
+    textPrimary: '#F7F7F7',
     themePrimary: '#1992E3',
     themeSecondary: '#88DDAA',
 });

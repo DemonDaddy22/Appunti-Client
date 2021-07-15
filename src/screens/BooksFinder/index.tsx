@@ -11,9 +11,11 @@ import Label from '../../ui-components/Label';
 import classes from './styles.module.scss';
 import { isEmptyString } from '../../utils';
 import Loader from '../../ui-components/Loader';
+import Light from '../../assets/icons/Light';
+import Dark from '../../assets/icons/Dark';
 
 const BooksFinder: React.FC<{}> = () => {
-    const { toggleTheme } = useContext(ThemeContext);
+    const { toggleTheme, theme } = useContext(ThemeContext);
 
     const [query, setQuery] = useState<string>('');
     const [pageIndex, setPageIndex] = useState<number>(1);
@@ -141,6 +143,8 @@ const BooksFinder: React.FC<{}> = () => {
                         Search
                     </ButtonOutlined>
                     <Button onClick={toggleTheme}>Toggle Theme</Button>
+                    <Light color={theme.textPrimary} />
+                    <Dark color={theme.textPrimary} />
                 </div>
                 <SearchResultsContainer data={books?.items} />
                 <Pagination

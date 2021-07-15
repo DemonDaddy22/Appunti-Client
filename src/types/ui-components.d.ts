@@ -381,3 +381,34 @@ interface ILoader extends IColor {
      */
     style?: React.CSSProperties;
 }
+
+interface IIconButton {
+    /**
+     *
+     * @field `disabled` - specifies whether icon button should be disabled
+     *
+     */
+    disabled?: boolean;
+
+    /**
+     *
+     * @field `children` - specifies valid React node element(s)
+     *
+     */
+    children: React.ReactNode;
+
+    /**
+     *
+     * @function onClick - function to trigger when the button is clicked
+     * @returns `void`
+     *
+     */
+    onClick: () => void;
+
+    /**
+     *
+     * @field `style` - specifies styles to override default icon button styles
+     *
+     */
+    style?: React.CSSProperties;
+}
