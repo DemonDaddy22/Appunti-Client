@@ -13,6 +13,7 @@ import { isEmptyString } from '../../utils';
 import Loader from '../../ui-components/Loader';
 import Light from '../../assets/icons/Light';
 import Dark from '../../assets/icons/Dark';
+import IconButton from '../../ui-components/Button/IconButton';
 
 const BooksFinder: React.FC<{}> = () => {
     const { toggleTheme, theme } = useContext(ThemeContext);
@@ -143,8 +144,12 @@ const BooksFinder: React.FC<{}> = () => {
                         Search
                     </ButtonOutlined>
                     <Button onClick={toggleTheme}>Toggle Theme</Button>
-                    <Light color={theme.textPrimary} />
-                    <Dark color={theme.textPrimary} />
+                    <IconButton onClick={toggleTheme}>
+                        <Light color={theme.textPrimary} />
+                    </IconButton>
+                    <IconButton onClick={toggleTheme}>
+                        <Dark color={theme.textPrimary} />
+                    </IconButton>
                 </div>
                 <SearchResultsContainer data={books?.items} />
                 <Pagination
