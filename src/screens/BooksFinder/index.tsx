@@ -3,7 +3,7 @@ import SearchResultsContainer from '../../components/SearchResultsContainer';
 import { ThemeContext } from '../../context/ThemeContext';
 import useAsyncExec from '../../hooks/useAsyncExec';
 import { BOOKS_API_URI, MAX_RESULTS_OPTIONS } from '../../resources/constants';
-import Button, { ButtonOutlined } from '../../ui-components/Button';
+import { ButtonOutlined } from '../../ui-components/Button';
 import Input from '../../ui-components/Input';
 import Pagination from '../../ui-components/Pagination';
 import Select from '../../ui-components/Select';
@@ -16,7 +16,7 @@ import Dark from '../../assets/icons/Dark';
 import IconButton from '../../ui-components/Button/IconButton';
 
 const BooksFinder: React.FC<{}> = () => {
-    const { toggleTheme, theme } = useContext(ThemeContext);
+    const { toggleTheme, theme, isLightTheme } = useContext(ThemeContext);
 
     const [query, setQuery] = useState<string>('');
     const [pageIndex, setPageIndex] = useState<number>(1);
@@ -143,12 +143,12 @@ const BooksFinder: React.FC<{}> = () => {
                     <ButtonOutlined onClick={handleSearchButtonClick}>
                         Search
                     </ButtonOutlined>
-                    <Button onClick={toggleTheme}>Toggle Theme</Button>
                     <IconButton onClick={toggleTheme}>
-                        <Light color={theme.textPrimary} />
-                    </IconButton>
-                    <IconButton onClick={toggleTheme}>
-                        <Dark color={theme.textPrimary} />
+                        {isLightTheme ? (
+                            <Dark color={theme.textPrimary} />
+                        ) : (
+                            <Light color={theme.textPrimary} />
+                        )}
                     </IconButton>
                 </div>
                 <SearchResultsContainer data={books?.items} />

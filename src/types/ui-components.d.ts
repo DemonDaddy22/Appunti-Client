@@ -407,6 +407,13 @@ interface IIconButton {
 
     /**
      *
+     * @field `showRipple` - specifies whether icon button should have background ripple;
+     *
+     */
+    showRipple?: boolean;
+
+    /**
+     *
      * @field `style` - specifies styles to override default icon button styles
      *
      */

@@ -1,28 +1,30 @@
-import React from 'react';
-import styled from 'styled-components';
-
-// TODO- add ripple background which can be toggled based on a boolean value
-const StyledIconButton = styled.button`
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    filter: brightness(0.8) opacity(80%);
-    outline: none;
-    transition: filter 0.25s;
-
-    &:hover {
-        filter: brightness(1.25) opacity(100%);
-    }
-`;
+import React, { useContext } from 'react';
+import { ThemeContext } from '../../../context/ThemeContext';
+import StyledIconButton from './styles';
 
 const IconButton: React.FC<IIconButton> = (props) => {
-    const { children, onClick, disabled, style } = props;
+    const { children, onClick, disabled, showRipple, style } = props;
+
+    const { theme } = useContext(ThemeContext);
 
     return (
-        <StyledIconButton style={style} disabled={disabled} onClick={onClick}>
+        <StyledIconButton
+            backgroundColor={theme.borderColor}
+            style={style}
+            disabled={disabled}
+            onClick={onClick}
+            showRipple={showRipple}
+        >
             {children}
         </StyledIconButton>
     );
 };
 
 export default IconButton;
+
+IconButton.defaultProps = {
+    disabled: false,
+    onClick: () => {},
+    showRipple: true,
+    style: {},
+};

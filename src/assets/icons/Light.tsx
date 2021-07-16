@@ -24,7 +24,7 @@ export default Light;
 
 Light.defaultProps = {
     style: {
-        height: 40,
-        width: 40,
+        height: 32,
+        width: 32,
     },
 };
