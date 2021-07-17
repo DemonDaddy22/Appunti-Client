@@ -12,7 +12,7 @@ const IconButton: React.FC<IIconButton> = (props) => {
             backgroundColor={theme.borderColor}
             style={style}
             disabled={disabled}
-            onClick={onClick}
+            onClick={!disabled ? onClick : () => {}}
             showRipple={showRipple}
         >
             {children}
@@ -23,7 +23,7 @@ const IconButton: React.FC<IIconButton> = (props) => {
 export default IconButton;
 
 IconButton.defaultProps = {
-    disabled: false,
+    disabled: true,
     onClick: () => {},
     showRipple: true,
     style: {},

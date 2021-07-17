@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 import styled from 'styled-components';
+import { GREY_50 } from '../../../resources/colors';
 import { isHexColor, rgbToHex } from '../../../utils';
 
 interface IProps extends IIconButton, IBackgroundColor {}
@@ -25,6 +26,12 @@ const StyledIconButton = styled.button`
                     : `${rgbToHex(backgroundColor || '')}27`
                 : 'transparent'};
         opacity: 1;
+    }
+
+    &:disabled {
+        background-color: transparent !important;
+        cursor: auto !important;
+        opacity: 0.75 !important;
     }
 `;
 
