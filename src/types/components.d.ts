@@ -7,3 +7,8 @@ interface ISearchResultsContainer extends IStyle {
 interface ISearchResultsBookCard extends IStyle {
     data: any;
 }
+
+interface IAppHeader extends IStyle {
+    label: string;
+    showIcon?: boolean;
+}

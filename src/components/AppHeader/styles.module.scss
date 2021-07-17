@@ -1,0 +1,15 @@
+@import '../../resources/globalStyles.scss';
+@import '../../resources/globalVariables.scss';
+
+.headerContainer {
+    display: inline-flex;
+    margin-left: 2rem;
+    margin-top: 2rem;
+
+    .header {
+        font-size: 2rem;
+        font-family: 'Homemade Apple', cursive;
+        font-weight: 700;
+        @include theme(color, textIntense, $transition: $transitionDuration);
+    }
+}

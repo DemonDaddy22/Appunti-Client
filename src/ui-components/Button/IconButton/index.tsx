@@ -23,7 +23,7 @@ const IconButton: React.FC<IIconButton> = (props) => {
 export default IconButton;
 
 IconButton.defaultProps = {
-    disabled: true,
+    disabled: false,
     onClick: () => {},
     showRipple: true,
     style: {},
