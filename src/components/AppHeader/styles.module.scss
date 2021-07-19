@@ -2,14 +2,33 @@
 @import '../../resources/globalVariables.scss';
 
 .headerContainer {
-    display: inline-flex;
-    margin-left: 2rem;
-    margin-top: 2rem;
+    @include flex($alignItems: center, $gap: 0.25rem);
 
     .header {
-        font-size: 2rem;
+        font-size: 1.25rem;
         font-family: 'Homemade Apple', cursive;
         font-weight: 700;
         @include theme(color, textIntense, $transition: $transitionDuration);
+
+        @media (min-width: 768px) {
+            font-size: 1.5rem;
+        }
+
+        @media (min-width: 1200px) {
+            font-size: 2rem;
+        }
+    }
+
+    .iconWrapper {
+        height: 2.25rem;
+        width: 2.25rem;
+
+        @media (min-width: 768px) {
+            height: 2.25rem;
+        }
+
+        @media (min-width: 1200px) {
+            width: 2.25rem;
+        }
     }
 }
