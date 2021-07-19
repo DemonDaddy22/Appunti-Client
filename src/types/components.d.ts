@@ -11,4 +11,7 @@ interface ISearchResultsBookCard extends IStyle {
 interface IAppHeader extends IStyle {
     label: string;
     showIcon?: boolean;
+    labelStyle?: React.CSSProperties;
 }
+
+interface INavbar extends IStyle {}

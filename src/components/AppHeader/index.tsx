@@ -2,19 +2,17 @@ import React from 'react';
 import Quill from '../../assets/icons/Quill';
 import classes from './styles.module.scss';
 
-// TODO- make header responsive
-// TODO- create navbar
 const AppHeader: React.FC<IAppHeader> = (props) => {
-    const { label, showIcon, style } = props;
+    const { label, showIcon, style, labelStyle } = props;
 
     return (
-        <div className={classes.headerContainer}>
+        <div className={classes.headerContainer} style={style}>
             {showIcon && (
                 <div className={classes.iconWrapper}>
                     <Quill style={{ height: 'inherit', width: 'inherit' }} />
                 </div>
             )}
-            <div className={classes.header} style={style}>
+            <div className={classes.header} style={labelStyle}>
                 {label}
             </div>
         </div>
