@@ -1,6 +1,5 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import SearchResultsContainer from '../../components/SearchResultsContainer';
-import { ThemeContext } from '../../context/ThemeContext';
 import useAsyncExec from '../../hooks/useAsyncExec';
 import { BOOKS_API_URI, MAX_RESULTS_OPTIONS } from '../../resources/constants';
 import { ButtonOutlined } from '../../ui-components/Button';
@@ -11,13 +10,8 @@ import Label from '../../ui-components/Label';
 import classes from './styles.module.scss';
 import { isEmptyString } from '../../utils';
 import Loader from '../../ui-components/Loader';
-import Light from '../../assets/icons/Light';
-import Dark from '../../assets/icons/Dark';
-import IconButton from '../../ui-components/Button/IconButton';
 
 const BooksFinder: React.FC<{}> = () => {
-    const { toggleTheme, theme, isLightTheme } = useContext(ThemeContext);
-
     const [query, setQuery] = useState<string>('');
     const [pageIndex, setPageIndex] = useState<number>(1);
     const [maxResultsOption, setMaxResultsOption] = useState<ISelectOption>(
@@ -143,13 +137,6 @@ const BooksFinder: React.FC<{}> = () => {
                     <ButtonOutlined onClick={handleSearchButtonClick}>
                         Search
                     </ButtonOutlined>
-                    <IconButton onClick={toggleTheme}>
-                        {isLightTheme ? (
-                            <Dark color={theme.textPrimary} />
-                        ) : (
-                            <Light color={theme.textPrimary} />
-                        )}
-                    </IconButton>
                 </div>
                 <SearchResultsContainer data={books?.items} />
                 <Pagination
