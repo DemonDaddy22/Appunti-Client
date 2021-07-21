@@ -5,10 +5,9 @@
     @include flex($alignItems: center);
     @include spacing($padding: 0.25rem 0.5rem);
     @include position($position: fixed, $top: 0, $left: 0);
-    backdrop-filter: blur(10px) saturate(120%) contrast(60%) brightness(135%);
     width: 100%;
     z-index: 1000;
-    transition: all $transitionDuration ease-in-out;
+    transition: background-color $transitionDuration ease-in-out, backdrop-filter $transitionDuration ease-in-out;
 
     @media (min-width: 1024px) {
         padding: 0.5rem 1rem;
