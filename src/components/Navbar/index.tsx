@@ -18,7 +18,7 @@ const Navbar: React.FC<INavbar> = (props) => {
         setIsPageScrolling(
             window.scrollY >= navbarHeight/2 ? true : false
         );
-    }), [window.scrollY]);
+    }, 25), [window.scrollY]);
 
     useEffect(() => {
         window.addEventListener('scroll', handlePageScrolling);

@@ -8,6 +8,7 @@
         font-size: 1.2rem;
         font-family: 'Homemade Apple', cursive;
         font-weight: 700;
+        text-shadow: 1px 1px 0px rgba($color: $black, $alpha: 0.25);
         @include theme(color, textPrimary, $transition: $transitionDuration);
 
         @media (min-width: 768px) {

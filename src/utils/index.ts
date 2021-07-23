@@ -209,3 +209,6 @@ export const throttle = (cb: Function, delay: number = 200) => {
         }
     };
 };
+
+// TODO - test arguments in throttle
+// TODO - create a debounce util as well
