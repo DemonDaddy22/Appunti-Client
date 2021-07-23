@@ -14,4 +14,6 @@ interface IAppHeader extends IStyle {
     labelStyle?: React.CSSProperties;
 }
 
-interface INavbar extends IStyle {}
+interface INavbar extends IStyle {
+    navbarRef: any;
+}

@@ -196,7 +196,8 @@ export const createListOfSize = (size: number, start: number = 1): number[] =>
  */
 export const throttle = (cb: Function, delay: number = 200) => {
     let shouldCallCb = true;
-    return function () {
+    // eslint-disable-next-line no-unused-vars
+    return function (this: any) {
         const context = this;
         const args = [].slice.apply(arguments);
         if (shouldCallCb) {

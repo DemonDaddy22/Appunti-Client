@@ -2,22 +2,23 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { NAVBAR_SCROLL_BREAKPOINT_HEIGHT } from '../../resources/constants';
+import { throttle } from '../../utils';
 import AppHeader from '../AppHeader';
 import ThemeToggler from '../ThemeToggler';
 import classes from './styles.module.scss';
 
-// TODO- throttle page scrolling function calls
 const Navbar: React.FC<INavbar> = (props) => {
-    const { style } = props;
+    const { style, navbarRef } = props;
     const { getThemedValue } = useContext(ThemeContext);
 
     const [isPageScrolling, setIsPageScrolling] = useState<boolean>(false);
 
-    const handlePageScrolling = useCallback(() => {
+    const handlePageScrolling = useCallback(throttle(() => {
+        const navbarHeight = (navbarRef?.current?.offsetHeight || NAVBAR_SCROLL_BREAKPOINT_HEIGHT) - 4;
         setIsPageScrolling(
-            window.scrollY >= NAVBAR_SCROLL_BREAKPOINT_HEIGHT/2 ? true : false
+            window.scrollY >= navbarHeight/2 ? true : false
         );
-    }, [window.scrollY]);
+    }), [window.scrollY]);
 
     useEffect(() => {
         window.addEventListener('scroll', handlePageScrolling);
@@ -26,6 +27,7 @@ const Navbar: React.FC<INavbar> = (props) => {
 
     return (
         <nav
+            ref={navbarRef}
             className={classes.navbar}
             style={{
                 ...style,
