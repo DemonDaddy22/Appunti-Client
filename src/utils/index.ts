@@ -185,3 +185,26 @@ export const truncateStringToLength = (
  */
 export const createListOfSize = (size: number, start: number = 1): number[] =>
     size > 0 ? Array.from(Array(size)).map(() => start++) : [];
+
+/**
+ *
+ * @function throttle - Throttles (limits) the execution of `cb` by `delay`ms
+ * @param {Function} cb - specifies the function to be throttled
+ * @param {number} delay - specifies delay in milliseconds
+ * @returns throttled version of the input function `cb`
+ *
+ */
+export const throttle = (cb: Function, delay: number = 200) => {
+    let shouldCallCb = true;
+    return function () {
+        const context = this;
+        const args = [].slice.apply(arguments);
+        if (shouldCallCb) {
+            cb.apply(context, args);
+            shouldCallCb = false;
+            setTimeout(() => {
+                shouldCallCb = true;
+            }, delay);
+        }
+    };
+};

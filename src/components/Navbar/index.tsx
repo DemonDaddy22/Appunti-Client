@@ -15,7 +15,7 @@ const Navbar: React.FC<INavbar> = (props) => {
 
     const handlePageScrolling = useCallback(() => {
         setIsPageScrolling(
-            window.scrollY > NAVBAR_SCROLL_BREAKPOINT_HEIGHT ? true : false
+            window.scrollY >= NAVBAR_SCROLL_BREAKPOINT_HEIGHT/2 ? true : false
         );
     }, [window.scrollY]);
 
