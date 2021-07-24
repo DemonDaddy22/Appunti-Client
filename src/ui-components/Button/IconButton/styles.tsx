@@ -1,6 +1,5 @@
 /* eslint-disable indent */
 import styled from 'styled-components';
-import { GREY_50 } from '../../../resources/colors';
 import { isHexColor, rgbToHex } from '../../../utils';
 
 interface IProps extends IIconButton, IBackgroundColor {}

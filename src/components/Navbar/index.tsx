@@ -23,7 +23,7 @@ const Navbar: React.FC<INavbar> = (props) => {
     useEffect(() => {
         window.addEventListener('scroll', handlePageScrolling);
         return () => window.removeEventListener('scroll', handlePageScrolling);
-    }, []);
+    }, [handlePageScrolling]);
 
     return (
         <nav

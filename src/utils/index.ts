@@ -191,17 +191,19 @@ export const createListOfSize = (size: number, start: number = 1): number[] =>
  * @function throttle - Throttles (limits) the execution of `cb` by `delay`ms
  * @param {Function} cb - specifies the function to be throttled
  * @param {number} delay - specifies delay in milliseconds
+ * @param {any} args - any arguments to be passed on to the throttled function
  * @returns throttled version of the input function `cb`
  *
  */
-export const throttle = (cb: Function, delay: number = 200) => {
+export const throttle = (cb: Function, delay: number = 200, ...args: any[]) => {
     let shouldCallCb = true;
+    const prevArgs = args;
     // eslint-disable-next-line no-unused-vars
     return function (this: any) {
         const context = this;
         const args = [].slice.apply(arguments);
         if (shouldCallCb) {
-            cb.apply(context, args);
+            cb.apply(context, [...prevArgs, ...args]);
             shouldCallCb = false;
             setTimeout(() => {
                 shouldCallCb = true;
@@ -210,5 +212,4 @@ export const throttle = (cb: Function, delay: number = 200) => {
     };
 };
 
-// TODO - test arguments in throttle
 // TODO - create a debounce util as well

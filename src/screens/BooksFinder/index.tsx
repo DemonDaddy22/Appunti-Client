@@ -22,7 +22,7 @@ const BooksFinder: React.FC<{}> = () => {
     );
     const [books, setBooks] = useState<IBookSearchData | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<boolean>(false);
+    const [, setError] = useState<boolean>(false);
     const [fetching, setFetching] = useState<boolean>(false);
     const [queryParams, setQueryParams] = useState<IBooksAPIParams>({
         q: query,

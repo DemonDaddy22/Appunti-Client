@@ -5,7 +5,6 @@ import ThemeContextProvider from './context/ThemeContext';
 import BooksFinder from './screens/BooksFinder';
 import { throttle } from './utils';
 
-// TODO- dynamically update padding top of app based on height of navbar
 const App: React.FC<{}> = () => {
     const navbarRef = useRef<HTMLElement | null>(null);
 
@@ -21,16 +20,18 @@ const App: React.FC<{}> = () => {
         [navbarRef.current?.offsetHeight]
     );
 
+    useEffect(() => setNavbarHeight(navbarRef?.current?.offsetHeight), []);
+
     useEffect(() => {
         window.addEventListener('resize', handleWindowResize);
         return () => window.removeEventListener('resize', handleWindowResize);
-    }, []);
+    }, [handleWindowResize]);
 
     return (
         <ThemeContextProvider>
             <div
                 className="App"
-                style={{ paddingTop: (navbarHeight || 0) + 32 }}
+                style={{ paddingTop: (navbarHeight || 0) + 24 }}
             >
                 <Navbar navbarRef={navbarRef} />
                 <BooksFinder />
