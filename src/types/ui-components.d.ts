@@ -1,55 +1,5 @@
 /* eslint-disable no-unused-vars */
 
-interface IColor {
-    /**
-     *
-     * @field `color` - specifies text color
-     *
-     */
-    color?: string;
-}
-
-interface IBorderColor {
-    /**
-     *
-     * @field `borderColor` - specifies border color
-     *
-     */
-    borderColor?: string;
-}
-
-interface IBackgroundColor {
-    /**
-     *
-     * @field `backgroundColor` - specifies background color
-     *
-     */
-    backgroundColor?: string;
-}
-
-interface IColors {
-    /**
-     *
-     * @field `color` - specifies text color of the content
-     *
-     */
-    color?: string;
-
-    /**
-     *
-     * @field `borderColor` - specifies border color of the button
-     *
-     */
-    borderColor?: string;
-
-    /**
-     *
-     * @field `backgroundColor` - specifies background color of the button
-     *
-     */
-    backgroundColor?: string;
-}
-
 interface IInput extends IColor, IBorderColor, IStyle {
     /**
      *
@@ -150,7 +100,7 @@ interface IButtonOutlined extends IColor, IStyle {
     onClick: () => void;
 }
 
-interface IPagination {
+interface IPagination extends IStyle {
     /**
      *
      * @field `pageRange` - specifies size of pagination bar
@@ -194,13 +144,6 @@ interface IPagination {
      *
      */
     handlePageChange: (page: number) => void;
-
-    /**
-     *
-     * @field `style` - specifies styles to override default container styles
-     *
-     */
-    style?: React.CSSProperties;
 
     /**
      *
@@ -350,39 +293,25 @@ interface ISelectItem extends IColors {
     selectedColor: string;
 }
 
-interface ILabel extends IColor {
+interface ILabel extends IColor, IStyle {
     /**
      *
      * @field `label` - specifies the label content
      *
      */
     label: string;
-
-    /**
-     *
-     * @field `style` - specifies styles to override default label styles
-     *
-     */
-    style?: React.CSSProperties;
 }
 
-interface ILoader extends IColor {
+interface ILoader extends IColor, IStyle {
     /**
      *
      * @field `size` - specifies size of the loader
      *
      */
     size?: number | string;
-
-    /**
-     *
-     * @field `style` - specifies styles to override default loader styles
-     *
-     */
-    style?: React.CSSProperties;
 }
 
-interface IIconButton {
+interface IIconButton extends IStyle {
     /**
      *
      * @field `disabled` - specifies whether icon button should be disabled
@@ -407,15 +336,39 @@ interface IIconButton {
 
     /**
      *
-     * @field `showRipple` - specifies whether icon button should have background ripple;
+     * @field `showRipple` - specifies whether icon button should have background ripple
      *
      */
     showRipple?: boolean;
+}
+
+interface IDivider extends IStyle {
+    /**
+     *
+     * @field `numDashes` - specifies the number of dash pattern
+     * @default 4
+     *
+     */
+    numOfDashes?: number;
 
     /**
      *
-     * @field `style` - specifies styles to override default icon button styles
+     * @field `hideDivider` - specifies whether to make the divider transparent
      *
      */
-    style?: React.CSSProperties;
+    hideDivider?: boolean;
+
+    /**
+     *
+     * @field `dashStyle` - specifies styles to override default dash style
+     *
+     */
+    dashStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `className` - specifies CSS class(es) to override default styles
+     *
+     */
+    className?: string;
 }

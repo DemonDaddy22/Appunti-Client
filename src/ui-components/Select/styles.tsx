@@ -17,7 +17,7 @@ export const StyledInputContainer = styled.div`
     border-radius: 4px;
     display: inline-flex;
     font-family: inherit;
-    margin: 4px 0;
+    margin: 0;
     padding: 0;
     transition: border 0.25s;
 
@@ -34,17 +34,17 @@ export const StyledInputContainer = styled.div`
         font-family: inherit;
         font-size: 1.05rem;
         outline: none;
-        padding: 0.8rem 0.6rem;
+        padding: 0.75rem 0.6rem;
         transition: color 0.25s;
 
         @media (min-width: 1024px) {
             font-size: 1.1rem;
-            padding: 0.9rem 0.7rem;
+            padding: 0.85rem 0.7rem;
         }
 
         @media (min-width: 1500px) {
             font-size: 1.15rem;
-            padding: 1rem 0.8rem;
+            padding: 0.85rem 0.8rem;
         }
 
         &::placeholder {

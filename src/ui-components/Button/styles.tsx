@@ -18,7 +18,7 @@ export const StyledButtonOutlined = styled.button`
     text-transform: uppercase;
     transition: background-color 0.25s, border 0.25s, color 0.25s, filter 0.1s;
 
-    &:hover {
+    &:hover, &:focus {
         background-color: ${(props: IColor) => props.color};
         color: ${(props: IColor) => isColorDark(props.color) ? WHITE_TRANSPARENT_90 : THEME_PRIMARY_ACCENT3};
         outline: none;
@@ -63,7 +63,7 @@ export const StyledButton = styled.button`
     transition: background-color 0.25s, border 0.25s, box-shadow 0.25s,
         color 0.25s, filter 0.25s;
 
-    &:hover {
+    &:hover, &:focus {
         box-shadow: 0 2px 8px ${BLACK_30};
         filter: brightness(1.15);
         outline: none;

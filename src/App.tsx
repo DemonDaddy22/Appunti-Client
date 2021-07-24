@@ -31,7 +31,7 @@ const App: React.FC<{}> = () => {
         <ThemeContextProvider>
             <div
                 className="App"
-                style={{ paddingTop: (navbarHeight || 0) + 24 }}
+                style={{ paddingTop: (navbarHeight || 0) + 4 }}
             >
                 <Navbar navbarRef={navbarRef} />
                 <BooksFinder />

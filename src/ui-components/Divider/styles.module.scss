@@ -1,0 +1,24 @@
+@import '../../resources/globalStyles.scss';
+@import '../../resources/globalVariables.scss';
+
+.divider {
+    @include flex($alignItems: center, $justifyContent: center, $gap: 0.5rem);
+    @include spacing($margin: 0 auto);
+    opacity: 1;
+    transition: opacity $transitionDuration;
+
+    .dash {
+        @include theme($property: background-color, $key: borderColor, $transition: $transitionDuration);
+        border-radius: 6px;
+        flex: 1;
+        height: 1px;
+        max-width: 1.5rem;
+    }
+
+    .dashMain {
+        @include theme($property: background-color, $key: borderColor, $transition: $transitionDuration);
+        border-radius: 6px;
+        flex: 2;
+        height: 1px;
+    }
+}

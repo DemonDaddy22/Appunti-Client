@@ -17,7 +17,8 @@ const StyledIconButton = styled.button`
     padding: ${({ showRipple }: IProps) => (showRipple ? '0.5rem' : 0)};
     transition: background-color 0.25s, opacity 0.25s;
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: ${({ showRipple, backgroundColor }: IProps) =>
             showRipple
                 ? isHexColor(backgroundColor || '')
