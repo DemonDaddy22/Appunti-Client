@@ -132,11 +132,18 @@ const BooksFinder: React.FC<{}> = () => {
                             onInputChange={handleSelectInputChange}
                         />
                     </div>
-                </div>
-                <div className={classes.buttonsWrapper}>
-                    <ButtonOutlined onClick={handleSearchButtonClick}>
-                        Search
-                    </ButtonOutlined>
+                    <div className={classes.inputCol}>
+                        <ButtonOutlined
+                            onClick={handleSearchButtonClick}
+                            style={{
+                                minWidth: '10rem',
+                                paddingTop: '1rem',
+                                paddingBottom: '1rem',
+                            }}
+                        >
+                            Search
+                        </ButtonOutlined>
+                    </div>
                 </div>
                 <SearchResultsContainer data={books?.items} />
                 <Pagination

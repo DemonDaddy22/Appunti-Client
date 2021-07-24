@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { isHexColor, rgbToHex } from '../../utils';
 
 export const StyledInputContainer = styled.div`
-    margin: 0.25rem 0;
+    margin: 0;
+    min-width: 350px;
     position: relative;
     width: 100%;
 `;
@@ -30,7 +31,7 @@ export const StyledInput = styled.input`
 
     @media (min-width: 1500px) {
         font-size: 1.15rem;
-        padding: 1rem 0.8rem;
+        padding: 0.9rem 0.8rem;
     }
 
     &::placeholder {

@@ -2,18 +2,18 @@
 
 .booksFinderContainer {
     @include spacing(0, 1rem);
-}
 
-.buttonsWrapper {
-    @include flex($justifyContent: center, $gap: 1rem);
+    @media (min-width: 1024px) {
+        padding: 1.5rem 1rem;
+    }
+
+    @media (min-width: 1500px) {
+        padding: 2rem 1rem;
+    }
 }
 
 .inputWrapper {
-    @include flex($flexDirection: column, $gap: 1rem);
-
-    @media (min-width: 1024px) {
-        flex-direction: row;
-    }
+    @include flex($gap: 1rem, $alignItems: flex-end, $flexWrap: wrap);
 
     .inputCol {
         @include flex($flexDirection: column, $gap: 0.5rem, $alignItems: flex-start);

@@ -39,7 +39,13 @@ const Navbar: React.FC<INavbar> = (props) => {
                     : 'transparent',
                 backdropFilter: isPageScrolling
                     ? 'blur(10px) saturate(120%) contrast(60%) brightness(135%)'
-                    : 'none'
+                    : 'none',
+                borderBottom: isPageScrolling
+                    ? 'none'
+                    : `1px dashed ${getThemedValue(
+                        'rgba(32, 38, 54, 0.25)',
+                        'rgb(45, 54, 77)'
+                    )}`
             }}
         >
             <AppHeader showIcon={false} label="Appunti" style={{ flex: 1 }} />
