@@ -26,3 +26,5 @@ export const MAX_RESULTS_OPTIONS: Array<ISelectOption> = [
         value: 40,
     },
 ];
+
+export const NAVBAR_SCROLL_BREAKPOINT_HEIGHT = 80;

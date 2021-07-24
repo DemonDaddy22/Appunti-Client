@@ -1,9 +1,8 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import SearchResultsContainer from '../../components/SearchResultsContainer';
-import { ThemeContext } from '../../context/ThemeContext';
 import useAsyncExec from '../../hooks/useAsyncExec';
 import { BOOKS_API_URI, MAX_RESULTS_OPTIONS } from '../../resources/constants';
-import Button, { ButtonOutlined } from '../../ui-components/Button';
+import { ButtonOutlined } from '../../ui-components/Button';
 import Input from '../../ui-components/Input';
 import Pagination from '../../ui-components/Pagination';
 import Select from '../../ui-components/Select';
@@ -13,8 +12,6 @@ import { isEmptyString } from '../../utils';
 import Loader from '../../ui-components/Loader';
 
 const BooksFinder: React.FC<{}> = () => {
-    const { toggleTheme } = useContext(ThemeContext);
-
     const [query, setQuery] = useState<string>('');
     const [pageIndex, setPageIndex] = useState<number>(1);
     const [maxResultsOption, setMaxResultsOption] = useState<ISelectOption>(
@@ -25,7 +22,7 @@ const BooksFinder: React.FC<{}> = () => {
     );
     const [books, setBooks] = useState<IBookSearchData | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<boolean>(false);
+    const [, setError] = useState<boolean>(false);
     const [fetching, setFetching] = useState<boolean>(false);
     const [queryParams, setQueryParams] = useState<IBooksAPIParams>({
         q: query,
@@ -140,7 +137,6 @@ const BooksFinder: React.FC<{}> = () => {
                     <ButtonOutlined onClick={handleSearchButtonClick}>
                         Search
                     </ButtonOutlined>
-                    <Button onClick={toggleTheme}>Toggle Theme</Button>
                 </div>
                 <SearchResultsContainer data={books?.items} />
                 <Pagination

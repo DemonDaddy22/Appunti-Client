@@ -1,6 +1,6 @@
+/* eslint-disable max-len */
 import React from 'react';
 
-/* eslint-disable max-len */
 const ChevronDown: React.FC<IIcon> = (props) => {
     const { color, style } = props;
 
