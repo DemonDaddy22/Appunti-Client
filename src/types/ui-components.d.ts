@@ -372,3 +372,53 @@ interface IDivider extends IStyle {
      */
     className?: string;
 }
+
+interface IModal {
+    /**
+     *
+     * @field `header` - specifies modal header
+     */
+    header: string;
+
+    /**
+     *
+     * @field `children` - specifies the content of modal
+     *
+     */
+    children: React.ReactNode;
+
+    /**
+     *
+     * @field `backdropStyle` - specifies styles to override default backdrop style
+     *
+     */
+    backdropStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `containerStyle` - specifies styles to override default modal container style
+     *
+     */
+    containerStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `contentStyle` - specifies styles to override default content wrapper style
+     *
+     */
+    contentStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `headerStyle` - specifies styles to override default header style
+     *
+     */
+    headerStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `iconStyle` - specifies styles to override default close button style
+     *
+     */
+    iconStyle?: React.CSSProperties;
+}
