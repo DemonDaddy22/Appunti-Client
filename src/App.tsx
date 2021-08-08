@@ -3,7 +3,6 @@ import './App.scss';
 import Navbar from './components/Navbar';
 import ThemeContextProvider from './context/ThemeContext';
 import BooksFinder from './screens/BooksFinder';
-import Modal from './ui-components/Modal';
 import { throttle } from './utils';
 
 const App: React.FC<{}> = () => {
@@ -36,96 +35,6 @@ const App: React.FC<{}> = () => {
             >
                 <Navbar navbarRef={navbarRef} />
                 <BooksFinder />
-                <Modal header="Appunti">
-                    <p>
-                        Lorem ipsum ullamco excepteur non amet enim qui veniam
-                        sint ex Lorem elit elit irure sunt. Magna et excepteur
-                        ex eiusmod minim laborum nostrud qui velit cillum
-                        reprehenderit dolore nisi. Do voluptate eiusmod eu
-                        aliquip esse ex excepteur mollit voluptate. Cillum ad
-                        Lorem veniam officia reprehenderit cupidatat.
-                    </p>
-                    <p>
-                        Lorem ipsum ullamco excepteur non amet enim qui veniam
-                        sint ex Lorem elit elit irure sunt. Magna et excepteur
-                        ex eiusmod minim laborum nostrud qui velit cillum
-                        reprehenderit dolore nisi. Do voluptate eiusmod eu
-                        aliquip esse ex excepteur mollit voluptate. Cillum ad
-                        Lorem veniam officia reprehenderit cupidatat.
-                    </p>
-                    <p>
-                        Lorem ipsum ullamco excepteur non amet enim qui veniam
-                        sint ex Lorem elit elit irure sunt. Magna et excepteur
-                        ex eiusmod minim laborum nostrud qui velit cillum
-                        reprehenderit dolore nisi. Do voluptate eiusmod eu
-                        aliquip esse ex excepteur mollit voluptate. Cillum ad
-                        Lorem veniam officia reprehenderit cupidatat.
-                    </p>
-                    <p>
-                        Lorem ipsum ullamco excepteur non amet enim qui veniam
-                        sint ex Lorem elit elit irure sunt. Magna et excepteur
-                        ex eiusmod minim laborum nostrud qui velit cillum
-                        reprehenderit dolore nisi. Do voluptate eiusmod eu
-                        aliquip esse ex excepteur mollit voluptate. Cillum ad
-                        Lorem veniam officia reprehenderit cupidatat.
-                    </p>
-                    <p>
-                        Lorem ipsum ullamco excepteur non amet enim qui veniam
-                        sint ex Lorem elit elit irure sunt. Magna et excepteur
-                        ex eiusmod minim laborum nostrud qui velit cillum
-                        reprehenderit dolore nisi. Do voluptate eiusmod eu
-                        aliquip esse ex excepteur mollit voluptate. Cillum ad
-                        Lorem veniam officia reprehenderit cupidatat.
-                    </p>
-                    <p>
-                        Lorem ipsum ullamco excepteur non amet enim qui veniam
-                        sint ex Lorem elit elit irure sunt. Magna et excepteur
-                        ex eiusmod minim laborum nostrud qui velit cillum
-                        reprehenderit dolore nisi. Do voluptate eiusmod eu
-                        aliquip esse ex excepteur mollit voluptate. Cillum ad
-                        Lorem veniam officia reprehenderit cupidatat.
-                    </p>
-                    <p>
-                        Lorem ipsum ullamco excepteur non amet enim qui veniam
-                        sint ex Lorem elit elit irure sunt. Magna et excepteur
-                        ex eiusmod minim laborum nostrud qui velit cillum
-                        reprehenderit dolore nisi. Do voluptate eiusmod eu
-                        aliquip esse ex excepteur mollit voluptate. Cillum ad
-                        Lorem veniam officia reprehenderit cupidatat.
-                    </p>
-                    <p>
-                        Lorem ipsum ullamco excepteur non amet enim qui veniam
-                        sint ex Lorem elit elit irure sunt. Magna et excepteur
-                        ex eiusmod minim laborum nostrud qui velit cillum
-                        reprehenderit dolore nisi. Do voluptate eiusmod eu
-                        aliquip esse ex excepteur mollit voluptate. Cillum ad
-                        Lorem veniam officia reprehenderit cupidatat.
-                    </p>
-                    <p>
-                        Lorem ipsum ullamco excepteur non amet enim qui veniam
-                        sint ex Lorem elit elit irure sunt. Magna et excepteur
-                        ex eiusmod minim laborum nostrud qui velit cillum
-                        reprehenderit dolore nisi. Do voluptate eiusmod eu
-                        aliquip esse ex excepteur mollit voluptate. Cillum ad
-                        Lorem veniam officia reprehenderit cupidatat.
-                    </p>
-                    <p>
-                        Lorem ipsum ullamco excepteur non amet enim qui veniam
-                        sint ex Lorem elit elit irure sunt. Magna et excepteur
-                        ex eiusmod minim laborum nostrud qui velit cillum
-                        reprehenderit dolore nisi. Do voluptate eiusmod eu
-                        aliquip esse ex excepteur mollit voluptate. Cillum ad
-                        Lorem veniam officia reprehenderit cupidatat.
-                    </p>
-                    <p>
-                        Lorem ipsum ullamco excepteur non amet enim qui veniam
-                        sint ex Lorem elit elit irure sunt. Magna et excepteur
-                        ex eiusmod minim laborum nostrud qui velit cillum
-                        reprehenderit dolore nisi. Do voluptate eiusmod eu
-                        aliquip esse ex excepteur mollit voluptate. Cillum ad
-                        Lorem veniam officia reprehenderit cupidatat.
-                    </p>
-                </Modal>
             </div>
         </ThemeContextProvider>
     );

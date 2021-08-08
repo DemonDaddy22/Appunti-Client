@@ -7,6 +7,19 @@ import Divider from '../Divider';
 import classes from './styles.module.scss';
 
 const Modal: React.FC<IModal> = (props) => {
+    const {
+        open,
+        closeOnBackdropClick,
+        onClose,
+        header,
+        backdropStyle,
+        containerStyle,
+        contentStyle,
+        headerStyle,
+        iconStyle,
+        children,
+    } = props;
+
     const modalRef = useRef<HTMLDivElement | null>(null);
     const modalHeaderRef = useRef<HTMLDivElement | null>(null);
 
@@ -22,32 +35,51 @@ const Modal: React.FC<IModal> = (props) => {
         [modalRef.current?.clientHeight, modalHeaderRef.current?.clientHeight]
     );
 
-    useEffect(
-        () =>
-            setContentHeight(
-                (modalRef?.current?.clientHeight || 0) -
-                    (modalHeaderRef?.current?.clientHeight || 0)
-            ),
-        []
+    const handleBackdropClick = useCallback(
+        (e: React.MouseEvent) => {
+            if (!closeOnBackdropClick) return;
+
+            const rects = modalRef?.current?.getClientRects();
+            if (!rects?.length) return;
+
+            const { top, left, bottom, right } = rects[0];
+            const positionX = e?.clientX;
+            const positionY = e?.clientY;
+
+            if (
+                positionX >= left &&
+                positionX <= right &&
+                positionY >= top &&
+                positionY <= bottom
+            ) {
+                return;
+            }
+
+            onClose();
+        },
+        [closeOnBackdropClick, onClose, modalRef?.current?.getClientRects()]
     );
+
+    useEffect(() => {
+        setContentHeight(
+            (modalRef?.current?.clientHeight || 0) -
+                (modalHeaderRef?.current?.clientHeight || 0)
+        );
+        if (open) document.body.classList.add(classes.overflowHidden);
+        return () => document.body.classList.remove(classes.overflowHidden);
+    }, [children, open]);
 
     useEffect(() => {
         window.addEventListener('resize', handleWindowResize);
         return () => window.removeEventListener('resize', handleWindowResize);
     }, [handleWindowResize]);
 
-    const {
-        header,
-        backdropStyle,
-        containerStyle,
-        contentStyle,
-        headerStyle,
-        iconStyle,
-        children,
-    } = props;
-
-    return (
-        <div className={classes.modalBackdrop} style={backdropStyle}>
+    return open ? (
+        <div
+            className={classes.modalBackdrop}
+            style={backdropStyle}
+            onClick={handleBackdropClick}
+        >
             <div
                 ref={modalRef}
                 className={classes.modalContainer}
@@ -61,7 +93,7 @@ const Modal: React.FC<IModal> = (props) => {
                         {header}
                     </div>
                     <IconButton
-                        onClick={() => {}}
+                        onClick={onClose}
                         style={iconStyle}
                         transform="rotate(90deg)"
                     >
@@ -83,18 +115,16 @@ const Modal: React.FC<IModal> = (props) => {
                 </div>
             </div>
         </div>
-    );
+    ) : null;
 };
 
 export default Modal;
 
-/*
-
-(for small screens, backdrop disappears and content takes full height and width)
-
-Header                      X
------------------------------
-
-<-  scrollable content  ->
-
-*/
+Modal.defaultProps = {
+    closeOnBackdropClick: true,
+    backdropStyle: {},
+    containerStyle: {},
+    contentStyle: {},
+    headerStyle: {},
+    iconStyle: {},
+};

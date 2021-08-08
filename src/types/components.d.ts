@@ -4,9 +4,11 @@ interface ISearchResultsContainer extends IStyle {
     data: any[] | undefined;
 }
 
-interface ISearchResultsBookCard extends IStyle {
+interface ISearchResultsBook {
     data: any;
 }
+
+interface ISearchResultsBookCard extends IStyle, ISearchResultsBook {}
 
 interface IAppHeader extends IStyle {
     label: string;

@@ -4,7 +4,7 @@
 .modalBackdrop {
     @include position($position: fixed, $top: 0, $left: 0);
     @include flex($alignItems: center, $justifyContent: center);
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 0, 0, 0.5);
     height: 100vh;
     overflow: hidden;
     width: 100vw;
@@ -28,7 +28,7 @@
 
     @media (min-width: 1024px) {
         border-radius: 6px;
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         max-height: 100%;
     }
 }
@@ -69,4 +69,8 @@
     @media (min-width: 1500px) {
         padding: 1rem 1.25rem;
     }
+}
+
+.overflowHidden {
+    overflow: hidden !important;
 }

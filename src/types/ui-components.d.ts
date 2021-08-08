@@ -383,6 +383,28 @@ interface IDivider extends IStyle {
 interface IModal {
     /**
      *
+     * @field `open` - specifies whether modal is open
+     *
+     */
+    open: boolean;
+
+    /**
+     *
+     * @field `closeOnBackdropClick` - specifies whether to close the modal on clicking backdrop
+     *
+     */
+    closeOnBackdropClick?: boolean;
+
+    /**
+     *
+     * @function onClose - function to trigger when the modal is to be closed
+     * @returns `void`
+     *
+     */
+    onClose: () => void;
+
+    /**
+     *
      * @field `header` - specifies modal header
      */
     header: string;
