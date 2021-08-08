@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { DEFAULT_DASH_COUNT } from '../../resources/constants';
+import { DEFAULT_DASH_COUNT, MAX_DASH_COUNT } from '../../resources/constants';
 import { createListOfSize } from '../../utils';
 import classes from './styles.module.scss';
 
@@ -9,7 +9,7 @@ const Divider: React.FC<IDivider> = (props) => {
     const renderDashes = useCallback(
         (key: string) => {
             const placeholderList = createListOfSize(
-                numOfDashes || DEFAULT_DASH_COUNT
+                Math.min(numOfDashes || DEFAULT_DASH_COUNT, MAX_DASH_COUNT)
             );
             return (
                 <>

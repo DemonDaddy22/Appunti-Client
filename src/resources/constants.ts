@@ -30,3 +30,5 @@ export const MAX_RESULTS_OPTIONS: Array<ISelectOption> = [
 export const NAVBAR_SCROLL_BREAKPOINT_HEIGHT = 80;
 
 export const DEFAULT_DASH_COUNT = 4;
+
+export const MAX_DASH_COUNT = 100;

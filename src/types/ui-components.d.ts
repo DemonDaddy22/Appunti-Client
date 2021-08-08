@@ -340,6 +340,13 @@ interface IIconButton extends IStyle {
      *
      */
     showRipple?: boolean;
+
+    /**
+     *
+     * @field `transform` - specifies transform style for hover state
+     *
+     */
+    transform?: string | null;
 }
 
 interface IDivider extends IStyle {

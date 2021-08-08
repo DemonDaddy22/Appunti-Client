@@ -1,5 +1,6 @@
 export const LIGHT_THEME: ITheme = Object.freeze({
     background: '#F7F7F7',
+    backgroundModal: '#FFFFFF',
     borderColor: '#D0D0D0',
     text: '#101010',
     textContrastLight: '#606060',
@@ -15,6 +16,7 @@ export const LIGHT_THEME: ITheme = Object.freeze({
 
 export const DARK_THEME: ITheme = Object.freeze({
     background: '#0F141F',
+    backgroundModal: '#1A2336',
     borderColor: '#3A4460',
     text: '#F0F0F0',
     textContrastLight: '#65739C',

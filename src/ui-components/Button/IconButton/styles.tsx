@@ -15,7 +15,7 @@ const StyledIconButton = styled.button`
     opacity: 0.8;
     outline: none;
     padding: ${({ showRipple }: IProps) => (showRipple ? '0.5rem' : 0)};
-    transition: background-color 0.25s, opacity 0.25s;
+    transition: background-color 0.25s, opacity 0.25s, transform 0.25s;
 
     &:hover,
     &:focus {
@@ -26,6 +26,7 @@ const StyledIconButton = styled.button`
                     : `${rgbToHex(backgroundColor || '')}27`
                 : 'transparent'};
         opacity: 1;
+        transform: ${({ transform }: IProps) => transform};
     }
 
     &:disabled {
