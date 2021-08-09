@@ -48,7 +48,7 @@ const SearchResultsBookCard: React.FC<ISearchResultsBookCard> = (props) => {
                         {data.volumeInfo?.title}
                     </div>
                     <div className={classes.authors}>
-                        {data.volumeInfo?.authors?.join(',')}
+                        {data.volumeInfo?.authors?.join(', ')}
                     </div>
                     <div className={classes.date}>
                         {data.volumeInfo?.publishedDate}

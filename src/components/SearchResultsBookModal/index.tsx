@@ -5,84 +5,39 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     const { data } = props;
 
     return (
-        <div>
-            <p>
-                Lorem ipsum ullamco excepteur non amet enim qui veniam sint ex
-                Lorem elit elit irure sunt. Magna et excepteur ex eiusmod minim
-                laborum nostrud qui velit cillum reprehenderit dolore nisi. Do
-                voluptate eiusmod eu aliquip esse ex excepteur mollit voluptate.
-                Cillum ad Lorem veniam officia reprehenderit cupidatat.
-            </p>
-            <p>
-                Lorem ipsum ullamco excepteur non amet enim qui veniam sint ex
-                Lorem elit elit irure sunt. Magna et excepteur ex eiusmod minim
-                laborum nostrud qui velit cillum reprehenderit dolore nisi. Do
-                voluptate eiusmod eu aliquip esse ex excepteur mollit voluptate.
-                Cillum ad Lorem veniam officia reprehenderit cupidatat.
-            </p>
-            <p>
-                Lorem ipsum ullamco excepteur non amet enim qui veniam sint ex
-                Lorem elit elit irure sunt. Magna et excepteur ex eiusmod minim
-                laborum nostrud qui velit cillum reprehenderit dolore nisi. Do
-                voluptate eiusmod eu aliquip esse ex excepteur mollit voluptate.
-                Cillum ad Lorem veniam officia reprehenderit cupidatat.
-            </p>
-            <p>
-                Lorem ipsum ullamco excepteur non amet enim qui veniam sint ex
-                Lorem elit elit irure sunt. Magna et excepteur ex eiusmod minim
-                laborum nostrud qui velit cillum reprehenderit dolore nisi. Do
-                voluptate eiusmod eu aliquip esse ex excepteur mollit voluptate.
-                Cillum ad Lorem veniam officia reprehenderit cupidatat.
-            </p>
-            <p>
-                Lorem ipsum ullamco excepteur non amet enim qui veniam sint ex
-                Lorem elit elit irure sunt. Magna et excepteur ex eiusmod minim
-                laborum nostrud qui velit cillum reprehenderit dolore nisi. Do
-                voluptate eiusmod eu aliquip esse ex excepteur mollit voluptate.
-                Cillum ad Lorem veniam officia reprehenderit cupidatat.
-            </p>
-            <p>
-                Lorem ipsum ullamco excepteur non amet enim qui veniam sint ex
-                Lorem elit elit irure sunt. Magna et excepteur ex eiusmod minim
-                laborum nostrud qui velit cillum reprehenderit dolore nisi. Do
-                voluptate eiusmod eu aliquip esse ex excepteur mollit voluptate.
-                Cillum ad Lorem veniam officia reprehenderit cupidatat.
-            </p>
-            <p>
-                Lorem ipsum ullamco excepteur non amet enim qui veniam sint ex
-                Lorem elit elit irure sunt. Magna et excepteur ex eiusmod minim
-                laborum nostrud qui velit cillum reprehenderit dolore nisi. Do
-                voluptate eiusmod eu aliquip esse ex excepteur mollit voluptate.
-                Cillum ad Lorem veniam officia reprehenderit cupidatat.
-            </p>
-            <p>
-                Lorem ipsum ullamco excepteur non amet enim qui veniam sint ex
-                Lorem elit elit irure sunt. Magna et excepteur ex eiusmod minim
-                laborum nostrud qui velit cillum reprehenderit dolore nisi. Do
-                voluptate eiusmod eu aliquip esse ex excepteur mollit voluptate.
-                Cillum ad Lorem veniam officia reprehenderit cupidatat.
-            </p>
-            <p>
-                Lorem ipsum ullamco excepteur non amet enim qui veniam sint ex
-                Lorem elit elit irure sunt. Magna et excepteur ex eiusmod minim
-                laborum nostrud qui velit cillum reprehenderit dolore nisi. Do
-                voluptate eiusmod eu aliquip esse ex excepteur mollit voluptate.
-                Cillum ad Lorem veniam officia reprehenderit cupidatat.
-            </p>
-            <p>
-                Lorem ipsum ullamco excepteur non amet enim qui veniam sint ex
-                Lorem elit elit irure sunt. Magna et excepteur ex eiusmod minim
-                laborum nostrud qui velit cillum reprehenderit dolore nisi. Do
-                voluptate eiusmod eu aliquip esse ex excepteur mollit voluptate.
-                Cillum ad Lorem veniam officia reprehenderit cupidatat.
-            </p>
-            <p>
-                Lorem ipsum ullamco excepteur non amet enim qui veniam sint ex
-                Lorem elit elit irure sunt. Magna et excepteur ex eiusmod minim
-                laborum nostrud qui velit cillum reprehenderit dolore nisi. Do
-                voluptate eiusmod eu aliquip esse ex excepteur mollit voluptate.
-                Cillum ad Lorem veniam officia reprehenderit cupidatat.
-            </p>
+        <div className={classes.contentContainer}>
+            <div className={classes.column}>
+                {data?.imageLinks?.thumbnail ? (
+                    <img
+                        className={classes.image}
+                        src={data.imageLinks.thumbnail}
+                        alt={data?.title}
+                    />
+                ) : (
+                    <div className={classes.imagePlaceholder}>
+                        <img
+                            src="https://res.cloudinary.com/yelp-camp/image/upload/v1624193684/BookPlaceholder.jpg"
+                            alt="no-cover"
+                        />
+                    </div>
+                )}
+            </div>
+            <div className={classes.column}>
+                <div className={classes.subtitle}>{data.subtitle}</div>
+                <div className={classes.authors}>
+                    {data.authors?.join(', ')}
+                </div>
+                <div className={classes.description}>
+                    {data.description || 'No Preview Available'}
+                </div>
+                {/* create a container for below 4 items */}
+                <div className={classes.date}>{data.publishedDate}</div>
+                <div className={classes.date}>{data.pageCount}</div>
+                <div className={classes.date}>
+                    {data.categories?.join(', ')}
+                </div>
+                <div className={classes.date}>{data.language}</div>
+            </div>
         </div>
     );
 };
