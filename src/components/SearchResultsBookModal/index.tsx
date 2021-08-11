@@ -1,4 +1,5 @@
 import React from 'react';
+import Tag from '../../ui-components/Tag';
 import classes from './styles.module.scss';
 
 const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
@@ -34,7 +35,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                 <div className={classes.date}>{data.publishedDate}</div>
                 <div className={classes.date}>{data.pageCount}</div>
                 <div className={classes.date}>
-                    {data.categories?.join(', ')}
+                    {data.categories?.map((category: string, index: number) => <Tag key={`${category}-${index}`} label={category} />)}
                 </div>
                 <div className={classes.date}>{data.language}</div>
             </div>

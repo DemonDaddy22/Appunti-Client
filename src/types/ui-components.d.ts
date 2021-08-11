@@ -451,3 +451,10 @@ interface IModal {
      */
     iconStyle?: React.CSSProperties;
 }
+
+interface ITag extends IStyle, IColor, IBackgroundColor {
+    /**
+     * @field `label` - specifies the tag label
+     */
+    label: string;
+}

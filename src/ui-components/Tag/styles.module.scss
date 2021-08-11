@@ -1,0 +1,12 @@
+@import '../../resources/globalStyles.scss';
+@import '../../resources/globalVariables.scss';
+
+.tag {
+    @include spacing($padding: 0.25rem 0.5rem);
+    color: $light;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: background-color $transitionDuration, color $transitionDuration;
+}
