@@ -65,7 +65,12 @@ const SearchResultsBookCard: React.FC<ISearchResultsBookCard> = (props) => {
                     </div>
                 </div>
             </div>
-            <Modal header={data.volumeInfo?.title || ''} open={isModalOpen} onClose={handleModalClose}>
+            <Modal
+                header={data.volumeInfo?.title || ''}
+                open={isModalOpen}
+                onClose={handleModalClose}
+                containerStyle={{ maxWidth: '60rem' }}
+            >
                 <SearchResultsBookModal data={data.volumeInfo} />
             </Modal>
         </>

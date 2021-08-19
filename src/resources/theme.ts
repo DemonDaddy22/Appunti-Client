@@ -1,5 +1,5 @@
 export const LIGHT_THEME: ITheme = Object.freeze({
-    background: '#F7F7F7',
+    background: '#F0F0F0',
     backgroundModal: '#FFFFFF',
     borderColor: '#D0D0D0',
     text: '#101010',
