@@ -31,13 +31,45 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                 <div className={classes.description}>
                     {data.description || 'No Preview Available'}
                 </div>
-                {/* create a container for below 4 items */}
-                <div className={classes.date}>{data.publishedDate}</div>
-                <div className={classes.date}>{data.pageCount}</div>
-                <div className={classes.date}>
-                    {data.categories?.map((category: string, index: number) => <Tag key={`${category}-${index}`} label={category} />)}
+                <div className={classes.infoContainer}>
+                    <div className={classes.infoCell}>
+                        <div className={classes.infoHeading}>
+                            Published Date
+                        </div>
+                        <div className={classes.infoContent}>
+                            {data.publishedDate || '-'}
+                        </div>
+                    </div>
+                    <div className={classes.infoCell}>
+                        <div className={classes.infoHeading}>Pages</div>
+                        <div className={classes.infoContent}>
+                            {data.pageCount || '-'}
+                        </div>
+                    </div>
+                    <div className={classes.infoCell}>
+                        <div className={classes.infoHeading}>Language</div>
+                        <div className={classes.infoContent}>
+                            {data.language || '-'}
+                        </div>
+                    </div>
+                    <div className={classes.infoCell}>
+                        <div className={classes.infoHeading}>
+                            {data.categories?.length === 1
+                                ? 'Category'
+                                : 'Categories'}
+                        </div>
+                        <div className={classes.infoContent}>
+                            {data.categories?.map(
+                                (category: string, index: number) => (
+                                    <Tag
+                                        key={`${category}-${index}`}
+                                        label={category}
+                                    />
+                                )
+                            )}
+                        </div>
+                    </div>
                 </div>
-                <div className={classes.date}>{data.language}</div>
             </div>
         </div>
     );

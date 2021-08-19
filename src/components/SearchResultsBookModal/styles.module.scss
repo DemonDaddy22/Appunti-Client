@@ -66,11 +66,29 @@
         letter-spacing: -0.25px;
     }
 
-    & .date {
-        @include theme(color, textContrastLight);
-        font-size: 0.75rem;
-        font-weight: 400;
-        letter-spacing: -0.25px;
+    & .infoContainer {
+        @include flex($gap: 2rem);
+        @include spacing($margin: 1rem 0, $padding: 1rem);
+        background-color: #0000007f;
+        width: fit-content;
+
+        & .infoCell {
+            @include flex($flexDirection: column, $gap: 0.4rem);
+        }
+
+        & .infoHeading {
+            @include theme(color, textContrastLight);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: -0.25px;
+        }
+
+        & .infoContent {
+            @include flex($gap: 0.5rem);
+            @include theme(color, textIntense);
+            font-size: 1rem;
+            letter-spacing: -0.1px;
+        }
     }
 
     & .description {

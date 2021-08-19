@@ -50,7 +50,16 @@ module.exports = {
             },
         ],
         camelcase: 1,
-        indent: 2,
+        'template-curly-spacing': 'off',
+        indent: [
+            "error",
+            4,
+            {
+                "ignoredNodes": [
+                    "TemplateLiteral"
+                ]
+            }
+        ],
         'max-len': [
             2,
             {
