@@ -57,10 +57,12 @@ const BooksFinder: React.FC<{}> = () => {
             ...prevQueryParams,
             startIndex: 0,
         }));
-        setFetching(true);
+        // to allow query params to get updated
+        useAsyncExec(() => setFetching(true), 100);
         useAsyncExec(() => {
             setFetching(false);
             setQuery('');
+            setPageIndex(1);
         });
     }, []);
 
