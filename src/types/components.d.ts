@@ -6,9 +6,14 @@ interface ISearchResultsContainer extends IStyle {
 
 interface ISearchResultsBook {
     data: any;
+    id: string;
+    epub: any;
+    pdf: any;
 }
 
-interface ISearchResultsBookCard extends IStyle, ISearchResultsBook {}
+interface ISearchResultsBookCard extends IStyle {
+    data: any;
+}
 
 interface IAppHeader extends IStyle {
     label: string;

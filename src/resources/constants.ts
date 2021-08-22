@@ -32,3 +32,6 @@ export const NAVBAR_SCROLL_BREAKPOINT_HEIGHT = 80;
 export const DEFAULT_DASH_COUNT = 4;
 
 export const MAX_DASH_COUNT = 100;
+
+export const PLACEHOLDER_IMAGE_URL =
+    'https://res.cloudinary.com/yelp-camp/image/upload/v1624193684/BookPlaceholder.jpg';

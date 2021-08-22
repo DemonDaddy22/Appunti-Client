@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useCallback, useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import { PLACEHOLDER_IMAGE_URL } from '../../resources/constants';
 import Modal from '../../ui-components/Modal';
 import { isEmptyObject, truncateStringToLength } from '../../utils';
 import SearchResultsBookModal from '../SearchResultsBookModal';
@@ -37,7 +38,7 @@ const SearchResultsBookCard: React.FC<ISearchResultsBookCard> = (props) => {
                     ) : (
                         <div className={classes.imagePlaceholder}>
                             <img
-                                src="https://res.cloudinary.com/yelp-camp/image/upload/v1624193684/BookPlaceholder.jpg"
+                                src={PLACEHOLDER_IMAGE_URL}
                                 alt="no-cover"
                             />
                         </div>
@@ -71,7 +72,12 @@ const SearchResultsBookCard: React.FC<ISearchResultsBookCard> = (props) => {
                 onClose={handleModalClose}
                 containerStyle={{ maxWidth: '60rem' }}
             >
-                <SearchResultsBookModal data={data.volumeInfo} />
+                <SearchResultsBookModal
+                    id={data.id}
+                    data={data.volumeInfo}
+                    epub={data.accessInfo?.epub || {}}
+                    pdf={data.accessInfo?.pdf || {}}
+                />
             </Modal>
         </>
     ) : null;
