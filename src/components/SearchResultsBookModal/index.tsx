@@ -7,8 +7,13 @@ import {
 import { ButtonOutlined } from '../../ui-components/Button';
 import Loader from '../../ui-components/Loader';
 import Tag from '../../ui-components/Tag';
+import Toast from '../../ui-components/Toast';
 import { isEmptyObject, isEmptyString } from '../../utils';
 import classes from './styles.module.scss';
+
+// TODO - create Toast component
+// TODO - add bookshelf dropdown
+// TODO - if user selects 'other' option, then show a form to create a new bookshelf
 
 const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     const { id, data, epub, pdf } = props;
@@ -148,6 +153,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                     </ButtonOutlined>
                 </div>
             </div>
+            <Toast label="This is a test toast" onClose={() => {}} />
         </>
     );
 };

@@ -454,7 +454,49 @@ interface IModal {
 
 interface ITag extends IStyle, IColor, IBackgroundColor {
     /**
+     *
      * @field `label` - specifies the tag label
+     *
      */
     label: string;
+}
+
+interface IToast extends IStyle {
+    /**
+     *
+     * @field `label` - specifies the toast label
+     *
+     */
+    label: string;
+
+    /**
+     *
+     * @field `position` - specifies the toast position
+     * @default 'bottom-left'
+     *
+     */
+    position?:
+        | 'top-left'
+        | 'top-center'
+        | 'top-right'
+        | 'bottom-left'
+        | 'bottom-center'
+        | 'bottom-right'
+        | string;
+
+    /**
+     *
+     * @field `variant` - specifies the toast variant
+     * @default 'info'
+     *
+     */
+    variant?: 'success' | 'error' | 'warning' | 'info' | string;
+
+    /**
+     *
+     * @function onClose - function to trigger when the toast is to be closed
+     * @returns `void`
+     *
+     */
+    onClose: () => void;
 }

@@ -1,0 +1,51 @@
+@import '../../resources/globalStyles.scss';
+@import '../../resources/globalVariables.scss';
+
+.toastContainer {
+    @include flex($gap: 0.5rem);
+    @include spacing($padding: 0.75rem 1rem);
+    border-radius: 0.25rem;
+    color: $white;
+    max-width: 20rem;
+    position: fixed;
+    transition: background-color $transitionDuration;
+}
+
+@each $name,
+$value in $toast {
+    .toast#{$name} {
+        background-color: $value;
+    }
+}
+
+.toastTopLeft {
+    top: 1rem;
+    left: 1rem;
+}
+
+.toastTopCenter {
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.toastTopRight {
+    top: 1rem;
+    right: 1rem;
+}
+
+.toastBottomLeft {
+    bottom: 1rem;
+    left: 1rem;
+}
+
+.toastBottomCenter {
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.toastBottomRight {
+    bottom: 1rem;
+    right: 1rem;
+}

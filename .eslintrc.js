@@ -51,15 +51,7 @@ module.exports = {
         ],
         camelcase: 1,
         'template-curly-spacing': 'off',
-        indent: [
-            "error",
-            4,
-            {
-                "ignoredNodes": [
-                    "TemplateLiteral"
-                ]
-            }
-        ],
+        indent: ['error', 4, { ignoredNodes: ['TemplateLiteral'] }],
         'max-len': [
             2,
             {
