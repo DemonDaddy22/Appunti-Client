@@ -73,7 +73,7 @@ interface IButton extends IColors, IStyle {
      * @returns `void`
      *
      */
-    onClick: () => void;
+    onClick: (...args) => void;
 }
 
 interface IButtonOutlined extends IColor, IStyle {
@@ -97,7 +97,7 @@ interface IButtonOutlined extends IColor, IStyle {
      * @returns `void`
      *
      */
-    onClick: () => void;
+    onClick: (...args) => void;
 }
 
 interface IPagination extends IStyle {
@@ -332,7 +332,7 @@ interface IIconButton extends IStyle {
      * @returns `void`
      *
      */
-    onClick: () => void;
+    onClick: (...args) => void;
 
     /**
      *
@@ -401,7 +401,7 @@ interface IModal {
      * @returns `void`
      *
      */
-    onClose: () => void;
+    onClose: (...args) => void;
 
     /**
      *
@@ -467,7 +467,7 @@ interface IToast extends IStyle {
      * @field `label` - specifies the toast label
      *
      */
-    label: string;
+    label?: string;
 
     /**
      *
@@ -498,5 +498,5 @@ interface IToast extends IStyle {
      * @returns `void`
      *
      */
-    onClose: () => void;
+    onClose: (...args) => void;
 }

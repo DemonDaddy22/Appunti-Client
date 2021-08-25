@@ -80,3 +80,19 @@ interface IGenericApiResponse {
      */
     error: any;
 }
+
+interface IToastData {
+    /**
+     *
+     * @field `label` - specifies the toast label
+     *
+     */
+    label?: string;
+
+    /**
+     *
+     * @field `variant` - specifies variant of the toast
+     *
+     */
+    variant?: string;
+}

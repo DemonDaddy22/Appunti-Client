@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {
     BOOKS_API_URI,
     PLACEHOLDER_IMAGE_URL,
+    TOAST_VARIANTS,
 } from '../../resources/constants';
 import { ButtonOutlined } from '../../ui-components/Button';
 import Loader from '../../ui-components/Loader';
@@ -11,7 +12,6 @@ import Toast from '../../ui-components/Toast';
 import { isEmptyObject, isEmptyString } from '../../utils';
 import classes from './styles.module.scss';
 
-// TODO - create Toast component
 // TODO - add bookshelf dropdown
 // TODO - if user selects 'other' option, then show a form to create a new bookshelf
 
@@ -20,6 +20,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [isFound, setIsFound] = useState<boolean>(false);
+    const [toastData, setToastData] = useState<IToastData>({});
 
     useEffect(() => {
         const findBook = async () => {
@@ -31,6 +32,9 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                         { params: { gid: id } }
                     );
                     const data: IGenericApiResponse = response.data;
+                    if (!isEmptyObject(data?.error)) {
+                        throw new Error(data.error?.message);
+                    }
                     setIsFound(data?.status === 200);
                 } catch (error) {
                     setIsFound(false);
@@ -42,7 +46,6 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     }, [id]);
 
     const handleAddBook = useCallback(async () => {
-        // make add book API call
         if (!isFound && !isEmptyString(id) && !isEmptyObject(data)) {
             setLoading(true);
             const book = {
@@ -62,14 +65,26 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
             };
             try {
                 // eslint-disable-next-line prettier/prettier
-                await axios.post(`${BOOKS_API_URI}/book/add`, { book });
+                const response = await axios.post(`${BOOKS_API_URI}/book/add`, { book });
+                if (!isEmptyObject(response?.data?.error)) {
+                    throw new Error(response.data.error?.message);
+                }
+                setToastData({
+                    label: 'Successfully added the book',
+                    variant: TOAST_VARIANTS.SUCCESS,
+                });
                 setIsFound(true);
             } catch (error) {
-                // TODO - create a toast component and use it to display error
+                setToastData({
+                    label: error.message,
+                    variant: TOAST_VARIANTS.ERROR,
+                });
             }
             setLoading(false);
         }
     }, [isFound, id, data, epub, pdf]);
+
+    const handleToastClose = () => setToastData({});
 
     return (
         <>
@@ -153,7 +168,9 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                     </ButtonOutlined>
                 </div>
             </div>
-            <Toast label="This is a test toast" onClose={() => {}} />
+            {!isEmptyObject(toastData) && (
+                <Toast onClose={handleToastClose} {...toastData} />
+            )}
         </>
     );
 };

@@ -1,17 +1,36 @@
 /* eslint-disable indent */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Cross from '../../assets/icons/Cross';
 import Exclamation from '../../assets/icons/Exclamation';
 import Info from '../../assets/icons/Info';
 import Tick from '../../assets/icons/Tick';
 import Warning from '../../assets/icons/Warning';
 import { WHITE } from '../../resources/colors';
-import { TOAST_POSITIONS, TOAST_VARIANTS } from '../../resources/constants';
+import {
+    TOAST_DURATION,
+    TOAST_POSITIONS,
+    TOAST_VARIANTS,
+} from '../../resources/constants';
+import { isEmptyString } from '../../utils';
 import IconButton from '../Button/IconButton';
 import classes from './styles.module.scss';
 
 const Toast: React.FC<IToast> = React.memo((props) => {
     const { label, position, variant, onClose, style } = props;
+
+    const [timerID, setTimerID] = useState<any>(null);
+
+    useEffect(() => {
+        const id = setTimeout(onClose, TOAST_DURATION);
+        setTimerID(id);
+        return () => clearTimeout(id);
+    }, []);
+
+    const handleToastClose = (e: React.MouseEvent) => {
+        clearTimeout(timerID);
+        onClose();
+        e.stopPropagation();
+    };
 
     const getToastBackgroundClass = () => {
         switch (variant) {
@@ -65,7 +84,7 @@ const Toast: React.FC<IToast> = React.memo((props) => {
         return <ToastIcon color={WHITE} />;
     };
 
-    return (
+    return !isEmptyString(label) ? (
         <div
             className={`${
                 classes.toastContainer
@@ -74,11 +93,11 @@ const Toast: React.FC<IToast> = React.memo((props) => {
         >
             {getToastIcon()}
             <div className={classes.toastLabel}>{label}</div>
-            <IconButton onClick={onClose} showRipple={false}>
+            <IconButton onClick={handleToastClose} showRipple={false}>
                 <Cross color={WHITE} style={{ width: 14, height: 14 }} />
             </IconButton>
         </div>
-    );
+    ) : null;
 });
 
 export default Toast;

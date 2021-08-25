@@ -33,6 +33,8 @@ export const DEFAULT_DASH_COUNT: number = 4;
 
 export const MAX_DASH_COUNT: number = 100;
 
+export const TOAST_DURATION: number = 3000;
+
 export const PLACEHOLDER_IMAGE_URL: string =
     'https://res.cloudinary.com/yelp-camp/image/upload/v1624193684/BookPlaceholder.jpg';
 
