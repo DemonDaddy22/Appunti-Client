@@ -1,6 +1,13 @@
 /* eslint-disable indent */
 import React from 'react';
+import Cross from '../../assets/icons/Cross';
+import Exclamation from '../../assets/icons/Exclamation';
+import Info from '../../assets/icons/Info';
+import Tick from '../../assets/icons/Tick';
+import Warning from '../../assets/icons/Warning';
+import { WHITE } from '../../resources/colors';
 import { TOAST_POSITIONS, TOAST_VARIANTS } from '../../resources/constants';
+import IconButton from '../Button/IconButton';
 import classes from './styles.module.scss';
 
 const Toast: React.FC<IToast> = React.memo((props) => {
@@ -37,11 +44,27 @@ const Toast: React.FC<IToast> = React.memo((props) => {
                 return classes.toastBottomLeft;
         }
     };
-    // position - top and bottom
-    // case 1 - success -> tick icon - text - close
-    // case 2 - error -> error icon - text - close
-    // case 3 - warn -> warn icon - text - close
-    // case 4 - info -> info icon - text - close
+
+    const getToastIcon = () => {
+        let ToastIcon = null;
+        switch (variant) {
+            case TOAST_VARIANTS.SUCCESS:
+                ToastIcon = Tick;
+                break;
+            case TOAST_VARIANTS.ERROR:
+                ToastIcon = Exclamation;
+                break;
+            case TOAST_VARIANTS.WARNING:
+                ToastIcon = Warning;
+                break;
+            case TOAST_VARIANTS.INFO:
+            default:
+                ToastIcon = Info;
+                break;
+        }
+        return <ToastIcon color={WHITE} />;
+    };
+
     return (
         <div
             className={`${
@@ -49,7 +72,11 @@ const Toast: React.FC<IToast> = React.memo((props) => {
             } ${getToastBackgroundClass()} ${getToastPositionClass()}`}
             style={style}
         >
-            {label}
+            {getToastIcon()}
+            <div className={classes.toastLabel}>{label}</div>
+            <IconButton onClick={onClose} showRipple={false}>
+                <Cross color={WHITE} style={{ width: 14, height: 14 }} />
+            </IconButton>
         </div>
     );
 });
