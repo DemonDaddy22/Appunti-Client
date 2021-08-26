@@ -116,7 +116,7 @@ export const StyledMenuItem = styled.li`
         isSelected ? 'bold' : 'inherit'};
     filter: ${({ isHighlighted }: ISelectItem) =>
         isHighlighted ? 'brightness(0.85)' : 'brightness(1)'};
-    padding: 0.5rem 0.75rem;
+    padding: 1rem 0.75rem;
     text-align: start;
     transition: background-color 0.25s, color 0.25s, filter 0.25s;
 

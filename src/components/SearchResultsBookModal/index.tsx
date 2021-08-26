@@ -7,6 +7,7 @@ import {
 } from '../../resources/constants';
 import { ButtonOutlined } from '../../ui-components/Button';
 import Loader from '../../ui-components/Loader';
+import Select from '../../ui-components/Select';
 import Tag from '../../ui-components/Tag';
 import Toast from '../../ui-components/Toast';
 import { isEmptyObject, isEmptyString } from '../../utils';
@@ -21,6 +22,9 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [isFound, setIsFound] = useState<boolean>(false);
     const [toastData, setToastData] = useState<IToastData>({});
+    const [bookshelfOption, setBookshelfOption] =
+        useState<ISelectOption | null>(null);
+    const [bookshelfLabel, setBookshelfLabel] = useState<string>('');
 
     useEffect(() => {
         const findBook = async () => {
@@ -84,6 +88,20 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
         }
     }, [isFound, id, data, epub, pdf]);
 
+    const handleSelectInputChange = useCallback((value) => {
+        setBookshelfLabel(!isEmptyString(value) ? value : '');
+    }, []);
+
+    const handleOptionSelect = useCallback(
+        (option) => {
+            if (option !== bookshelfOption) {
+                setBookshelfOption(option);
+                handleSelectInputChange(option?.value);
+            }
+        },
+        [handleSelectInputChange, bookshelfOption]
+    );
+
     const handleToastClose = () => setToastData({});
 
     return (
@@ -111,9 +129,34 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                     )}
                 </div>
                 <div className={classes.column}>
-                    <div className={classes.subtitle}>{data.subtitle}</div>
-                    <div className={classes.authors}>
-                        {data.authors?.join(', ')}
+                    <div className={classes.headerWrapper}>
+                        <div className={classes.header}>
+                            <div
+                                className={classes.subtitle}
+                                style={{
+                                    marginBottom: !isEmptyString(data.subtitle)
+                                        ? 6
+                                        : 0,
+                                }}
+                            >
+                                {data.subtitle}
+                            </div>
+                            <div className={classes.authors}>
+                                {data.authors?.join(', ')}
+                            </div>
+                        </div>
+                        <Select
+                            value={bookshelfLabel}
+                            options={[
+                                {
+                                    label: 'Create new bookshelf',
+                                    value: 'Create new bookshelf',
+                                },
+                            ]}
+                            placeholder="Add to bookshelf"
+                            onOptionChange={handleOptionSelect}
+                            onInputChange={handleSelectInputChange}
+                        />
                     </div>
                     <div className={classes.description}>
                         {data.description || 'No Preview Available'}

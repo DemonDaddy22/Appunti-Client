@@ -189,7 +189,7 @@ interface ISelectOption {
      * @field `value` - specifies the actual value to be used for further processing
      *
      */
-    value: number;
+    value: any;
 }
 
 interface ISelect extends IColors {
