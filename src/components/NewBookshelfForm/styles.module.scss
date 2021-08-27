@@ -1,0 +1,26 @@
+@import '../../resources/globalStyles.scss';
+@import '../../resources/globalVariables.scss';
+
+.formContainer {
+    @include spacing($padding: 1rem, $margin: 1.5rem 0 0.5rem);
+    @include theme(background-color, background, $transition: $transitionDuration);
+    @include flex($flexDirection: column, $gap: 1rem);
+    border-radius: 0.25rem;
+
+    & .formRow {
+        @include flex($flexDirection: column, $gap: 1rem);
+
+        @media (min-width: 1024px) {
+            flex-direction: row;
+        }
+
+        & .formCol {
+            @include flex($flexDirection: column, $gap: 0.25rem);
+            flex: 1;
+        }
+    }
+
+    & .buttonsWrapper {
+        @include flex($gap: 1rem);
+    }
+}

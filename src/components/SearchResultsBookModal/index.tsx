@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
+    BOOKSHELF_SELECT_DEFAULT_OPTION,
     BOOKS_API_URI,
     PLACEHOLDER_IMAGE_URL,
     TOAST_VARIANTS,
@@ -11,6 +12,7 @@ import Select from '../../ui-components/Select';
 import Tag from '../../ui-components/Tag';
 import Toast from '../../ui-components/Toast';
 import { isEmptyObject, isEmptyString } from '../../utils';
+import NewBookshelfForm from '../NewBookshelfForm';
 import classes from './styles.module.scss';
 
 // TODO - add bookshelf dropdown
@@ -96,11 +98,15 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
         (option) => {
             if (option !== bookshelfOption) {
                 setBookshelfOption(option);
-                handleSelectInputChange(option?.value);
+                handleSelectInputChange(option?.label);
             }
         },
         [handleSelectInputChange, bookshelfOption]
     );
+
+    const handleNewBookshelfFormSubmit = useCallback(() => {}, []);
+
+    const handleNewBookshelfFormCancel = useCallback(() => {}, []);
 
     const handleToastClose = () => setToastData({});
 
@@ -147,17 +153,15 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                         </div>
                         <Select
                             value={bookshelfLabel}
-                            options={[
-                                {
-                                    label: 'Create new bookshelf',
-                                    value: 'Create new bookshelf',
-                                },
-                            ]}
+                            options={[BOOKSHELF_SELECT_DEFAULT_OPTION]}
                             placeholder="Add to bookshelf"
                             onOptionChange={handleOptionSelect}
                             onInputChange={handleSelectInputChange}
                         />
                     </div>
+                    {bookshelfOption === BOOKSHELF_SELECT_DEFAULT_OPTION ? (
+                        <NewBookshelfForm />
+                    ) : null}
                     <div className={classes.description}>
                         {data.description || 'No Preview Available'}
                     </div>

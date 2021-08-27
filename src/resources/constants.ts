@@ -53,3 +53,8 @@ export const TOAST_POSITIONS: IToastPositions = Object.freeze({
     BOTTOMCENTER: 'bottom-center',
     BOTTOMRIGHT: 'bottom-right',
 });
+
+export const BOOKSHELF_SELECT_DEFAULT_OPTION: ISelectOption = Object.freeze({
+    label: 'Create new bookshelf',
+    value: 'Create new bookshelf',
+});

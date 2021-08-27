@@ -93,7 +93,7 @@ const BooksFinder: React.FC<{}> = () => {
                     maxResults: option.value,
                 }));
                 setMaxResultsOption(option);
-                handleSelectInputChange(option?.value);
+                handleSelectInputChange(option?.label);
                 setFetching(true);
                 useAsyncExec(() => {
                     setFetching(false);
