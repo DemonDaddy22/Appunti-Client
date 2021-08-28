@@ -300,6 +300,13 @@ interface ILabel extends IColor, IStyle {
      *
      */
     label: string;
+
+    /**
+     *
+     * @field `required` - specifies whether to add an asterick to label
+     *
+     */
+    required?: boolean;
 }
 
 interface ILoader extends IColor, IStyle {
