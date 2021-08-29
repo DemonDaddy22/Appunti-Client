@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
@@ -15,15 +16,15 @@ import { isEmptyObject, isEmptyString } from '../../utils';
 import NewBookshelfForm from '../NewBookshelfForm';
 import classes from './styles.module.scss';
 
-// TODO - add bookshelf dropdown
-// TODO - if user selects 'other' option, then show a form to create a new bookshelf
-
 const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     const { id, data, epub, pdf } = props;
 
     const [loading, setLoading] = useState<boolean>(false);
-    const [isFound, setIsFound] = useState<boolean>(false);
+    const [foundBook, setFoundBook] = useState<any>(null);
     const [toastData, setToastData] = useState<IToastData>({});
+    const [bookshelfOptions, setBookshelfOptions] = useState<
+        Array<ISelectOption>
+    >([BOOKSHELF_SELECT_DEFAULT_OPTION]);
     const [bookshelfOption, setBookshelfOption] =
         useState<ISelectOption | null>(null);
     const [bookshelfLabel, setBookshelfLabel] = useState<string>('');
@@ -41,9 +42,9 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                     if (!isEmptyObject(data?.error)) {
                         throw new Error(data.error?.message);
                     }
-                    setIsFound(data?.status === 200);
+                    setFoundBook(data?.data?.book);
                 } catch (error) {
-                    setIsFound(false);
+                    // do nothing for now
                 }
                 setLoading(false);
             }
@@ -51,9 +52,40 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
         findBook();
     }, [id]);
 
+    useEffect(() => {
+        const getBookshelves = async () => {
+            try {
+                const response = await axios.get(
+                    `${BOOKS_API_URI}/bookshelf/getAll`
+                );
+                const data: IGenericApiResponse = response.data;
+                if (!isEmptyObject(data?.error)) {
+                    throw new Error(data.error?.message);
+                }
+
+                const bookshelves =
+                    data?.data?.bookshelves?.reduce((accu: Array<any>, bookshelf: any) => {
+                        return !isEmptyObject(bookshelf)
+                            ? [...accu, {
+                                label: bookshelf.title,
+                                value: bookshelf.title,
+                            }]
+                            : accu;
+                    }, []) || [];
+                setBookshelfOptions([...bookshelves, BOOKSHELF_SELECT_DEFAULT_OPTION]);
+            } catch (error) {
+                // do nothing for now
+            }
+        };
+        getBookshelves();
+    }, []);
+
     const handleAddBook = useCallback(async () => {
-        if (!isFound && !isEmptyString(id) && !isEmptyObject(data)) {
-            setLoading(true);
+        if (
+            isEmptyObject(foundBook) &&
+            !isEmptyString(id) &&
+            !isEmptyObject(data)
+        ) {
             const book = {
                 gid: id,
                 title: data?.title || '',
@@ -79,16 +111,15 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                     label: 'Successfully added the book',
                     variant: TOAST_VARIANTS.SUCCESS,
                 });
-                setIsFound(true);
+                setFoundBook(response?.data?.data?.book);
             } catch (error) {
                 setToastData({
                     label: error.message,
                     variant: TOAST_VARIANTS.ERROR,
                 });
             }
-            setLoading(false);
         }
-    }, [isFound, id, data, epub, pdf]);
+    }, [foundBook, id, data, epub, pdf]);
 
     const handleSelectInputChange = useCallback((value) => {
         setBookshelfLabel(!isEmptyString(value) ? value : '');
@@ -104,9 +135,14 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
         [handleSelectInputChange, bookshelfOption]
     );
 
-    const handleNewBookshelfFormSubmit = useCallback(() => {}, []);
+    const handleNewBookshelfFormSubmit = useCallback((options: any) => {
+        console.log(options);
+    }, []);
 
-    const handleNewBookshelfFormCancel = useCallback(() => {}, []);
+    const handleNewBookshelfFormCancel = useCallback(() => {
+        setBookshelfOption(null);
+        setBookshelfLabel('');
+    }, []);
 
     const handleToastClose = () => setToastData({});
 
@@ -135,32 +171,37 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                     )}
                 </div>
                 <div className={classes.column}>
-                    <div className={classes.headerWrapper}>
-                        <div className={classes.header}>
-                            <div
-                                className={classes.subtitle}
-                                style={{
-                                    marginBottom: !isEmptyString(data.subtitle)
-                                        ? 6
-                                        : 0,
-                                }}
-                            >
-                                {data.subtitle}
-                            </div>
-                            <div className={classes.authors}>
-                                {data.authors?.join(', ')}
-                            </div>
-                        </div>
+                    <div className={classes.subtitle}>
+                        {data.subtitle}
+                    </div>
+                    <div className={classes.authors}>
+                        {data.authors?.join(', ')}
+                    </div>
+                    <div className={classes.bookshelfSelectWrapper}>
                         <Select
                             value={bookshelfLabel}
-                            options={[BOOKSHELF_SELECT_DEFAULT_OPTION]}
+                            options={bookshelfOptions}
                             placeholder="Add to bookshelf"
                             onOptionChange={handleOptionSelect}
                             onInputChange={handleSelectInputChange}
                         />
+                        {bookshelfOption !== BOOKSHELF_SELECT_DEFAULT_OPTION ? (
+                            <ButtonOutlined
+                                disabled={loading}
+                                onClick={() => {}}
+                                style={{ width: 'fit-content' }}
+                            >
+                                Add Book
+                            </ButtonOutlined>
+                        ) : null}
                     </div>
                     {bookshelfOption === BOOKSHELF_SELECT_DEFAULT_OPTION ? (
-                        <NewBookshelfForm />
+                        <NewBookshelfForm
+                            foundBook={foundBook}
+                            handleCancel={handleNewBookshelfFormCancel}
+                            handleSubmit={handleNewBookshelfFormSubmit}
+                            handleAddBook={handleAddBook}
+                        />
                     ) : null}
                     <div className={classes.description}>
                         {data.description || 'No Preview Available'}
@@ -206,13 +247,6 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                             </div>
                         </div>
                     </div>
-                    <ButtonOutlined
-                        disabled={loading || (!loading && isFound)}
-                        onClick={handleAddBook}
-                        style={{ width: 'fit-content' }}
-                    >
-                        {isFound ? 'Book Added' : 'Add Book'}
-                    </ButtonOutlined>
                 </div>
             </div>
             {!isEmptyObject(toastData) && (
@@ -223,3 +257,5 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
 };
 
 export default SearchResultsBookModal;
+
+// add support for multiple toasts

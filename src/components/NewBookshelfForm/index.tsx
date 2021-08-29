@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { RED_500, RED_700 } from '../../resources/colors';
 import { BOOKS_API_URI, TOAST_VARIANTS } from '../../resources/constants';
@@ -15,13 +15,17 @@ import classes from './styles.module.scss';
 // TODO - on submit, if successful set new bookshelf as option in dropdown
 // TODO - add cancel function logic, on cancel clear dropdown
 // TODO - create a file picker component
-const NewBookshelfForm = () => {
+const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
+    const { foundBook, handleCancel, handleSubmit, handleAddBook } = props;
+
     const { getThemedValue } = useContext(ThemeContext);
 
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [imageUrl, setImageUrl] = useState<string>('');
     const [toastData, setToastData] = useState<IToastData>({});
+    const [loading, setLoading] = useState<boolean>(false);
+    const [makeAPICall, setMakeAPICall] = useState<boolean>(false);
 
     const handleTitleChange = (value: any) => setTitle(value);
 
@@ -32,29 +36,45 @@ const NewBookshelfForm = () => {
 
     const handleToastClose = () => setToastData({});
 
-    const handleCancelClick = useCallback(() => {}, []);
+    const handleCancelClick = useCallback(handleCancel, [handleCancel]);
 
     const handleSubmitClick = useCallback(async () => {
-        try {
-            const response = await axios.post(`${BOOKS_API_URI}/bookshelf/add`, {
-                title,
-                description,
-                imageUrl,
-            });
-            if (!isEmptyObject(response?.data?.error)) {
-                throw new Error(response.data.error?.message);
-            }
-            setToastData({
-                label: 'Successfully created new bookshelf',
-                variant: TOAST_VARIANTS.SUCCESS,
-            });
-        } catch (error) {
-            setToastData({
-                label: error.message,
-                variant: TOAST_VARIANTS.ERROR,
-            });
+        if (isEmptyObject(foundBook)) await handleAddBook();
+        setMakeAPICall(true);
+    }, [foundBook, handleAddBook]);
+
+    useEffect(() => {
+        if (makeAPICall && !isEmptyObject(foundBook)) {
+            console.log(foundBook);
+            const createNewBookshelf = async () => {
+                setLoading(true);
+                try {
+                    const bookshelfResponse = await axios.post(`${BOOKS_API_URI}/bookshelf/add`, {
+                        title,
+                        description,
+                        imageUrl,
+                        bookIds: [foundBook?._id],
+                    });
+                    if (!isEmptyObject(bookshelfResponse?.data?.error)) {
+                        throw new Error(bookshelfResponse.data.error?.message);
+                    }
+                    setToastData({
+                        label: 'Successfully created new bookshelf',
+                        variant: TOAST_VARIANTS.SUCCESS,
+                    });
+                    handleSubmit(bookshelfResponse?.data?.data?.bookshelf);
+                } catch (error) {
+                    setToastData({
+                        label: error.message,
+                        variant: TOAST_VARIANTS.ERROR,
+                    });
+                }
+                setLoading(false);
+                setMakeAPICall(false);
+            };
+            createNewBookshelf();
         }
-    }, [title, description, imageUrl]);
+    }, [title, description, imageUrl, foundBook, makeAPICall]);
 
     return (
         <>
@@ -95,14 +115,15 @@ const NewBookshelfForm = () => {
                 </div>
                 <div className={classes.buttonsWrapper}>
                     <Button
-                        disabled={isEmptyString(title)}
+                        disabled={loading || isEmptyString(title)}
                         onClick={handleSubmitClick}
                         style={{ width: 'fit-content' }}
                     >
                         Create
                     </Button>
                     <ButtonOutlined
-                        onClick={() => {}}
+                        disabled={loading}
+                        onClick={handleCancelClick}
                         color={getThemedValue(RED_700, RED_500)}
                         style={{ width: 'fit-content' }}
                     >
