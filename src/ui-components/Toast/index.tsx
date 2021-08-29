@@ -6,17 +6,13 @@ import Info from '../../assets/icons/Info';
 import Tick from '../../assets/icons/Tick';
 import Warning from '../../assets/icons/Warning';
 import { WHITE } from '../../resources/colors';
-import {
-    TOAST_DURATION,
-    TOAST_POSITIONS,
-    TOAST_VARIANTS,
-} from '../../resources/constants';
+import { TOAST_DURATION, TOAST_VARIANTS } from '../../resources/constants';
 import { isEmptyString } from '../../utils';
 import IconButton from '../Button/IconButton';
 import classes from './styles.module.scss';
 
 const Toast: React.FC<IToast> = React.memo((props) => {
-    const { label, position, variant, onClose, style } = props;
+    const { label, variant, onClose, style } = props;
 
     const [timerID, setTimerID] = useState<any>(null);
 
@@ -46,24 +42,6 @@ const Toast: React.FC<IToast> = React.memo((props) => {
         }
     };
 
-    const getToastPositionClass = () => {
-        switch (position) {
-            case TOAST_POSITIONS.TOPLEFT:
-                return classes.toastTopLeft;
-            case TOAST_POSITIONS.TOPCENTER:
-                return classes.toastTopCenter;
-            case TOAST_POSITIONS.TOPRIGHT:
-                return classes.toastTopRight;
-            case TOAST_POSITIONS.BOTTOMRIGHT:
-                return classes.toastBottomRight;
-            case TOAST_POSITIONS.BOTTOMCENTER:
-                return classes.toastBottomCenter;
-            case TOAST_POSITIONS.BOTTOMLEFT:
-            default:
-                return classes.toastBottomLeft;
-        }
-    };
-
     const getToastIcon = () => {
         let ToastIcon = null;
         switch (variant) {
@@ -86,9 +64,7 @@ const Toast: React.FC<IToast> = React.memo((props) => {
 
     return !isEmptyString(label) ? (
         <div
-            className={`${
-                classes.toastContainer
-            } ${getToastBackgroundClass()} ${getToastPositionClass()}`}
+            className={`${classes.toastContainer} ${getToastBackgroundClass()}`}
             style={style}
         >
             {getToastIcon()}
@@ -103,7 +79,6 @@ const Toast: React.FC<IToast> = React.memo((props) => {
 export default Toast;
 
 Toast.defaultProps = {
-    position: TOAST_POSITIONS.BOTTOMLEFT,
     variant: TOAST_VARIANTS.INFO,
     onClose: () => {},
 };

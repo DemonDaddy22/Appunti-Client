@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { ToastContext } from '../../context/ToastContext';
 import {
     BOOKSHELF_SELECT_DEFAULT_OPTION,
     BOOKS_API_URI,
@@ -11,17 +12,17 @@ import { ButtonOutlined } from '../../ui-components/Button';
 import Loader from '../../ui-components/Loader';
 import Select from '../../ui-components/Select';
 import Tag from '../../ui-components/Tag';
-import Toast from '../../ui-components/Toast';
 import { isEmptyObject, isEmptyString } from '../../utils';
 import NewBookshelfForm from '../NewBookshelfForm';
 import classes from './styles.module.scss';
 
 const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     const { id, data, epub, pdf } = props;
+    
+    const { addToast } = useContext(ToastContext);
 
     const [loading, setLoading] = useState<boolean>(false);
     const [foundBook, setFoundBook] = useState<any>(null);
-    const [toastData, setToastData] = useState<IToastData>({});
     const [bookshelfOptions, setBookshelfOptions] = useState<
         Array<ISelectOption>
     >([BOOKSHELF_SELECT_DEFAULT_OPTION]);
@@ -107,13 +108,13 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                 if (!isEmptyObject(response?.data?.error)) {
                     throw new Error(response.data.error?.message);
                 }
-                setToastData({
+                addToast({
                     label: 'Successfully added the book',
                     variant: TOAST_VARIANTS.SUCCESS,
                 });
                 setFoundBook(response?.data?.data?.book);
             } catch (error) {
-                setToastData({
+                addToast({
                     label: error.message,
                     variant: TOAST_VARIANTS.ERROR,
                 });
@@ -143,8 +144,6 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
         setBookshelfOption(null);
         setBookshelfLabel('');
     }, []);
-
-    const handleToastClose = () => setToastData({});
 
     return (
         <>
@@ -249,9 +248,6 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                     </div>
                 </div>
             </div>
-            {!isEmptyObject(toastData) && (
-                <Toast onClose={handleToastClose} {...toastData} />
-            )}
         </>
     );
 };

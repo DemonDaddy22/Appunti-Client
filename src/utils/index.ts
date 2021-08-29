@@ -213,3 +213,14 @@ export const throttle = (cb: Function, delay: number = 200, ...args: any[]) => {
 };
 
 // TODO - create a debounce util as well
+
+/**
+ *
+ * @function generateRandomID - Generates random ID using timestamp
+ * @param {number} offset
+ * @returns `number` randomly generated ID
+ *
+ */
+export const generateRandomID = (offset: number = 1000000): number =>
+    Math.floor(Math.random() * new Date().getTime()) +
+    Math.floor(Math.random() * offset);

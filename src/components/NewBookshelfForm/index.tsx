@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import { ToastContext } from '../../context/ToastContext';
 import { RED_500, RED_700 } from '../../resources/colors';
 import { BOOKS_API_URI, TOAST_VARIANTS } from '../../resources/constants';
 import Button, { ButtonOutlined } from '../../ui-components/Button';
 import Input from '../../ui-components/Input';
 import Label from '../../ui-components/Label';
-import Toast from '../../ui-components/Toast';
 import { isEmptyObject, isEmptyString } from '../../utils';
 import classes from './styles.module.scss';
 
@@ -18,12 +18,12 @@ import classes from './styles.module.scss';
 const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
     const { foundBook, handleCancel, handleSubmit, handleAddBook } = props;
 
+    const { addToast } = useContext(ToastContext);
     const { getThemedValue } = useContext(ThemeContext);
 
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [imageUrl, setImageUrl] = useState<string>('');
-    const [toastData, setToastData] = useState<IToastData>({});
     const [loading, setLoading] = useState<boolean>(false);
     const [makeAPICall, setMakeAPICall] = useState<boolean>(false);
 
@@ -34,18 +34,19 @@ const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
 
     const handleImageUrlChange = (value: any) => setImageUrl(value);
 
-    const handleToastClose = () => setToastData({});
+    const handleCancelClick = useCallback((e: React.MouseEvent | React.KeyboardEvent) => {
+        handleCancel();
+        e.stopPropagation();
+    }, [handleCancel]);
 
-    const handleCancelClick = useCallback(handleCancel, [handleCancel]);
-
-    const handleSubmitClick = useCallback(async () => {
+    const handleSubmitClick = useCallback(async (e: React.MouseEvent | React.KeyboardEvent) => {
         if (isEmptyObject(foundBook)) await handleAddBook();
         setMakeAPICall(true);
+        e.stopPropagation();
     }, [foundBook, handleAddBook]);
 
     useEffect(() => {
         if (makeAPICall && !isEmptyObject(foundBook)) {
-            console.log(foundBook);
             const createNewBookshelf = async () => {
                 setLoading(true);
                 try {
@@ -58,13 +59,13 @@ const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
                     if (!isEmptyObject(bookshelfResponse?.data?.error)) {
                         throw new Error(bookshelfResponse.data.error?.message);
                     }
-                    setToastData({
+                    addToast({
                         label: 'Successfully created new bookshelf',
                         variant: TOAST_VARIANTS.SUCCESS,
                     });
                     handleSubmit(bookshelfResponse?.data?.data?.bookshelf);
                 } catch (error) {
-                    setToastData({
+                    addToast({
                         label: error.message,
                         variant: TOAST_VARIANTS.ERROR,
                     });
@@ -131,9 +132,6 @@ const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
                     </ButtonOutlined>
                 </div>
             </div>
-            {!isEmptyObject(toastData) && (
-                <Toast onClose={handleToastClose} {...toastData} />
-            )}
         </>
     );
 };

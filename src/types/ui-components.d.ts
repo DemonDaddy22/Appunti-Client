@@ -478,21 +478,6 @@ interface IToast extends IStyle {
 
     /**
      *
-     * @field `position` - specifies the toast position
-     * @default 'bottom-left'
-     *
-     */
-    position?:
-        | 'top-left'
-        | 'top-center'
-        | 'top-right'
-        | 'bottom-left'
-        | 'bottom-center'
-        | 'bottom-right'
-        | string;
-
-    /**
-     *
      * @field `variant` - specifies the toast variant
      * @default 'info'
      *
