@@ -11,7 +11,7 @@ import Label from '../../ui-components/Label';
 import { isEmptyObject, isEmptyString } from '../../utils';
 import classes from './styles.module.scss';
 
-// TODO - check if name already exists and not equal to default option
+// TODO - check if name already exists and not equal to default option (handled at backend, check once)
 // TODO - on submit, if successful set new bookshelf as option in dropdown
 // TODO - add cancel function logic, on cancel clear dropdown
 // TODO - create a file picker component
@@ -23,7 +23,7 @@ const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
 
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-    const [imageUrl, setImageUrl] = useState<string>('');
+    const [coverImageLink, setCoverImageLink] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
     const [makeAPICall, setMakeAPICall] = useState<boolean>(false);
 
@@ -32,17 +32,19 @@ const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
     const handleDescriptionChange = (value: any) =>
         setDescription(value);
 
-    const handleImageUrlChange = (value: any) => setImageUrl(value);
+    const handleImageUrlChange = (value: any) => setCoverImageLink(value);
 
     const handleCancelClick = useCallback((e: React.MouseEvent | React.KeyboardEvent) => {
-        handleCancel();
         e.stopPropagation();
+        e.preventDefault();
+        handleCancel();
     }, [handleCancel]);
 
     const handleSubmitClick = useCallback(async (e: React.MouseEvent | React.KeyboardEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
         if (isEmptyObject(foundBook)) await handleAddBook();
         setMakeAPICall(true);
-        e.stopPropagation();
     }, [foundBook, handleAddBook]);
 
     useEffect(() => {
@@ -53,7 +55,7 @@ const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
                     const bookshelfResponse = await axios.post(`${BOOKS_API_URI}/bookshelf/add`, {
                         title,
                         description,
-                        imageUrl,
+                        coverImageLink,
                         bookIds: [foundBook?._id],
                     });
                     if (!isEmptyObject(bookshelfResponse?.data?.error)) {
@@ -75,7 +77,7 @@ const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
             };
             createNewBookshelf();
         }
-    }, [title, description, imageUrl, foundBook, makeAPICall]);
+    }, [title, description, coverImageLink, foundBook, makeAPICall]);
 
     return (
         <>
@@ -108,7 +110,7 @@ const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
                         <Input
                             name="cover"
                             placeholder="Enter image URL..."
-                            value={imageUrl}
+                            value={coverImageLink}
                             onChange={handleImageUrlChange}
                             containerStyle={{ minWidth: '10rem' }}
                         />

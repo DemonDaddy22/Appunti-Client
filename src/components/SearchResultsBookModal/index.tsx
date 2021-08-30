@@ -16,6 +16,7 @@ import { isEmptyObject, isEmptyString } from '../../utils';
 import NewBookshelfForm from '../NewBookshelfForm';
 import classes from './styles.module.scss';
 
+// TODO - create function to update bookshelves on Add Book button
 const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     const { id, data, epub, pdf } = props;
     
@@ -69,7 +70,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                         return !isEmptyObject(bookshelf)
                             ? [...accu, {
                                 label: bookshelf.title,
-                                value: bookshelf.title,
+                                value: bookshelf.uid,
                             }]
                             : accu;
                     }, []) || [];
@@ -130,20 +131,24 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
         (option) => {
             if (option !== bookshelfOption) {
                 setBookshelfOption(option);
-                handleSelectInputChange(option?.label);
+                handleSelectInputChange(option?.label || '');
             }
         },
         [handleSelectInputChange, bookshelfOption]
     );
 
-    const handleNewBookshelfFormSubmit = useCallback((options: any) => {
-        console.log(options);
-    }, []);
-
-    const handleNewBookshelfFormCancel = useCallback(() => {
-        setBookshelfOption(null);
-        setBookshelfLabel('');
-    }, []);
+    const handleNewBookshelfFormSubmit = useCallback((bookshelf: any) => {
+        if (!isEmptyObject(bookshelf)) {
+            const bookshelfOption: ISelectOption = { label: bookshelf.title, value: bookshelf.uid };
+            handleOptionSelect(bookshelfOption);
+            setBookshelfOptions(prevOptions => [bookshelfOption, ...prevOptions]);
+        } else {
+            addToast({
+                label: 'Something went wrong, please try again',
+                variant: TOAST_VARIANTS.ERROR,
+            });
+        }
+    }, [handleOptionSelect]);
 
     return (
         <>
@@ -197,7 +202,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                     {bookshelfOption === BOOKSHELF_SELECT_DEFAULT_OPTION ? (
                         <NewBookshelfForm
                             foundBook={foundBook}
-                            handleCancel={handleNewBookshelfFormCancel}
+                            handleCancel={() => handleOptionSelect(null)}
                             handleSubmit={handleNewBookshelfFormSubmit}
                             handleAddBook={handleAddBook}
                         />
@@ -253,5 +258,3 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
 };
 
 export default SearchResultsBookModal;
-
-// add support for multiple toasts
