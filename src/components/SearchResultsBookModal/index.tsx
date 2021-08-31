@@ -123,6 +123,28 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
         }
     }, [foundBook, id, data, epub, pdf]);
 
+    const handleAddBookToBookshelf = useCallback(async () => {
+        if (!foundBook) await handleAddBook();
+        // TODO - move to useEffect
+        try {
+            const response = await axios.patch(
+                    `${BOOKS_API_URI}/bookshelf/update`,
+                    { books: [foundBook] },
+                    { params: { uid: bookshelfOption?.value } },
+            );
+            const data: IGenericApiResponse = response.data;
+            console.log(data);
+            if (!isEmptyObject(data?.error)) {
+                throw new Error(data.error?.message);
+            }
+        } catch (error) {
+            addToast({
+                label: error.message,
+                variant: TOAST_VARIANTS.ERROR,
+            });
+        }
+    }, [foundBook, handleAddBook, bookshelfOption]);
+
     const handleSelectInputChange = useCallback((value) => {
         setBookshelfLabel(!isEmptyString(value) ? value : '');
     }, []);
@@ -192,7 +214,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                         {bookshelfOption !== BOOKSHELF_SELECT_DEFAULT_OPTION ? (
                             <ButtonOutlined
                                 disabled={loading}
-                                onClick={() => {}}
+                                onClick={handleAddBookToBookshelf}
                                 style={{ width: 'fit-content' }}
                             >
                                 Add Book
