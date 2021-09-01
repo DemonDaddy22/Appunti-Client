@@ -30,6 +30,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     const [bookshelfOption, setBookshelfOption] =
         useState<ISelectOption | null>(null);
     const [bookshelfLabel, setBookshelfLabel] = useState<string>('');
+    const [updateBookshelf, setUpdateBookshelf] = useState<boolean>(false);
 
     useEffect(() => {
         const findBook = async () => {
@@ -82,6 +83,35 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
         getBookshelves();
     }, []);
 
+    useEffect(() => {
+        if (updateBookshelf) {
+            const makeUpdateBookshelfCall = async () => {
+                try {
+                    const response = await axios.patch(
+                            `${BOOKS_API_URI}/bookshelf/update`,
+                            { books: [foundBook] },
+                            { params: { uid: bookshelfOption?.value } },
+                    );
+                    const data: IGenericApiResponse = response.data;
+                    if (!isEmptyObject(data?.error)) {
+                        throw new Error(data.error?.message);
+                    }
+                    addToast({
+                        label: 'Successfully updated the bookshelf',
+                        variant: TOAST_VARIANTS.SUCCESS,
+                    });
+                } catch (error) {
+                    addToast({
+                        label: error.message,
+                        variant: TOAST_VARIANTS.ERROR,
+                    });
+                }
+                setUpdateBookshelf(false);
+            };
+            makeUpdateBookshelfCall();
+        }
+    }, [updateBookshelf]);
+
     const handleAddBook = useCallback(async () => {
         if (
             isEmptyObject(foundBook) &&
@@ -125,25 +155,8 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
 
     const handleAddBookToBookshelf = useCallback(async () => {
         if (!foundBook) await handleAddBook();
-        // TODO - move to useEffect
-        try {
-            const response = await axios.patch(
-                    `${BOOKS_API_URI}/bookshelf/update`,
-                    { books: [foundBook] },
-                    { params: { uid: bookshelfOption?.value } },
-            );
-            const data: IGenericApiResponse = response.data;
-            console.log(data);
-            if (!isEmptyObject(data?.error)) {
-                throw new Error(data.error?.message);
-            }
-        } catch (error) {
-            addToast({
-                label: error.message,
-                variant: TOAST_VARIANTS.ERROR,
-            });
-        }
-    }, [foundBook, handleAddBook, bookshelfOption]);
+        setUpdateBookshelf(true);
+    }, [foundBook, handleAddBook]);
 
     const handleSelectInputChange = useCallback((value) => {
         setBookshelfLabel(!isEmptyString(value) ? value : '');
