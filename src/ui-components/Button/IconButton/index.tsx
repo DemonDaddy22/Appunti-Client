@@ -3,7 +3,7 @@ import { ThemeContext } from '../../../context/ThemeContext';
 import StyledIconButton from './styles';
 
 const IconButton: React.FC<IIconButton> = (props) => {
-    const { children, onClick, disabled, showRipple, style } = props;
+    const { children, onClick, disabled, showRipple, style, transform } = props;
 
     const { theme } = useContext(ThemeContext);
 
@@ -14,6 +14,7 @@ const IconButton: React.FC<IIconButton> = (props) => {
             disabled={disabled}
             onClick={!disabled ? onClick : () => {}}
             showRipple={showRipple}
+            transform={transform}
         >
             {children}
         </StyledIconButton>
@@ -27,4 +28,5 @@ IconButton.defaultProps = {
     onClick: () => {},
     showRipple: true,
     style: {},
+    transform: null,
 };

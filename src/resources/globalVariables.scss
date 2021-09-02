@@ -2,10 +2,20 @@ $black: #000;
 $dark: #0F141F;
 $light: #F4F4F4;
 $white: #FFF;
+$toast: (
+    Success: #34B334,
+    Error: #BC2D29,
+    Warning: #D38D1D,
+    Info: #3377CC,
+);
+
 $transitionDuration: 0.25s;
+$zIndexModalBackdrop: 9999;
+$zIndexModal: $zIndexModalBackdrop + 1;
 
 $lightTheme: (
-    background: '#F7F7F7',
+    background: '#F0F0F0',
+    backgroundModal: '#FFFFFF',
     borderColor: '#D0D0D0',
     text: '#101010',
     textContrastLight: '#606060',
@@ -21,6 +31,7 @@ $lightTheme: (
 
 $darkTheme: (
     background: '#0F141F',
+    backgroundModal: '#1A2336',
     borderColor: '#3A4460',
     text: '#F0F0F0',
     textContrastLight: '#65739C',

@@ -27,6 +27,34 @@ export const MAX_RESULTS_OPTIONS: Array<ISelectOption> = [
     },
 ];
 
-export const NAVBAR_SCROLL_BREAKPOINT_HEIGHT = 80;
+export const NAVBAR_SCROLL_BREAKPOINT_HEIGHT: number = 80;
 
-export const DEFAULT_DASH_COUNT = 4;
+export const DEFAULT_DASH_COUNT: number = 4;
+
+export const MAX_DASH_COUNT: number = 100;
+
+export const TOAST_DURATION: number = 3000;
+
+export const PLACEHOLDER_IMAGE_URL: string =
+    'https://res.cloudinary.com/yelp-camp/image/upload/v1624193684/BookPlaceholder.jpg';
+
+export const TOAST_VARIANTS: IToastVariants = Object.freeze({
+    SUCCESS: 'success',
+    ERROR: 'error',
+    WARNING: 'warning',
+    INFO: 'info',
+});
+
+export const TOAST_POSITIONS: IToastPositions = Object.freeze({
+    TOPLEFT: 'top-left',
+    TOPCENTER: 'top-center',
+    TOPRIGHT: 'top-right',
+    BOTTOMLEFT: 'bottom-left',
+    BOTTOMCENTER: 'bottom-center',
+    BOTTOMRIGHT: 'bottom-right',
+});
+
+export const BOOKSHELF_SELECT_DEFAULT_OPTION: ISelectOption = Object.freeze({
+    label: 'Create new bookshelf',
+    value: 'Create new bookshelf',
+});

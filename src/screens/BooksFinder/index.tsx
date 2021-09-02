@@ -10,6 +10,7 @@ import Label from '../../ui-components/Label';
 import classes from './styles.module.scss';
 import { isEmptyString } from '../../utils';
 import Loader from '../../ui-components/Loader';
+import axios from 'axios';
 
 const BooksFinder: React.FC<{}> = () => {
     const [query, setQuery] = useState<string>('');
@@ -34,10 +35,10 @@ const BooksFinder: React.FC<{}> = () => {
         setLoading(true);
         const { q, startIndex, maxResults } = queryParams;
         try {
-            const res = await fetch(
+            const response = await axios.get(
                 `${BOOKS_API_URI}/search?q=${q}&maxResults=${maxResults}&start=${startIndex}`
             );
-            const data: IBookSearchResponse = await res.json();
+            const data: IBookSearchResponse = response.data;
             let fetchedBooks: IBookSearchData = data.data || {};
             setBooks(fetchedBooks);
         } catch (err) {
@@ -57,11 +58,12 @@ const BooksFinder: React.FC<{}> = () => {
             ...prevQueryParams,
             startIndex: 0,
         }));
+        // BUG - startIndex doesn't set as 0 for api call
         setFetching(true);
         useAsyncExec(() => {
             setFetching(false);
             setQuery('');
-        });
+        }, 100);
     }, []);
 
     const handlePageChange = useCallback(
@@ -91,7 +93,7 @@ const BooksFinder: React.FC<{}> = () => {
                     maxResults: option.value,
                 }));
                 setMaxResultsOption(option);
-                handleSelectInputChange(option?.value);
+                handleSelectInputChange(option?.label);
                 setFetching(true);
                 useAsyncExec(() => {
                     setFetching(false);

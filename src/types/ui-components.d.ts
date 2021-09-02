@@ -73,7 +73,7 @@ interface IButton extends IColors, IStyle {
      * @returns `void`
      *
      */
-    onClick: () => void;
+    onClick: (...args) => void;
 }
 
 interface IButtonOutlined extends IColor, IStyle {
@@ -97,7 +97,7 @@ interface IButtonOutlined extends IColor, IStyle {
      * @returns `void`
      *
      */
-    onClick: () => void;
+    onClick: (...args) => void;
 }
 
 interface IPagination extends IStyle {
@@ -189,7 +189,7 @@ interface ISelectOption {
      * @field `value` - specifies the actual value to be used for further processing
      *
      */
-    value: number;
+    value: any;
 }
 
 interface ISelect extends IColors {
@@ -300,6 +300,13 @@ interface ILabel extends IColor, IStyle {
      *
      */
     label: string;
+
+    /**
+     *
+     * @field `required` - specifies whether to add an asterick to label
+     *
+     */
+    required?: boolean;
 }
 
 interface ILoader extends IColor, IStyle {
@@ -332,7 +339,7 @@ interface IIconButton extends IStyle {
      * @returns `void`
      *
      */
-    onClick: () => void;
+    onClick: (...args) => void;
 
     /**
      *
@@ -340,6 +347,13 @@ interface IIconButton extends IStyle {
      *
      */
     showRipple?: boolean;
+
+    /**
+     *
+     * @field `transform` - specifies transform style for hover state
+     *
+     */
+    transform?: string | null;
 }
 
 interface IDivider extends IStyle {
@@ -371,4 +385,110 @@ interface IDivider extends IStyle {
      *
      */
     className?: string;
+}
+
+interface IModal {
+    /**
+     *
+     * @field `open` - specifies whether modal is open
+     *
+     */
+    open: boolean;
+
+    /**
+     *
+     * @field `closeOnBackdropClick` - specifies whether to close the modal on clicking backdrop
+     *
+     */
+    closeOnBackdropClick?: boolean;
+
+    /**
+     *
+     * @function onClose - function to trigger when the modal is to be closed
+     * @returns `void`
+     *
+     */
+    onClose: (...args) => void;
+
+    /**
+     *
+     * @field `header` - specifies modal header
+     */
+    header: string;
+
+    /**
+     *
+     * @field `children` - specifies the content of modal
+     *
+     */
+    children: React.ReactNode;
+
+    /**
+     *
+     * @field `backdropStyle` - specifies styles to override default backdrop style
+     *
+     */
+    backdropStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `containerStyle` - specifies styles to override default modal container style
+     *
+     */
+    containerStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `contentStyle` - specifies styles to override default content wrapper style
+     *
+     */
+    contentStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `headerStyle` - specifies styles to override default header style
+     *
+     */
+    headerStyle?: React.CSSProperties;
+
+    /**
+     *
+     * @field `iconStyle` - specifies styles to override default close button style
+     *
+     */
+    iconStyle?: React.CSSProperties;
+}
+
+interface ITag extends IStyle, IColor, IBackgroundColor {
+    /**
+     *
+     * @field `label` - specifies the tag label
+     *
+     */
+    label: string;
+}
+
+interface IToast extends IStyle {
+    /**
+     *
+     * @field `label` - specifies the toast label
+     *
+     */
+    label?: string;
+
+    /**
+     *
+     * @field `variant` - specifies the toast variant
+     * @default 'info'
+     *
+     */
+    variant?: 'success' | 'error' | 'warning' | 'info' | string;
+
+    /**
+     *
+     * @function onClose - function to trigger when the toast is to be closed
+     * @returns `void`
+     *
+     */
+    onClose: (...args) => void;
 }

@@ -9,6 +9,7 @@ interface IBookSearchData {
 interface IBookSearchResponse {
     data: IBookSearchData;
     status: number;
+    error: any;
 }
 
 interface IBooksAPIParams {

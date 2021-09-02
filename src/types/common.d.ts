@@ -57,3 +57,42 @@ interface IColors {
      */
     backgroundColor?: string;
 }
+
+interface IGenericApiResponse {
+    /**
+     *
+     * @field `data` - specifies API response data
+     *
+     */
+    data: any;
+
+    /**
+     *
+     * @field `status` - specifies API response status
+     *
+     */
+    status: number;
+
+    /**
+     *
+     * @field `error` - specifies API response error
+     *
+     */
+    error: any;
+}
+
+interface IToastData {
+    /**
+     *
+     * @field `label` - specifies the toast label
+     *
+     */
+    label?: string;
+
+    /**
+     *
+     * @field `variant` - specifies variant of the toast
+     *
+     */
+    variant?: string;
+}

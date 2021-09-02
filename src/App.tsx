@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './App.scss';
 import Navbar from './components/Navbar';
 import ThemeContextProvider from './context/ThemeContext';
+import ToastContextProvider from './context/ToastContext';
 import BooksFinder from './screens/BooksFinder';
 import { throttle } from './utils';
 
@@ -29,13 +30,15 @@ const App: React.FC<{}> = () => {
 
     return (
         <ThemeContextProvider>
-            <div
-                className="App"
-                style={{ paddingTop: (navbarHeight || 0) + 4 }}
-            >
-                <Navbar navbarRef={navbarRef} />
-                <BooksFinder />
-            </div>
+            <ToastContextProvider>
+                <div
+                    className="App"
+                    style={{ paddingTop: (navbarHeight || 0) + 4 }}
+                >
+                    <Navbar navbarRef={navbarRef} />
+                    <BooksFinder />
+                </div>
+            </ToastContextProvider>
         </ThemeContextProvider>
     );
 };

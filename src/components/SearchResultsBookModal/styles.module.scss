@@ -1,0 +1,116 @@
+@import '../../resources/globalStyles.scss';
+@import '../../resources/globalVariables.scss';
+
+.contentContainer {
+    @include flex($gap: 1.25rem, $flexDirection: column);
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
+
+    & .column {
+        @include flex($flexDirection: column, $gap: 0.25rem);
+        text-align: left;
+
+        &:first-child {
+            margin: 0 auto;
+            max-width: 20rem;
+            width: 50%;
+        }
+
+        @media (min-width: 768px) {
+            width: 75%;
+
+            &:first-child {
+                width: 25%;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            gap: 0.5rem;
+            width: 85%;
+
+            &:first-child {
+                width: 15%;
+            }
+        }
+    }
+
+    & .imagePlaceholder {
+        height: 100%;
+        overflow: hidden;
+        width: 100%;
+
+        & img {
+            height: inherit;
+            width: inherit;
+        }
+    }
+
+    & .image {
+        width: 100%;
+        height: auto;
+    }
+
+    & .subtitle {
+        @include theme(color, themeSecondary, $transition: $transitionDuration);
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+    }
+
+    & .authors {
+        @include theme(color, textIntense, $transition: $transitionDuration);
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: -0.25px;
+        margin-bottom: 1rem;
+    }
+
+    & .bookshelfSelectWrapper {
+        @include flex($gap: 1rem);
+    }
+
+    & .infoContainer {
+        @include grid($gap: 1rem, $gridTemplateColumns: 1fr 1fr);
+        @include spacing($margin: 1rem 0, $padding: 1rem);
+        @include theme(background-color, background, $transition: $transitionDuration);
+        border-radius: 4px;
+
+        @media (min-width: 1024px) {
+            gap: 2rem;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            width: fit-content;
+        }
+
+        & .infoCell {
+            @include flex($flexDirection: column, $gap: 0.4rem);
+        }
+
+        & .infoHeading {
+            @include theme(color, textContrastLight, $transition: $transitionDuration);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: -0.25px;
+        }
+
+        & .infoContent {
+            @include flex($gap: 0.5rem, $flexWrap: wrap);
+            @include theme(color, textIntense, $transition: $transitionDuration);
+            font-size: 1rem;
+            letter-spacing: -0.1px;
+        }
+    }
+
+    & .description {
+        @include theme(color, text, $transition: $transitionDuration);
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        line-height: 1.25rem;
+    }
+}
+
+.loaderWrapper {
+    @include position($position: fixed, $top: 50%, $left: 50%, $transform: translate(-50%, -50%));
+    z-index: 11000;
+}

@@ -1,0 +1,76 @@
+@import '../../resources/globalStyles.scss';
+@import '../../resources/globalVariables.scss';
+
+.modalBackdrop {
+    @include position($position: fixed, $top: 0, $left: 0);
+    @include flex($alignItems: center, $justifyContent: center);
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    overflow: hidden;
+    width: 100vw;
+    z-index: $zIndexModalBackdrop;
+
+    @media (min-width: 1024px) {
+        padding: 4rem;
+    }
+
+    @media (min-width: 1500px) {
+        padding: 8rem;
+    }
+}
+
+.modalContainer {
+    @include theme($property: background-color, $key: backgroundModal, $transition: $transitionDuration);
+    height: inherit;
+    overflow: inherit;
+    width: inherit;
+    z-index: $zIndexModal;
+
+    @media (min-width: 1024px) {
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-height: 100%;
+    }
+}
+
+.modalHeaderContainer {
+    @include flex($alignItems: center, $justifyContent: space-between, $gap: 0.5rem);
+    @include spacing($padding: 0.75rem 0.6rem);
+}
+
+.modalHeader {
+    @include theme($property: color, $key: textIntense, $transition: $transitionDuration);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+
+    @media (min-width: 1024px) {
+        font-size: 1.5rem;
+    }
+
+    @media (min-width: 1500px) {
+        font-size: 1.75rem;
+    }
+}
+
+.modalContent {
+    @include spacing($padding: 0.75rem 0.6rem);
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.modalHeaderContainer,
+.modalContent {
+    @media (min-width: 1024px) {
+        padding: 1rem 0.9rem;
+    }
+
+    @media (min-width: 1500px) {
+        padding: 1rem 1.25rem;
+    }
+}
+
+.overflowHidden {
+    overflow: hidden !important;
+}

@@ -3,7 +3,6 @@
 interface IContext {
     /**
      *
-     * @interface IContext
      * @field `children` - specifies valid React node element(s)
      *
      */
@@ -13,7 +12,6 @@ interface IContext {
 interface IThemeContextValue {
     /**
      *
-     * @interface IThemeContextValue
      * @field `isLightTheme` - specifies whether light theme is active or not
      *
      */
@@ -21,7 +19,6 @@ interface IThemeContextValue {
 
     /**
      *
-     * @interface IThemeContextValue
      * @field `theme` - specifies `ITheme` object
      *
      */
@@ -29,16 +26,14 @@ interface IThemeContextValue {
 
     /**
      *
-     * @interface IThemeContextValue
      * @function toggleTheme - function to toggle app theme
      * @returns `void`
      *
      */
-    toggleTheme: () => void;
+    toggleTheme: (...args: any[]) => void;
 
     /**
      *
-     * @interface IThemeContextValue
      * @function getThemedValue - function which returns a value based on current theme
      * @param {string} lightValue - specifies value to be used for light theme
      * @param {string} darkValue - specifies value to be used for dark theme
@@ -46,4 +41,45 @@ interface IThemeContextValue {
      *
      */
     getThemedValue: (lightValue: string, darkValue: string) => string;
+}
+
+interface IToastContextValue {
+    /**
+     *
+     * @field `toasts` - specifies the list of toasts to be rendered
+     *
+     */
+    toasts: Array<IToastValue>;
+
+    /**
+     *
+     * @function addToast - function to add new toast to toasts list
+     * @returns `void`
+     *
+     */
+    addToast: (...args: any[]) => void;
+
+    /**
+     *
+     * @function deleteToast - function to delete toast from toasts list
+     * @returns `void`
+     *
+     */
+    deleteToast: (...args: any[]) => void;
+}
+
+interface IToastValue {
+    /**
+     *
+     * @field `id` - specifies unique id of toast
+     *
+     */
+    id: number;
+
+    /**
+     *
+     * @field `toast` - specifies necessary data for toast
+     *
+     */
+    toast: IToast;
 }

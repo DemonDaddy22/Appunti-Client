@@ -10,6 +10,13 @@ interface ITheme {
 
     /**
      *
+     * @field {string} `backgroundModal` - specifies background color of modal
+     *
+     */
+    backgroundModal: string;
+
+    /**
+     *
      * @field {string} `borderColor` - specifies background accent color
      *
      */

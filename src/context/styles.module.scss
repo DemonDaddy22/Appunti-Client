@@ -1,0 +1,40 @@
+@import '../resources/globalStyles.scss';
+@import '../resources/globalVariables.scss';
+
+.toastsContainer {
+    @include flex($flexDirection: column, $gap: 0.75rem);
+    position: fixed;
+    z-index: $zIndexModal + 10;
+}
+
+.toastTopLeft {
+    top: 1rem;
+    left: 1rem;
+}
+
+.toastTopCenter {
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.toastTopRight {
+    top: 1rem;
+    right: 1rem;
+}
+
+.toastBottomLeft {
+    bottom: 1rem;
+    left: 1rem;
+}
+
+.toastBottomCenter {
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.toastBottomRight {
+    bottom: 1rem;
+    right: 1rem;
+}
