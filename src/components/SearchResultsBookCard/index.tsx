@@ -15,7 +15,7 @@ const SearchResultsBookCard: React.FC<ISearchResultsBookCard> = (props) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const handleModalOpen = useCallback(() => setIsModalOpen(true), []);
-    
+
     const handleModalClose = useCallback(() => setIsModalOpen(false), []);
 
     return !isEmptyObject(data) ? (
