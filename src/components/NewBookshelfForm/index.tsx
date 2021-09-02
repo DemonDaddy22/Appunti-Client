@@ -11,9 +11,6 @@ import Label from '../../ui-components/Label';
 import { isEmptyObject, isEmptyString } from '../../utils';
 import classes from './styles.module.scss';
 
-// TODO - check if name already exists and not equal to default option (handled at backend, check once)
-// TODO - on submit, if successful set new bookshelf as option in dropdown
-// TODO - add cancel function logic, on cancel clear dropdown
 // TODO - create a file picker component
 const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
     const { foundBook, handleCancel, handleSubmit, handleAddBook } = props;

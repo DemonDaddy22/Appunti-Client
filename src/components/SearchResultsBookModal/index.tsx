@@ -16,7 +16,6 @@ import { isEmptyObject, isEmptyString } from '../../utils';
 import NewBookshelfForm from '../NewBookshelfForm';
 import classes from './styles.module.scss';
 
-// TODO - create function to update bookshelves on Add Book button
 const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     const { id, data, epub, pdf } = props;
     
