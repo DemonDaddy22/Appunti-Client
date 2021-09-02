@@ -18,7 +18,7 @@ import classes from './styles.module.scss';
 
 const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     const { id, data, epub, pdf } = props;
-    
+
     const { addToast } = useContext(ToastContext);
 
     const [loading, setLoading] = useState<boolean>(false);
