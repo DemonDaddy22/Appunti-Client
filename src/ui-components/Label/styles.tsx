@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const StyledLabel = styled.div`
     color: ${(props: IColor) => props.color};
+    display: flex;
     font-size: 0.8rem;
     letter-spacing: -0.5px;
     text-align: initial;
