@@ -26,8 +26,7 @@ jobs:
               with:
                 vercel-token: ${{ secrets.VERCEL_TOKEN }}
                 github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-                vercel-args: '--prod'
                 vercel-org-id: ${{ secrets.ORG_ID}}
                 vercel-project-id: ${{ secrets.PROJECT_ID}}
+                vercel-args: '--prod'
                 vercel-project-name: appunti
-                working-directory: ./build
