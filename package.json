@@ -1,7 +1,7 @@
 {
     "name": "appunti-client",
     "version": "0.1.0",
-    "homepage": "https://appunti-demondaddy22.vercel.app/",
+    "homepage": "https://appunti.vercel.app/",
     "private": true,
     "dependencies": {
         "@testing-library/jest-dom": "^5.12.0",
