@@ -17,6 +17,10 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: ${{ matrix.node-version }}
+            - name: Install the Dependencies
+              run: npm install
+            - name: Build the Project
+              run: npm run build
             - name: Deploy to Vercel
               uses: amondnet/vercel-action@v20
               with:
@@ -26,4 +30,4 @@ jobs:
                 vercel-org-id: ${{ secrets.ORG_ID}}
                 vercel-project-id: ${{ secrets.PROJECT_ID}}
                 vercel-project-name: appunti
-                working-directory: ./
+                working-directory: build
