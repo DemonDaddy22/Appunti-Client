@@ -100,8 +100,9 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                         variant: TOAST_VARIANTS.SUCCESS,
                     });
                 } catch (error) {
+                    const err: any = error;
                     addToast({
-                        label: error.message,
+                        label: err?.message,
                         variant: TOAST_VARIANTS.ERROR,
                     });
                 }
@@ -144,8 +145,9 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                 });
                 setFoundBook(response?.data?.data?.book);
             } catch (error) {
+                const err: any = error;
                 addToast({
-                    label: error.message,
+                    label: err?.message,
                     variant: TOAST_VARIANTS.ERROR,
                 });
             }
