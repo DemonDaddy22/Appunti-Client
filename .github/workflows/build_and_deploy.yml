@@ -19,10 +19,6 @@ jobs:
                   node-version: ${{ matrix.node-version }}
             - name: Deploy to Vercel
               uses: amondnet/vercel-action@v20
-              run: |
-                  git config user.email ${{ secrets.EMAIL }}
-                  git config user.name ${{ secrets.USERNAME }}
-                  git remote set-url origin https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/${{ secrets.USERNAME }}/${{ secrets.REPO_NAME }}.git
               with:
                 vercel-token: ${{ secrets.VERCEL_TOKEN }}
                 github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
