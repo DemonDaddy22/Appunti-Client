@@ -64,8 +64,9 @@ const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
                     });
                     handleSubmit(bookshelfResponse?.data?.data?.bookshelf);
                 } catch (error) {
+                    const err: any = error;
                     addToast({
-                        label: error.message,
+                        label: err.message,
                         variant: TOAST_VARIANTS.ERROR,
                     });
                 }
