@@ -7,6 +7,8 @@ export const BOOKS_API_URI: string =
         ? BOOKS_API_URI_DEV
         : BOOKS_API_URI_PROD;
 
+export const HOMEPAGE_PATH: string = '/';
+
 export const THEME: IThemeVariants = Object.freeze({
     LIGHT: 'light',
     DARK: 'dark',

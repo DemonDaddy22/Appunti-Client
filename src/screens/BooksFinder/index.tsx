@@ -11,8 +11,16 @@ import classes from './styles.module.scss';
 import { isEmptyString } from '../../utils';
 import Loader from '../../ui-components/Loader';
 import axios from 'axios';
+import {
+    IBooksAPIParams,
+    IBookSearchData,
+    IBookSearchResponse,
+    IRouterProps,
+} from '../../types/screens';
 
-const BooksFinder: React.FC<{}> = () => {
+interface IProps extends IRouterProps {}
+
+const BooksFinder: React.FC<IProps> = () => {
     const [query, setQuery] = useState<string>('');
     const [pageIndex, setPageIndex] = useState<number>(1);
     const [maxResultsOption, setMaxResultsOption] = useState<ISelectOption>(
@@ -41,7 +49,8 @@ const BooksFinder: React.FC<{}> = () => {
             const data: IBookSearchResponse = response.data;
             let fetchedBooks: IBookSearchData = data.data || {};
             setBooks(fetchedBooks);
-        } catch (err) {
+        } catch (error) {
+            const err: any = error;
             setError(err);
         } finally {
             setLoading(false);

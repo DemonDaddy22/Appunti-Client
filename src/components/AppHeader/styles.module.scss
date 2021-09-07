@@ -3,6 +3,7 @@
 
 .headerContainer {
     @include flex($alignItems: center, $gap: 0.25rem);
+    text-decoration: none;
 
     .header {
         font-size: 1.2rem;
