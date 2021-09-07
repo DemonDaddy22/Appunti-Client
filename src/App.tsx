@@ -1,43 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import './App.scss';
-import Navbar from './components/Navbar';
 import ThemeContextProvider from './context/ThemeContext';
 import ToastContextProvider from './context/ToastContext';
-import BooksFinder from './screens/BooksFinder';
-import { throttle } from './utils';
+import Routes from './routes';
 
 const App: React.FC<{}> = () => {
-    const navbarRef = useRef<HTMLElement | null>(null);
-
-    const [navbarHeight, setNavbarHeight] = useState<number | undefined>(0);
-
-    const handleWindowResize = useCallback(
-        throttle(() => {
-            const navbarOffsetHeight = navbarRef.current?.offsetHeight;
-            if (navbarHeight !== navbarOffsetHeight) {
-                setNavbarHeight(navbarOffsetHeight);
-            }
-        }, 50),
-        [navbarRef.current?.offsetHeight]
-    );
-
-    useEffect(() => setNavbarHeight(navbarRef?.current?.offsetHeight), []);
-
-    useEffect(() => {
-        window.addEventListener('resize', handleWindowResize);
-        return () => window.removeEventListener('resize', handleWindowResize);
-    }, [handleWindowResize]);
-
     return (
         <ThemeContextProvider>
             <ToastContextProvider>
-                <div
-                    className="App"
-                    style={{ paddingTop: (navbarHeight || 0) + 4 }}
-                >
-                    <Navbar navbarRef={navbarRef} />
-                    <BooksFinder />
-                </div>
+                <BrowserRouter>
+                    <Routes />
+                </BrowserRouter>
             </ToastContextProvider>
         </ThemeContextProvider>
     );
