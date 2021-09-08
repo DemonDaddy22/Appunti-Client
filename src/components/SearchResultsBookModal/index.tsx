@@ -37,7 +37,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                 setLoading(true);
                 try {
                     const response = await axios.get(
-                        `${BOOKS_API_URI}/book/find/gid`,
+                        `${BOOKS_API_URI}/book/find/g`,
                         { params: { gid: id } }
                     );
                     const data: IGenericApiResponse = response.data;

@@ -12,6 +12,7 @@ $toast: (
 $transitionDuration: 0.25s;
 $zIndexModalBackdrop: 9999;
 $zIndexModal: $zIndexModalBackdrop + 1;
+$zIndexLoader: $zIndexModalBackdrop + 100;
 
 $lightTheme: (
     background: '#F0F0F0',

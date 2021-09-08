@@ -15,7 +15,7 @@ export const isEmptyString = (value: string | undefined): boolean =>
  * @returns `boolean` indicating whether `value` is a valid number
  *
  */
-export const isValidNumber = (value: number | string | undefined): boolean =>
+export const isValidNumber = (value: string | number | undefined): boolean =>
     !isNaN(Number(value));
 
 /**
@@ -35,7 +35,7 @@ export const isEmptyList = (obj: Array<any> | undefined): boolean =>
  * @returns `boolean` indicating whether `obj` is an empty object
  *
  */
-export const isEmptyObject = (obj: Object | undefined): boolean =>
+export const isEmptyObject = (obj: any): boolean =>
     !obj ||
     typeof obj !== 'object' ||
     Array.isArray(obj) ||
