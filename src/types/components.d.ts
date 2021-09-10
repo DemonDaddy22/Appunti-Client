@@ -31,3 +31,23 @@ interface INewBookshelfForm {
     handleAddBook: (...args: any[]) => Promise<void>;
     foundBook: any;
 }
+
+interface IBook {
+    _id: string;
+    uid: string;
+    gid: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    publishedDate: string;
+    pageCount: number;
+    rating: number;
+    ratingsCount: number;
+    language: string;
+    imageLink: string;
+    epub: any;
+    pdf: any;
+    industryIdentifiers: Array<any>;
+    authors: Array<string>;
+    categories: Array<string>;
+}

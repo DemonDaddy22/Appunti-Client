@@ -4,6 +4,7 @@
 import axios from 'axios';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import BookCard from '../../components/BookCard';
 import { ToastContext } from '../../context/ToastContext';
 import {
     BOOKS_API_URI,
@@ -97,7 +98,16 @@ const BookshelfScreen: React.FC<IBookshelfScreen> = (props) => {
                     </div>
                     <Divider style={{ margin: '3rem 0' }} />
                     {!isEmptyList(bookshelf?.books) ? (
-                        <div className={classes.booksContainer}></div>
+                        <div className={classes.booksContainer}>
+                            {bookshelf?.books?.map(
+                                (book: IBook, index: number) => (
+                                    <BookCard
+                                        key={book?.uid || `book-card-${index}`}
+                                        {...book}
+                                    />
+                                )
+                            )}
+                        </div>
                     ) : (
                         <div className={classes.noBooksContainer}>
                             <div className={classes.noBooksText}>

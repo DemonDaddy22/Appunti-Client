@@ -50,7 +50,7 @@
                 margin-bottom: 2rem;
             }
         }
-        
+
         .bookshelfDescription {
             @include theme(color, textPrimary, $transition: $transitionDuration);
             font-size: 0.95rem;
@@ -67,6 +67,28 @@
             font-size: 2rem;
             font-weight: 600;
             letter-spacing: -0.5px;
+        }
+    }
+
+    .booksContainer {
+        @include spacing(1rem 0);
+        @include grid($gridTemplateColumns: 1fr);
+
+        @media (min-width: 768px) {
+            gap: 0.25rem;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (min-width: 1024px) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        @media (min-width: 1200px) {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+        
+        @media (min-width: 1500px) {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         }
     }
 }

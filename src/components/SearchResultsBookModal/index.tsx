@@ -204,7 +204,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                     ) : (
                         <div className={classes.imagePlaceholder}>
                             <img
-                                src="https://res.cloudinary.com/yelp-camp/image/upload/v1624193684/BookPlaceholder.jpg"
+                                src={PLACEHOLDER_IMAGE_URL}
                                 alt="no-cover"
                             />
                         </div>
