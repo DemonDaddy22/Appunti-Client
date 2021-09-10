@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 
+import { IBookshelf } from './screens';
+
 interface ISearchResultsContainer extends IStyle {
     data: any[] | undefined;
 }
@@ -50,4 +52,14 @@ interface IBook {
     industryIdentifiers: Array<any>;
     authors: Array<string>;
     categories: Array<string>;
+}
+
+interface IBookshelfInfo {
+    bookshelf: IBookshelf | null;
+}
+
+interface IBookshelfBooksContainer {
+    books?: Array<IBook>;
+    loading: boolean;
+    redirectToFindBooks: (...args: any[]) => void;
 }

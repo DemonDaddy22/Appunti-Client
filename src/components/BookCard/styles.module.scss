@@ -2,11 +2,21 @@
 @import '../../resources/globalVariables.scss';
 
 .bookCard {
+    border-radius: 4px;
+    box-shadow: none;
+    cursor: pointer;
     overflow: hidden;
     position: relative;
-    cursor: pointer;
+    transform: scale(1);
+    transition: box-shadow $transitionDuration, transform $transitionDuration;
 
     &:hover {
+        @media (min-width: 1024px) {
+            box-shadow: 0 0 14px rgba($color: $dark, $alpha: 0.75);
+            transform: scale(1.2);
+            z-index: 10;
+        }
+
         .bookCardContent {
             height: 100%;
             max-height: 100%;
@@ -32,9 +42,21 @@
     }
 
     .bookCardImage {
+        border-radius: inherit;
         height: 100%;
-        max-height: 20rem;
         width: 100%;
+
+        @media (min-width: 768px) {
+            max-height: 30rem;    
+        }
+
+        @media (min-width: 1024) {
+            max-height: 25rem;
+        }
+        
+        @media (min-width: 1200) {
+            max-height: 20rem;
+        }
     }
 
     .bookCardContentHeader,

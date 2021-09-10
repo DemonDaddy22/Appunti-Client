@@ -1,4 +1,5 @@
 import React from 'react';
+import { ISearchResultsContainer } from '../../types/components';
 import { isEmptyList } from '../../utils';
 import SearchResultsBookCard from '../SearchResultsBookCard';
 import classes from './styles.module.scss';

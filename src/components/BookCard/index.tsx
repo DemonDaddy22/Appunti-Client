@@ -1,5 +1,6 @@
 import React from 'react';
 import { PLACEHOLDER_IMAGE_URL } from '../../resources/constants';
+import { IBook } from '../../types/components';
 import { isEmptyString, truncateStringToLength } from '../../utils';
 import classes from './styles.module.scss';
 
@@ -42,7 +43,7 @@ const BookCard: React.FC<IBook> = (props) => {
                             </div>
                         </div>
                     )}
-                    {rating && (
+                    {rating ? (
                         <div className={classes.bookCardContentRow}>
                             <div className={classes.bookCardContentHeader}>
                                 Ratings
@@ -51,7 +52,7 @@ const BookCard: React.FC<IBook> = (props) => {
                                 {rating} ({ratingsCount})
                             </div>
                         </div>
-                    )}
+                    ) : null}
                 </div>
             </div>
         </div>

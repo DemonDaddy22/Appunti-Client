@@ -1,0 +1,36 @@
+@import '../../resources/globalStyles.scss';
+@import '../../resources/globalVariables.scss';
+
+.noBooksContainer {
+    @include flex($flexDirection: column, $alignItems: center, $justifyContent: center, $gap: 1rem);
+    @include spacing($margin: 1rem auto 3rem);
+
+    .noBooksText {
+        @include theme(color, themePrimary, $transition: $transitionDuration);
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+    }
+}
+
+.booksContainer {
+    @include spacing(1rem 0);
+    @include grid($gridTemplateColumns: 1fr);
+
+    @media (min-width: 500px) {
+        gap: 0.25rem;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media (min-width: 1024px) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    
+    @media (min-width: 1500px) {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}
