@@ -1,25 +1,35 @@
-// /bookshelf/:id
-// props.match.params.bookshelfId
-// make an API call to fetch bookshelf for provided ID
-// for now show simple text 'No bookshelf found', if bookshelf is not found
-// afterwards create a error page which lets user create a new bookshelf there and then
+// TODO - test case of no books
+// TODO - add bookshelf to book model
+// TODO - once book gets added to bookshelf, hide the bookshelf dropdown and show the selected bookshelf
 import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { ToastContext } from '../../context/ToastContext';
-import { BOOKS_API_URI, TOAST_VARIANTS } from '../../resources/constants';
+import {
+    BOOKS_API_URI,
+    HOMEPAGE_PATH,
+    PLACEHOLDER_BOOKSHELF_URL,
+    TOAST_VARIANTS,
+} from '../../resources/constants';
 import { IBookshelf, IBookshelfScreen } from '../../types/screens';
+import { ButtonOutlined } from '../../ui-components/Button';
+import Divider from '../../ui-components/Divider';
 import Loader from '../../ui-components/Loader';
-import { isEmptyObject, isEmptyString } from '../../utils';
+import { isEmptyList, isEmptyObject, isEmptyString } from '../../utils';
 import classes from './styles.module.scss';
 
 const BookshelfScreen: React.FC<IBookshelfScreen> = (props) => {
-    const { match } = props;
+    const { match, history } = props;
 
     const { addToast } = useContext(ToastContext);
 
     const [loading, setLoading] = useState<boolean>(false);
     const [bookshelf, setBookshelf] = useState<IBookshelf | null>(null);
+
+    const redirectToFindBooks = useCallback(
+        () => history.push(HOMEPAGE_PATH),
+        []
+    );
 
     useEffect(() => {
         const getBookshelf = async (bookshelfId: string) => {
@@ -55,11 +65,55 @@ const BookshelfScreen: React.FC<IBookshelfScreen> = (props) => {
                     <Loader />
                 </div>
             )}
-            {!isEmptyObject(bookshelf) && !loading ? (
-                <h2>{bookshelf?.title}</h2>
-            ) : (
-                <h3>No Bookshelf found</h3>
-            )}
+            {!loading && !isEmptyObject(bookshelf) ? (
+                <div className={classes.bookshelfContainer}>
+                    <div className={classes.bookshelfContentRow}>
+                        <div className={classes.bookshelfContentCol}>
+                            <img
+                                src={
+                                    bookshelf?.coverImageLink ||
+                                    PLACEHOLDER_BOOKSHELF_URL
+                                }
+                                alt={bookshelf?.title}
+                                className={classes.bookshelfCover}
+                            />
+                        </div>
+                        <div className={classes.bookshelfContentCol}>
+                            <div className={classes.bookshelfTitle}>
+                                {bookshelf?.title}
+                            </div>
+                            {!isEmptyString(bookshelf?.updatedAt) && (
+                                <div className={classes.bookshelfUpdated}>
+                                    Last updated:{' '}
+                                    {new Date(
+                                        bookshelf?.updatedAt || ''
+                                    ).toDateString()}
+                                </div>
+                            )}
+                            <div className={classes.bookshelfDescription}>
+                                {bookshelf?.description}
+                            </div>
+                        </div>
+                    </div>
+                    <Divider style={{ margin: '3rem 0' }} />
+                    {!isEmptyList(bookshelf?.books) ? (
+                        <div className={classes.booksContainer}></div>
+                    ) : (
+                        <div className={classes.noBooksContainer}>
+                            <div className={classes.noBooksText}>
+                                No books present in the bookshelf
+                            </div>
+                            <ButtonOutlined
+                                disabled={loading}
+                                onClick={redirectToFindBooks}
+                                style={{ width: 'fit-content' }}
+                            >
+                                Find Books
+                            </ButtonOutlined>
+                        </div>
+                    )}
+                </div>
+            ) : null}
         </>
     );
 };

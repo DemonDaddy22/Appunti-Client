@@ -5,3 +5,68 @@
     @include position($position: fixed, $top: 50%, $left: 50%, $transform: translate(-50%, -50%));
     z-index: $zIndexLoader;
 }
+
+.bookshelfContainer {
+    @include spacing($margin: 2rem auto, $padding: 1rem);
+    max-width: 1000px;
+    width: 100%;
+
+    .bookshelfContentRow {
+        @include flex($flexDirection: column, $gap: 2rem);
+
+        @media (min-width: 1024px) {
+            flex-direction: row;
+        }
+    }
+
+    .bookshelfContentCol {
+        @include flex($flexDirection: column);
+        flex: 1;
+
+        .bookshelfCover {
+            border-radius: 6px;
+            height: auto;
+            width: 100%;
+        }
+
+        .bookshelfTitle {
+            @include theme(color, themeSecondary, $transition: $transitionDuration);
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+
+            @media (min-width: 1024px) {
+                font-size: 3rem;
+            }
+        }
+
+        .bookshelfUpdated {
+            @include theme(color, textContrastLight, $transition: $transitionDuration);
+            font-size: 0.8rem;
+            font-weight: 400;
+            margin-bottom: 1.25rem;
+
+            @media (min-width: 1024px) {
+                margin-bottom: 2rem;
+            }
+        }
+        
+        .bookshelfDescription {
+            @include theme(color, textPrimary, $transition: $transitionDuration);
+            font-size: 0.95rem;
+            letter-spacing: -0.25px;
+        }
+    }
+
+    .noBooksContainer {
+        @include flex($flexDirection: column, $alignItems: center, $justifyContent: center, $gap: 1rem);
+        @include spacing($margin: 1rem auto 3rem);
+
+        .noBooksText {
+            @include theme(color, themePrimary, $transition: $transitionDuration);
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+    }
+}

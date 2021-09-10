@@ -38,7 +38,10 @@ export const MAX_DASH_COUNT: number = 100;
 export const TOAST_DURATION: number = 3000;
 
 export const PLACEHOLDER_IMAGE_URL: string =
-    'https://res.cloudinary.com/yelp-camp/image/upload/v1624193684/BookPlaceholder.jpg';
+    'https://res.cloudinary.com/yelp-camp/image/upload/v1631279832/appunti/no-book.jpg';
+
+export const PLACEHOLDER_BOOKSHELF_URL: string =
+    'https://res.cloudinary.com/yelp-camp/image/upload/v1631279832/appunti/no-bookshelf.jpg';
 
 export const TOAST_VARIANTS: IToastVariants = Object.freeze({
     SUCCESS: 'success',

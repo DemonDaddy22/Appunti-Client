@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { RouteComponentProps, match } from 'react-router-dom';
+import { History } from 'history';
 
 interface IRouterProps {
     router?: RouteComponentProps;
@@ -26,6 +27,7 @@ interface IBooksAPIParams {
 
 interface IBookshelfScreen {
     match: match<{ bookshelfId: string }>;
+    history: History;
 }
 
 interface IBookshelf {
