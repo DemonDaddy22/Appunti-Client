@@ -2,6 +2,7 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { PLACEHOLDER_IMAGE_URL } from '../../resources/constants';
+import { ISearchResultsBookCard } from '../../types/components';
 import Modal from '../../ui-components/Modal';
 import { isEmptyObject, truncateStringToLength } from '../../utils';
 import SearchResultsBookModal from '../SearchResultsBookModal';

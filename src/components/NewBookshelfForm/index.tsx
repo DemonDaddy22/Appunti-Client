@@ -5,6 +5,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import { ToastContext } from '../../context/ToastContext';
 import { RED_500, RED_700 } from '../../resources/colors';
 import { BOOKS_API_URI, TOAST_VARIANTS } from '../../resources/constants';
+import { INewBookshelfForm } from '../../types/components';
 import Button, { ButtonOutlined } from '../../ui-components/Button';
 import Input from '../../ui-components/Input';
 import Label from '../../ui-components/Label';
@@ -13,7 +14,7 @@ import classes from './styles.module.scss';
 
 // TODO - create a file picker component
 const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
-    const { foundBook, handleCancel, handleSubmit, handleAddBook } = props;
+    const { foundBook, handleCancel, handleSubmit } = props;
 
     const { addToast } = useContext(ToastContext);
     const { getThemedValue } = useContext(ThemeContext);
@@ -37,12 +38,11 @@ const NewBookshelfForm: React.FC<INewBookshelfForm> = (props) => {
         handleCancel();
     }, [handleCancel]);
 
-    const handleSubmitClick = useCallback(async (e: React.MouseEvent | React.KeyboardEvent) => {
+    const handleSubmitClick = useCallback((e: React.MouseEvent | React.KeyboardEvent) => {
         e.stopPropagation();
         e.preventDefault();
-        if (isEmptyObject(foundBook)) await handleAddBook();
         setMakeAPICall(true);
-    }, [foundBook, handleAddBook]);
+    }, [foundBook]);
 
     useEffect(() => {
         if (makeAPICall && !isEmptyObject(foundBook)) {

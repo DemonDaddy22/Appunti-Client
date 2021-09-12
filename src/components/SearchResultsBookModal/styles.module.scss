@@ -65,11 +65,11 @@
         font-size: 0.9rem;
         font-weight: 500;
         letter-spacing: -0.25px;
-        margin-bottom: 1rem;
     }
 
     & .bookshelfSelectWrapper {
         @include flex($gap: 1rem);
+        margin-top: 1rem;
     }
 
     & .infoContainer {
@@ -108,6 +108,27 @@
         margin-top: 1rem;
         font-size: 0.9rem;
         line-height: 1.25rem;
+    }
+
+    & .bookshelfFoundText {
+        @include theme(color, themeSecondary, $transition: $transitionDuration);
+        font-size: 1.25rem;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+    }
+    
+    & .bookshelfFoundLink {
+        @include theme(color, textObscure, $transition: $transitionDuration);
+        filter: brightness(1);
+        font-size: 0.9rem;
+        letter-spacing: -0.25px;
+        margin-top: -4px;
+        width: fit-content;
+        transition: filter $transitionDuration;
+
+        &:hover {
+            filter: brightness(0.8);
+        }
     }
 }
 

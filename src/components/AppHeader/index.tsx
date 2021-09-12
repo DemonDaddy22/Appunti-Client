@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Quill from '../../assets/icons/Quill';
 import { HOMEPAGE_PATH } from '../../resources/constants';
+import { IAppHeader } from '../../types/components';
 import classes from './styles.module.scss';
 
 const AppHeader: React.FC<IAppHeader> = (props) => {

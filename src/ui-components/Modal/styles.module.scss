@@ -26,7 +26,7 @@
     width: inherit;
     z-index: $zIndexModal;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1024px) and (min-height: 768px) {
         border-radius: 6px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         max-height: 100%;

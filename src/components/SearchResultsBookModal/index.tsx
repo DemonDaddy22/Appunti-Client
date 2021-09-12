@@ -1,13 +1,16 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ToastContext } from '../../context/ToastContext';
 import {
     BOOKSHELF_SELECT_DEFAULT_OPTION,
     BOOKS_API_URI,
+    HOMEPAGE_PATH,
     PLACEHOLDER_IMAGE_URL,
     TOAST_VARIANTS,
 } from '../../resources/constants';
+import { ISearchResultsBook } from '../../types/components';
 import { ButtonOutlined } from '../../ui-components/Button';
 import Loader from '../../ui-components/Loader';
 import Select from '../../ui-components/Select';
@@ -32,13 +35,15 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     const [updateBookshelf, setUpdateBookshelf] = useState<boolean>(false);
 
     useEffect(() => {
+        // TODO - for now leave it as it is
+        // after adding auth, use userId from auth info and make this API call on component mounting
         const findBook = async () => {
-            if (!isEmptyString(id)) {
+            if (!isEmptyObject(bookshelfOption) && !isEmptyString(bookshelfOption?.value?.userId)) {
                 setLoading(true);
                 try {
                     const response = await axios.get(
-                        `${BOOKS_API_URI}/book/find/g`,
-                        { params: { gid: id } }
+                        `${BOOKS_API_URI}/book/find/user`,
+                        { params: { userId: bookshelfOption?.value?.userId, gid: id, } }
                     );
                     const data: IGenericApiResponse = response.data;
                     if (!isEmptyObject(data?.error)) {
@@ -52,7 +57,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
             }
         };
         findBook();
-    }, [id]);
+    }, []);
 
     useEffect(() => {
         const getBookshelves = async () => {
@@ -70,7 +75,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                         return !isEmptyObject(bookshelf)
                             ? [...accu, {
                                 label: bookshelf.title,
-                                value: bookshelf.uid,
+                                value: bookshelf,
                             }]
                             : accu;
                     }, []) || [];
@@ -83,13 +88,13 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     }, []);
 
     useEffect(() => {
-        if (updateBookshelf) {
+        if (updateBookshelf && !isEmptyObject(foundBook)) {
             const makeUpdateBookshelfCall = async () => {
                 try {
                     const response = await axios.patch(
                             `${BOOKS_API_URI}/bookshelf/update`,
                             { books: [foundBook] },
-                            { params: { uid: bookshelfOption?.value } },
+                            { params: { uid: bookshelfOption?.value?.uid } },
                     );
                     const data: IGenericApiResponse = response.data;
                     if (!isEmptyObject(data?.error)) {
@@ -110,13 +115,15 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
             };
             makeUpdateBookshelfCall();
         }
-    }, [updateBookshelf]);
+    }, [updateBookshelf, foundBook]);
 
     const handleAddBook = useCallback(async () => {
         if (
             isEmptyObject(foundBook) &&
             !isEmptyString(id) &&
-            !isEmptyObject(data)
+            !isEmptyObject(data) &&
+            !isEmptyObject(bookshelfOption) &&
+            bookshelfOption !== BOOKSHELF_SELECT_DEFAULT_OPTION
         ) {
             const book = {
                 gid: id,
@@ -132,6 +139,8 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                 authors: data?.authors || [],
                 categories: data?.categories || [],
                 industryIdentifiers: data?.industryIdentifiers || [],
+                userId: bookshelfOption?.value?.userId,
+                bookshelf: bookshelfOption?.value?.uid,
             };
             try {
                 // eslint-disable-next-line prettier/prettier
@@ -152,7 +161,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                 });
             }
         }
-    }, [foundBook, id, data, epub, pdf]);
+    }, [foundBook, id, data, epub, pdf, bookshelfOption]);
 
     const handleAddBookToBookshelf = useCallback(async () => {
         if (!foundBook) await handleAddBook();
@@ -175,7 +184,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
 
     const handleNewBookshelfFormSubmit = useCallback((bookshelf: any) => {
         if (!isEmptyObject(bookshelf)) {
-            const bookshelfOption: ISelectOption = { label: bookshelf.title, value: bookshelf.uid };
+            const bookshelfOption: ISelectOption = { label: bookshelf.title, value: bookshelf };
             handleOptionSelect(bookshelfOption);
             setBookshelfOptions(prevOptions => [bookshelfOption, ...prevOptions]);
         } else {
@@ -217,30 +226,44 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                     <div className={classes.authors}>
                         {data.authors?.join(', ')}
                     </div>
-                    <div className={classes.bookshelfSelectWrapper}>
-                        <Select
-                            value={bookshelfLabel}
-                            options={bookshelfOptions}
-                            placeholder="Add to bookshelf"
-                            onOptionChange={handleOptionSelect}
-                            onInputChange={handleSelectInputChange}
-                        />
-                        {bookshelfOption !== BOOKSHELF_SELECT_DEFAULT_OPTION ? (
-                            <ButtonOutlined
-                                disabled={loading}
-                                onClick={handleAddBookToBookshelf}
-                                style={{ width: 'fit-content' }}
-                            >
+                    {isEmptyObject(foundBook)
+                        ? <div className={classes.bookshelfSelectWrapper}>
+                            <Select
+                                value={bookshelfLabel}
+                                options={bookshelfOptions}
+                                placeholder="Add to bookshelf"
+                                onOptionChange={handleOptionSelect}
+                                onInputChange={handleSelectInputChange}
+                            />
+                            {bookshelfOption !== BOOKSHELF_SELECT_DEFAULT_OPTION ? (
+                                <ButtonOutlined
+                                    disabled={
+                                        loading ||
+                                        (!bookshelfOption || bookshelfOption === BOOKSHELF_SELECT_DEFAULT_OPTION)
+                                    }
+                                    onClick={handleAddBookToBookshelf}
+                                    style={{ width: 'fit-content' }}
+                                >
                                 Add Book
-                            </ButtonOutlined>
-                        ) : null}
-                    </div>
+                                </ButtonOutlined>
+                            ) : null}
+                        </div>
+                        : <>
+                            <div className={classes.bookshelfFoundText}>
+                                Book present in bookshelf {foundBook?.bookshelf?.title}
+                            </div>
+                            <Link
+                                to={`${HOMEPAGE_PATH}bookshelf/${foundBook?.bookshelf?.uid}`}
+                                className={classes.bookshelfFoundLink}
+                            >
+                                Explore {foundBook?.bookshelf?.title}
+                            </Link>
+                        </>}
                     {bookshelfOption === BOOKSHELF_SELECT_DEFAULT_OPTION ? (
                         <NewBookshelfForm
                             foundBook={foundBook}
                             handleCancel={() => handleOptionSelect(null)}
                             handleSubmit={handleNewBookshelfFormSubmit}
-                            handleAddBook={handleAddBook}
                         />
                     ) : null}
                     <div className={classes.description}>

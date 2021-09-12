@@ -17,10 +17,16 @@ const BookCard: React.FC<IBook> = (props) => {
             />
             <div className={classes.bookCardContent}>
                 <div className={classes.bookCardContentRow}>
-                    <div className={classes.bookCardTitleHeader}>Title</div>
-                    <div className={classes.bookCardContentValue}>
-                        {truncateStringToLength(title, 50)}
-                    </div>
+                    {!isEmptyString(title) && (
+                        <>
+                            <div className={classes.bookCardTitleHeader}>
+                                Title
+                            </div>
+                            <div className={classes.bookCardContentValue}>
+                                {truncateStringToLength(title, 50)}
+                            </div>
+                        </>
+                    )}
                 </div>
                 <div className={classes.bookCardInfo}>
                     {!isEmptyString(publishedDate) && (

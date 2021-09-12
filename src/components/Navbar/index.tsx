@@ -2,6 +2,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { NAVBAR_SCROLL_BREAKPOINT_HEIGHT } from '../../resources/constants';
+import { INavbar } from '../../types/components';
 import { throttle } from '../../utils';
 import AppHeader from '../AppHeader';
 import ThemeToggler from '../ThemeToggler';

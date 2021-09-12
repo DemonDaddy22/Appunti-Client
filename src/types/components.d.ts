@@ -30,7 +30,6 @@ interface INavbar extends IStyle {
 interface INewBookshelfForm {
     handleSubmit: (...args: any[]) => void;
     handleCancel: (...args: any[]) => void;
-    handleAddBook: (...args: any[]) => Promise<void>;
     foundBook: any;
 }
 
