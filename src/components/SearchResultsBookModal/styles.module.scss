@@ -112,18 +112,15 @@
 
     & .bookshelfFoundText {
         @include theme(color, themeSecondary, $transition: $transitionDuration);
-        font-size: 1.25rem;
-        font-weight: 600;
+        @include flex($alignItems: center, $flexWrap: wrap, $gap: 0.25rem);
+        font-size: 1rem;
+        font-weight: 500;
         letter-spacing: -0.5px;
     }
     
     & .bookshelfFoundLink {
-        @include theme(color, textObscure, $transition: $transitionDuration);
+        color: inherit;
         filter: brightness(1);
-        font-size: 0.9rem;
-        letter-spacing: -0.25px;
-        margin-top: -4px;
-        width: fit-content;
         transition: filter $transitionDuration;
 
         &:hover {

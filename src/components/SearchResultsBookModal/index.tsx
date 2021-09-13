@@ -2,6 +2,8 @@
 import axios from 'axios';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Info from '../../assets/icons/Info';
+import { ThemeContext } from '../../context/ThemeContext';
 import { ToastContext } from '../../context/ToastContext';
 import {
     BOOKSHELF_SELECT_DEFAULT_OPTION,
@@ -23,6 +25,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
     const { id, data, epub, pdf } = props;
 
     const { addToast } = useContext(ToastContext);
+    const { theme } = useContext(ThemeContext);
 
     const [loading, setLoading] = useState<boolean>(false);
     const [foundBook, setFoundBook] = useState<any>(null);
@@ -248,17 +251,17 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                                 </ButtonOutlined>
                             ) : null}
                         </div>
-                        : <>
-                            <div className={classes.bookshelfFoundText}>
-                                Book present in bookshelf {foundBook?.bookshelf?.title}
-                            </div>
+                        : <div className={classes.bookshelfFoundText}>
+                            <Info color={theme.themeSecondary} />
+                                Added to {foundBook?.bookshelf?.title}.&nbsp;
                             <Link
                                 to={`${HOMEPAGE_PATH}bookshelf/${foundBook?.bookshelf?.uid}`}
                                 className={classes.bookshelfFoundLink}
                             >
-                                Explore {foundBook?.bookshelf?.title}
+                                    Explore bookshelf
                             </Link>
-                        </>}
+                                .
+                        </div>}
                     {bookshelfOption === BOOKSHELF_SELECT_DEFAULT_OPTION ? (
                         <NewBookshelfForm
                             foundBook={foundBook}
