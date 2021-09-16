@@ -2,7 +2,7 @@
 // TODO - add bookshelf to book model
 // TODO - once book gets added to bookshelf, hide the bookshelf dropdown and show the selected bookshelf
 // TODO - add quote of the day in sidebar
-// TODO - create a floating option menu
+// TODO - create a floating option menu - (take this up next)
 import axios from 'axios';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';

@@ -60,7 +60,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
             }
         };
         findBook();
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         const getBookshelves = async () => {
@@ -258,9 +258,8 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                                 to={`${HOMEPAGE_PATH}bookshelf/${foundBook?.bookshelf?.uid}`}
                                 className={classes.bookshelfFoundLink}
                             >
-                                    Explore bookshelf
+                                Explore bookshelf.
                             </Link>
-                                .
                         </div>}
                     {bookshelfOption === BOOKSHELF_SELECT_DEFAULT_OPTION ? (
                         <NewBookshelfForm
