@@ -14,3 +14,9 @@
         padding: 0.5rem 1.5rem;
     }
 }
+
+.themeTogglerWrapper {
+    display: inline-flex;
+    flex: 1;
+    justify-content: flex-end;
+}

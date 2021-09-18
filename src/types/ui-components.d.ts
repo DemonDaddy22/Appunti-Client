@@ -73,7 +73,7 @@ interface IButton extends IColors, IStyle {
      * @returns `void`
      *
      */
-    onClick: (...args) => void;
+    onClick: (...args: any[]) => void;
 }
 
 interface IButtonOutlined extends IColor, IStyle {
@@ -97,7 +97,7 @@ interface IButtonOutlined extends IColor, IStyle {
      * @returns `void`
      *
      */
-    onClick: (...args) => void;
+    onClick: (...args: any[]) => void;
 }
 
 interface IPagination extends IStyle {
@@ -339,7 +339,7 @@ interface IIconButton extends IStyle {
      * @returns `void`
      *
      */
-    onClick: (...args) => void;
+    onClick: (...args: any[]) => void;
 
     /**
      *
@@ -408,7 +408,7 @@ interface IModal {
      * @returns `void`
      *
      */
-    onClose: (...args) => void;
+    onClose: (...args: any[]) => void;
 
     /**
      *
@@ -490,5 +490,45 @@ interface IToast extends IStyle {
      * @returns `void`
      *
      */
-    onClose: (...args) => void;
+    onClose: (...args: any[]) => void;
+}
+
+interface IMenu extends IStyle {
+    /**
+     *
+     * @field `options` - specifies the list of menu options
+     *
+     */
+    options: Array<IMenuOption>;
+
+    /**
+     *
+     * @field `closeOnOptionSelect` - specifies whether the menu should be closed on selecting an option
+     * @default true
+     *
+     */
+    closeOnOptionSelect?: boolean;
+}
+
+interface IMenuOption extends IStyle {
+    /**
+     *
+     * @field `label` - specifies the label of menu option
+     *
+     */
+    label: string;
+
+    /**
+     *
+     * @field `id` - specifies ID of menu option
+     *
+     */
+    id: string | number;
+
+    /**
+     *
+     * @function onSelect - function to trigger when the menu option is selected
+     *
+     */
+    onSelect: (...args: any[]) => void;
 }

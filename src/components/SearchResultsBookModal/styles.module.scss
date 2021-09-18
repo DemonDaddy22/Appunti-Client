@@ -37,6 +37,20 @@
         }
     }
 
+    & .subtitle {
+        @include theme(color, themeSecondary, $transition: $transitionDuration);
+        font-size: 1.2rem;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+    }
+
+    & .authors {
+        @include theme(color, textIntense, $transition: $transitionDuration);
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: -0.25px;
+    }
+
     & .imagePlaceholder {
         height: 100%;
         overflow: hidden;
@@ -51,20 +65,6 @@
     & .image {
         width: 100%;
         height: auto;
-    }
-
-    & .subtitle {
-        @include theme(color, themeSecondary, $transition: $transitionDuration);
-        font-size: 1.2rem;
-        font-weight: 600;
-        letter-spacing: -0.5px;
-    }
-
-    & .authors {
-        @include theme(color, textIntense, $transition: $transitionDuration);
-        font-size: 0.9rem;
-        font-weight: 500;
-        letter-spacing: -0.25px;
     }
 
     & .bookshelfSelectWrapper {
@@ -117,7 +117,7 @@
         font-weight: 500;
         letter-spacing: -0.5px;
     }
-    
+
     & .bookshelfFoundLink {
         color: inherit;
         filter: brightness(1);

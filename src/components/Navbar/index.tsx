@@ -49,8 +49,10 @@ const Navbar: React.FC<INavbar> = (props) => {
                     )}`
             }}
         >
-            <AppHeader showIcon={false} label="Appunti" style={{ flex: 1 }} />
-            <ThemeToggler />
+            <AppHeader showIcon={false} label="Appunti" />
+            <div className={classes.themeTogglerWrapper}>
+                <ThemeToggler />
+            </div>
         </nav>
     );
 };

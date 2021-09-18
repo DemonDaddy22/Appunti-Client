@@ -1,0 +1,31 @@
+@import '../../resources/globalStyles.scss';
+@import '../../resources/globalVariables.scss';
+
+.menuContainer {
+    @include position($position: absolute);
+
+    & .menuItem {
+        @include theme($property: color, $key: text, $transition: $transitionDuration);
+        @include theme($property: background-color, $key: backgroundModal, $transition: $transitionDuration);
+        @include theme($property: border-bottom, $key: borderColor, $inlinePre: 1px solid, $transition: $transitionDuration);
+        @include spacing($padding: 0.75rem);
+        cursor: pointer;
+        filter: brightness(1);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: filter $transitionDuration;
+
+        &:hover {
+            filter: brightness(0.85);
+        }
+
+        &:last-of-type {
+            border-bottom: none;
+        }
+
+        @media (min-width: 1024px) {
+            font-size: 1rem;
+            padding: 0.8rem 1rem;
+        }
+    }
+}

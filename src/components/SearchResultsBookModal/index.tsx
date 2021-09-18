@@ -2,9 +2,11 @@
 import axios from 'axios';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import DotsVertical from '../../assets/icons/DotsVertical';
 import Info from '../../assets/icons/Info';
 import { ThemeContext } from '../../context/ThemeContext';
 import { ToastContext } from '../../context/ToastContext';
+import { GREY_50 } from '../../resources/colors';
 import {
     BOOKSHELF_SELECT_DEFAULT_OPTION,
     BOOKS_API_URI,
@@ -14,6 +16,7 @@ import {
 } from '../../resources/constants';
 import { ISearchResultsBook } from '../../types/components';
 import { ButtonOutlined } from '../../ui-components/Button';
+import IconButton from '../../ui-components/Button/IconButton';
 import Loader from '../../ui-components/Loader';
 import Select from '../../ui-components/Select';
 import Tag from '../../ui-components/Tag';
@@ -223,12 +226,12 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                     )}
                 </div>
                 <div className={classes.column}>
-                    <div className={classes.subtitle}>
+                    {data?.subtitle && <div className={classes.subtitle}>
                         {data.subtitle}
-                    </div>
-                    <div className={classes.authors}>
+                    </div>}
+                    {data?.authors && <div className={classes.authors}>
                         {data.authors?.join(', ')}
-                    </div>
+                    </div>}
                     {isEmptyObject(foundBook)
                         ? <div className={classes.bookshelfSelectWrapper}>
                             <Select
@@ -253,7 +256,7 @@ const SearchResultsBookModal: React.FC<ISearchResultsBook> = (props) => {
                         </div>
                         : <div className={classes.bookshelfFoundText}>
                             <Info color={theme.themeSecondary} />
-                                Added to {foundBook?.bookshelf?.title}.&nbsp;
+                                Added to <em>{foundBook?.bookshelf?.title}</em>.&nbsp;
                             <Link
                                 to={`${HOMEPAGE_PATH}bookshelf/${foundBook?.bookshelf?.uid}`}
                                 className={classes.bookshelfFoundLink}
