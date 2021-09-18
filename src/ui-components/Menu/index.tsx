@@ -1,8 +1,7 @@
 import React from 'react';
 import classes from './styles.module.scss';
 
-// dynamically position the menu based on screen size and parent's position
-
+// TODO - try replacing with Downshift
 const Menu: React.FC<IMenu> = (props) => {
     const { style, options, closeOnOptionSelect } = props;
 

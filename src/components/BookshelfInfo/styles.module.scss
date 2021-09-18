@@ -19,17 +19,6 @@
         width: 100%;
     }
 
-    .bookshelfTitle {
-        @include theme(color, themeSecondary, $transition: $transitionDuration);
-        font-size: 2rem;
-        font-weight: 600;
-        letter-spacing: -0.5px;
-
-        @media (min-width: 1024px) {
-            font-size: 3rem;
-        }
-    }
-
     .bookshelfUpdated {
         @include theme(color, textContrastLight, $transition: $transitionDuration);
         font-size: 0.8rem;
@@ -45,5 +34,27 @@
         @include theme(color, textPrimary, $transition: $transitionDuration);
         font-size: 0.95rem;
         letter-spacing: -0.25px;
+    }
+}
+
+.bookshelfTitleWrapper {
+    @include flex($gap: 0.5rem);
+
+    .menuIconWrapper {
+        position: relative;
+    }
+
+    .bookshelfTitle {
+        @include theme(color, themeSecondary, $transition: $transitionDuration);
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        line-height: 2.4rem;
+        margin-bottom: 0.5rem;
+
+        @media (min-width: 1024px) {
+            font-size: 3rem;
+            line-height: 3.5rem;
+        }
     }
 }

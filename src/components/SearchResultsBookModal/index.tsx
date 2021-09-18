@@ -2,11 +2,9 @@
 import axios from 'axios';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import DotsVertical from '../../assets/icons/DotsVertical';
 import Info from '../../assets/icons/Info';
 import { ThemeContext } from '../../context/ThemeContext';
 import { ToastContext } from '../../context/ToastContext';
-import { GREY_50 } from '../../resources/colors';
 import {
     BOOKSHELF_SELECT_DEFAULT_OPTION,
     BOOKS_API_URI,
@@ -16,7 +14,6 @@ import {
 } from '../../resources/constants';
 import { ISearchResultsBook } from '../../types/components';
 import { ButtonOutlined } from '../../ui-components/Button';
-import IconButton from '../../ui-components/Button/IconButton';
 import Loader from '../../ui-components/Loader';
 import Select from '../../ui-components/Select';
 import Tag from '../../ui-components/Tag';
